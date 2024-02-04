@@ -1,0 +1,8 @@
+#ifndef RAPI_VERSION_H
+#define RAPI_VERSION_H
+
+#define VERSION_RAPI_MAJOR 1
+#define VERSION_RAPI_MINOR 0
+#define VERSION_RAPI_PATCH 0
+
+#endif // RAPI_VERSION_H

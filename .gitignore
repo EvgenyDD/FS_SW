@@ -1,0 +1,7 @@
+build/
+.vscode
+.gdbinit
+*.user*
+*.Release
+*.Debug
+*.stash

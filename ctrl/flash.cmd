@@ -1,0 +1,1 @@
+ST-LINK_CLI.exe -P "build/ctrl.bin" 0x08060000 -Rst
