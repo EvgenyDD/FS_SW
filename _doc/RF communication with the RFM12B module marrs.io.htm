@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.marrs.io/xmlrpc.php">
+
+<title>RF communication with the RFM12B module | marrs.io</title>
+<meta name='robots' content='max-image-preview:large' />
+<meta name="description" content="&nbsp; (For the working code scroll all the way to the bottom!) I free-formed a simple RFM12B atmega168 temperature sensor circuit using a 3." />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://www.marrs.io/rf-communication-with-the-rfm12b-module/" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="RF communication with the RFM12B module, marrs.io" />
+<meta property="og:description" content="&nbsp; (For the working code scroll all the way to the bottom!) I free-formed a simple RFM12B atmega168 temperature sensor circuit using a 3." />
+<meta property="og:url" content="https://www.marrs.io/rf-communication-with-the-rfm12b-module/" />
+<meta property="og:site_name" name="copyright" content="marrs.io" />
+<meta property="og:image" content="https://www.marrs.io/wp-content/uploads/2019/10/diagram-of-components-in-free-dorm2-01.jpg" />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="marrs.io &raquo; Feed" href="https://www.marrs.io/feed/" />
+<link rel="alternate" type="application/rss+xml" title="marrs.io &raquo; Comments Feed" href="https://www.marrs.io/comments/feed/" />
+<script type="text/javascript">
+/* <![CDATA[ */
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/svg\/","svgExt":".svg","source":{"wpemoji":"https:\/\/www.marrs.io\/wp-includes\/js\/wp-emoji.js?ver=6.5.2","twemoji":"https:\/\/www.marrs.io\/wp-includes\/js\/twemoji.js?ver=6.5.2"}};
+/**
+ * @output wp-includes/js/wp-emoji-loader.js
+ */
+
+/**
+ * Emoji Settings as exported in PHP via _print_emoji_detection_script().
+ * @typedef WPEmojiSettings
+ * @type {object}
+ * @property {?object} source
+ * @property {?string} source.concatemoji
+ * @property {?string} source.twemoji
+ * @property {?string} source.wpemoji
+ * @property {?boolean} DOMReady
+ * @property {?Function} readyCallback
+ */
+
+/**
+ * Support tests.
+ * @typedef SupportTests
+ * @type {object}
+ * @property {?boolean} flag
+ * @property {?boolean} emoji
+ */
+
+/**
+ * IIFE to detect emoji support and load Twemoji if needed.
+ *
+ * @param {Window} window
+ * @param {Document} document
+ * @param {WPEmojiSettings} settings
+ */
+( function wpEmojiLoader( window, document, settings ) {
+	if ( typeof Promise === 'undefined' ) {
+		return;
+	}
+
+	var sessionStorageKey = 'wpEmojiSettingsSupports';
+	var tests = [ 'flag', 'emoji' ];
+
+	/**
+	 * Checks whether the browser supports offloading to a Worker.
+	 *
+	 * @since 6.3.0
+	 *
+	 * @private
+	 *
+	 * @returns {boolean}
+	 */
+	function supportsWorkerOffloading() {
+		return (
+			typeof Worker !== 'undefined' &&
+			typeof OffscreenCanvas !== 'undefined' &&
+			typeof URL !== 'undefined' &&
+			URL.createObjectURL &&
+			typeof Blob !== 'undefined'
+		);
+	}
+
+	/**
+	 * @typedef SessionSupportTests
+	 * @type {object}
+	 * @property {number} timestamp
+	 * @property {SupportTests} supportTests
+	 */
+
+	/**
+	 * Get support tests from session.
+	 *
+	 * @since 6.3.0
+	 *
+	 * @private
+	 *
+	 * @returns {?SupportTests} Support tests, or null if not set or older than 1 week.
+	 */
+	function getSessionSupportTests() {
+		try {
+			/** @type {SessionSupportTests} */
+			var item = JSON.parse(
+				sessionStorage.getItem( sessionStorageKey )
+			);
+			if (
+				typeof item === 'object' &&
+				typeof item.timestamp === 'number' &&
+				new Date().valueOf() < item.timestamp + 604800 && // Note: Number is a week in seconds.
+				typeof item.supportTests === 'object'
+			) {
+				return item.supportTests;
+			}
+		} catch ( e ) {}
+		return null;
+	}
+
+	/**
+	 * Persist the supports in session storage.
+	 *
+	 * @since 6.3.0
+	 *
+	 * @private
+	 *
+	 * @param {SupportTests} supportTests Support tests.
+	 */
+	function setSessionSupportTests( supportTests ) {
+		try {
+			/** @type {SessionSupportTests} */
+			var item = {
+				supportTests: supportTests,
+				timestamp: new Date().valueOf()
+			};
+
+			sessionStorage.setItem(
+				sessionStorageKey,
+				JSON.stringify( item )
+			);
+		} catch ( e ) {}
+	}
+
+	/**
+	 * Checks if two sets of Emoji characters render the same visually.
+	 *
+	 * This function may be serialized to run in a Worker. Therefore, it cannot refer to variables from the containing
+	 * scope. Everything must be passed by parameters.
+	 *
+	 * @since 4.9.0
+	 *
+	 * @private
+	 *
+	 * @param {CanvasRenderingContext2D} context 2D Context.
+	 * @param {string} set1 Set of Emoji to test.
+	 * @param {string} set2 Set of Emoji to test.
+	 *
+	 * @return {boolean} True if the two sets render the same.
+	 */
+	function emojiSetsRenderIdentically( context, set1, set2 ) {
+		// Cleanup from previous test.
+		context.clearRect( 0, 0, context.canvas.width, context.canvas.height );
+		context.fillText( set1, 0, 0 );
+		var rendered1 = new Uint32Array(
+			context.getImageData(
+				0,
+				0,
+				context.canvas.width,
+				context.canvas.height
+			).data
+		);
+
+		// Cleanup from previous test.
+		context.clearRect( 0, 0, context.canvas.width, context.canvas.height );
+		context.fillText( set2, 0, 0 );
+		var rendered2 = new Uint32Array(
+			context.getImageData(
+				0,
+				0,
+				context.canvas.width,
+				context.canvas.height
+			).data
+		);
+
+		return rendered1.every( function ( rendered2Data, index ) {
+			return rendered2Data === rendered2[ index ];
+		} );
+	}
+
+	/**
+	 * Determines if the browser properly renders Emoji that Twemoji can supplement.
+	 *
+	 * This function may be serialized to run in a Worker. Therefore, it cannot refer to variables from the containing
+	 * scope. Everything must be passed by parameters.
+	 *
+	 * @since 4.2.0
+	 *
+	 * @private
+	 *
+	 * @param {CanvasRenderingContext2D} context 2D Context.
+	 * @param {string} type Whether to test for support of "flag" or "emoji".
+	 * @param {Function} emojiSetsRenderIdentically Reference to emojiSetsRenderIdentically function, needed due to minification.
+	 *
+	 * @return {boolean} True if the browser can render emoji, false if it cannot.
+	 */
+	function browserSupportsEmoji( context, type, emojiSetsRenderIdentically ) {
+		var isIdentical;
+
+		switch ( type ) {
+			case 'flag':
+				/*
+				 * Test for Transgender flag compatibility. Added in Unicode 13.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly (white flag emoji + transgender symbol).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					context,
+					'\uD83C\uDFF3\uFE0F\u200D\u26A7\uFE0F', // as a zero-width joiner sequence
+					'\uD83C\uDFF3\uFE0F\u200B\u26A7\uFE0F' // separated by a zero-width space
+				);
+
+				if ( isIdentical ) {
+					return false;
+				}
+
+				/*
+				 * Test for UN flag compatibility. This is the least supported of the letter locale flags,
+				 * so gives us an easy test for full support.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly ([U] + [N]).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					context,
+					'\uD83C\uDDFA\uD83C\uDDF3', // as the sequence of two code points
+					'\uD83C\uDDFA\u200B\uD83C\uDDF3' // as the two code points separated by a zero-width space
+				);
+
+				if ( isIdentical ) {
+					return false;
+				}
+
+				/*
+				 * Test for English flag compatibility. England is a country in the United Kingdom, it
+				 * does not have a two letter locale code but rather a five letter sub-division code.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly (black flag emoji + [G] + [B] + [E] + [N] + [G]).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					context,
+					// as the flag sequence
+					'\uD83C\uDFF4\uDB40\uDC67\uDB40\uDC62\uDB40\uDC65\uDB40\uDC6E\uDB40\uDC67\uDB40\uDC7F',
+					// with each code point separated by a zero-width space
+					'\uD83C\uDFF4\u200B\uDB40\uDC67\u200B\uDB40\uDC62\u200B\uDB40\uDC65\u200B\uDB40\uDC6E\u200B\uDB40\uDC67\u200B\uDB40\uDC7F'
+				);
+
+				return ! isIdentical;
+			case 'emoji':
+				/*
+				 * Four and twenty blackbirds baked in a pie.
+				 *
+				 * To test for Emoji 15.0 support, try to render a new emoji: Blackbird.
+				 *
+				 * The Blackbird is a ZWJ sequence combining 🐦 Bird and ⬛ large black square.,
+				 *
+				 * 0x1F426 (\uD83D\uDC26) == Bird
+				 * 0x200D == Zero-Width Joiner (ZWJ) that links the code points for the new emoji or
+				 * 0x200B == Zero-Width Space (ZWS) that is rendered for clients not supporting the new emoji.
+				 * 0x2B1B == Large Black Square
+				 *
+				 * When updating this test for future Emoji releases, ensure that individual emoji that make up the
+				 * sequence come from older emoji standards.
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					context,
+					'\uD83D\uDC26\u200D\u2B1B', // as the zero-width joiner sequence
+					'\uD83D\uDC26\u200B\u2B1B' // separated by a zero-width space
+				);
+
+				return ! isIdentical;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Checks emoji support tests.
+	 *
+	 * This function may be serialized to run in a Worker. Therefore, it cannot refer to variables from the containing
+	 * scope. Everything must be passed by parameters.
+	 *
+	 * @since 6.3.0
+	 *
+	 * @private
+	 *
+	 * @param {string[]} tests Tests.
+	 * @param {Function} browserSupportsEmoji Reference to browserSupportsEmoji function, needed due to minification.
+	 * @param {Function} emojiSetsRenderIdentically Reference to emojiSetsRenderIdentically function, needed due to minification.
+	 *
+	 * @return {SupportTests} Support tests.
+	 */
+	function testEmojiSupports( tests, browserSupportsEmoji, emojiSetsRenderIdentically ) {
+		var canvas;
+		if (
+			typeof WorkerGlobalScope !== 'undefined' &&
+			self instanceof WorkerGlobalScope
+		) {
+			canvas = new OffscreenCanvas( 300, 150 ); // Dimensions are default for HTMLCanvasElement.
+		} else {
+			canvas = document.createElement( 'canvas' );
+		}
+
+		var context = canvas.getContext( '2d', { willReadFrequently: true } );
+
+		/*
+		 * Chrome on OS X added native emoji rendering in M41. Unfortunately,
+		 * it doesn't work when the font is bolder than 500 weight. So, we
+		 * check for bold rendering support to avoid invisible emoji in Chrome.
+		 */
+		context.textBaseline = 'top';
+		context.font = '600 32px Arial';
+
+		var supports = {};
+		tests.forEach( function ( test ) {
+			supports[ test ] = browserSupportsEmoji( context, test, emojiSetsRenderIdentically );
+		} );
+		return supports;
+	}
+
+	/**
+	 * Adds a script to the head of the document.
+	 *
+	 * @ignore
+	 *
+	 * @since 4.2.0
+	 *
+	 * @param {string} src The url where the script is located.
+	 *
+	 * @return {void}
+	 */
+	function addScript( src ) {
+		var script = document.createElement( 'script' );
+		script.src = src;
+		script.defer = true;
+		document.head.appendChild( script );
+	}
+
+	settings.supports = {
+		everything: true,
+		everythingExceptFlag: true
+	};
+
+	// Create a promise for DOMContentLoaded since the worker logic may finish after the event has fired.
+	var domReadyPromise = new Promise( function ( resolve ) {
+		document.addEventListener( 'DOMContentLoaded', resolve, {
+			once: true
+		} );
+	} );
+
+	// Obtain the emoji support from the browser, asynchronously when possible.
+	new Promise( function ( resolve ) {
+		var supportTests = getSessionSupportTests();
+		if ( supportTests ) {
+			resolve( supportTests );
+			return;
+		}
+
+		if ( supportsWorkerOffloading() ) {
+			try {
+				// Note that the functions are being passed as arguments due to minification.
+				var workerScript =
+					'postMessage(' +
+					testEmojiSupports.toString() +
+					'(' +
+					[
+						JSON.stringify( tests ),
+						browserSupportsEmoji.toString(),
+						emojiSetsRenderIdentically.toString()
+					].join( ',' ) +
+					'));';
+				var blob = new Blob( [ workerScript ], {
+					type: 'text/javascript'
+				} );
+				var worker = new Worker( URL.createObjectURL( blob ), { name: 'wpTestEmojiSupports' } );
+				worker.onmessage = function ( event ) {
+					supportTests = event.data;
+					setSessionSupportTests( supportTests );
+					worker.terminate();
+					resolve( supportTests );
+				};
+				return;
+			} catch ( e ) {}
+		}
+
+		supportTests = testEmojiSupports( tests, browserSupportsEmoji, emojiSetsRenderIdentically );
+		setSessionSupportTests( supportTests );
+		resolve( supportTests );
+	} )
+		// Once the browser emoji support has been obtained from the session, finalize the settings.
+		.then( function ( supportTests ) {
+			/*
+			 * Tests the browser support for flag emojis and other emojis, and adjusts the
+			 * support settings accordingly.
+			 */
+			for ( var test in supportTests ) {
+				settings.supports[ test ] = supportTests[ test ];
+
+				settings.supports.everything =
+					settings.supports.everything && settings.supports[ test ];
+
+				if ( 'flag' !== test ) {
+					settings.supports.everythingExceptFlag =
+						settings.supports.everythingExceptFlag &&
+						settings.supports[ test ];
+				}
+			}
+
+			settings.supports.everythingExceptFlag =
+				settings.supports.everythingExceptFlag &&
+				! settings.supports.flag;
+
+			// Sets DOMReady to false and assigns a ready function to settings.
+			settings.DOMReady = false;
+			settings.readyCallback = function () {
+				settings.DOMReady = true;
+			};
+		} )
+		.then( function () {
+			return domReadyPromise;
+		} )
+		.then( function () {
+			// When the browser can not render everything we need to load a polyfill.
+			if ( ! settings.supports.everything ) {
+				settings.readyCallback();
+
+				var src = settings.source || {};
+
+				if ( src.concatemoji ) {
+					addScript( src.concatemoji );
+				} else if ( src.wpemoji && src.twemoji ) {
+					addScript( src.twemoji );
+					addScript( src.wpemoji );
+				}
+			}
+		} );
+} )( window, document, window._wpemojiSettings );
+
+/* ]]> */
+</script>
+<style id='wp-emoji-styles-inline-css' type='text/css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel='stylesheet' id='wp-block-library-css' href='https://www.marrs.io/wp-includes/css/dist/block-library/style.css?ver=6.5.2' type='text/css' media='all' />
+<style id='wp-block-library-inline-css' type='text/css'>
+.has-text-align-justify{text-align:justify;}
+</style>
+<link rel='stylesheet' id='mediaelement-css' href='https://www.marrs.io/wp-includes/js/mediaelement/mediaelementplayer-legacy.min.css?ver=4.2.17' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-mediaelement-css' href='https://www.marrs.io/wp-includes/js/mediaelement/wp-mediaelement.css?ver=6.5.2' type='text/css' media='all' />
+<style id='jetpack-sharing-buttons-style-inline-css' type='text/css'>
+.jetpack-sharing-buttons__services-list{display:flex;flex-direction:row;flex-wrap:wrap;gap:0;list-style-type:none;margin:5px;padding:0}.jetpack-sharing-buttons__services-list.has-small-icon-size{font-size:12px}.jetpack-sharing-buttons__services-list.has-normal-icon-size{font-size:16px}.jetpack-sharing-buttons__services-list.has-large-icon-size{font-size:24px}.jetpack-sharing-buttons__services-list.has-huge-icon-size{font-size:36px}@media print{.jetpack-sharing-buttons__services-list{display:none!important}}.editor-styles-wrapper .wp-block-jetpack-sharing-buttons{gap:0;padding-inline-start:0}ul.jetpack-sharing-buttons__services-list.has-background{padding:1.25em 2.375em}
+</style>
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/**
+ * These rules are needed for backwards compatibility.
+ * They should match the button element rules in the base theme.json file.
+ */
+.wp-block-button__link {
+	color: #ffffff;
+	background-color: #32373c;
+	border-radius: 9999px; /* 100% causes an oval, but any explicit but really high value retains the pill shape. */
+
+	/* This needs a low specificity so it won't override the rules from the button element if defined in theme.json. */
+	box-shadow: none;
+	text-decoration: none;
+
+	/* The extra 2px are added to size solids the same as the outline versions.*/
+	padding: calc(0.667em + 2px) calc(1.333em + 2px);
+
+	font-size: 1.125em;
+}
+
+.wp-block-file__button {
+	background: #32373c;
+	color: #ffffff;
+	text-decoration: none;
+}
+
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='wc-gallery-style-css' href='https://www.marrs.io/wp-content/plugins/boldgrid-gallery/includes/css/style.css?ver=1.55' type='text/css' media='all' />
+<link rel='stylesheet' id='wc-gallery-popup-style-css' href='https://www.marrs.io/wp-content/plugins/boldgrid-gallery/includes/css/magnific-popup.css?ver=1.1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='wc-gallery-flexslider-style-css' href='https://www.marrs.io/wp-content/plugins/boldgrid-gallery/includes/vendors/flexslider/flexslider.css?ver=2.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='wc-gallery-owlcarousel-style-css' href='https://www.marrs.io/wp-content/plugins/boldgrid-gallery/includes/vendors/owlcarousel/assets/owl.carousel.css?ver=2.1.4' type='text/css' media='all' />
+<link rel='stylesheet' id='wc-gallery-owlcarousel-theme-style-css' href='https://www.marrs.io/wp-content/plugins/boldgrid-gallery/includes/vendors/owlcarousel/assets/owl.theme.default.css?ver=2.1.4' type='text/css' media='all' />
+<link rel='stylesheet' id='libre-style-css' href='https://www.marrs.io/wp-content/themes/libre/style.css?ver=6.5.2' type='text/css' media='all' />
+<link rel='stylesheet' id='libre-libre-css' href='https://fonts.googleapis.com/css?family=Libre+Baskerville%3A400%2C400italic%2C700&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='hcb-style-css' href='https://www.marrs.io/wp-content/plugins/highlighting-code-block/build/css/hcb--light.css?ver=2.0.1' type='text/css' media='all' />
+<style id='hcb-style-inline-css' type='text/css'>
+:root{--hcb--fz--base: 14px}:root{--hcb--fz--mobile: 13px}:root{--hcb--ff:Menlo, Consolas, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;}
+</style>
+<link rel='stylesheet' id='boldgrid-components-css' href='https://www.marrs.io/wp-content/plugins/post-and-page-builder/assets/css/components.min.css?ver=2.16.5' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome-css' href='https://www.marrs.io/wp-content/plugins/post-and-page-builder/assets/css/font-awesome.min.css?ver=4.7' type='text/css' media='all' />
+<link rel='stylesheet' id='boldgrid-fe-css' href='https://www.marrs.io/wp-content/plugins/post-and-page-builder/assets/css/editor-fe.min.css?ver=1.26.3' type='text/css' media='all' />
+<link rel='stylesheet' id='boldgrid-custom-styles-css' href='https://www.marrs.io/wp-content/plugins/post-and-page-builder/assets/css/custom-styles.css?ver=6.5.2' type='text/css' media='all' />
+<link rel='stylesheet' id='bgpbpp-public-css' href='https://www.marrs.io/wp-content/plugins/post-and-page-builder-premium/dist/application.min.css?ver=1.1.2' type='text/css' media='all' />
+<script type="text/javascript" src="https://www.marrs.io/wp-includes/js/jquery/jquery.js?ver=3.7.1" id="jquery-core-js"></script>
+<script type="text/javascript" src="https://www.marrs.io/wp-includes/js/jquery/jquery-migrate.js?ver=3.4.1" id="jquery-migrate-js"></script>
+<link rel="https://api.w.org/" href="https://www.marrs.io/wp-json/" /><link rel="alternate" type="application/json" href="https://www.marrs.io/wp-json/wp/v2/posts/908" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.marrs.io/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.5.2" />
+<link rel='shortlink' href='https://www.marrs.io/?p=908' />
+<link rel="alternate" type="application/json+oembed" href="https://www.marrs.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.marrs.io%2Frf-communication-with-the-rfm12b-module%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.marrs.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.marrs.io%2Frf-communication-with-the-rfm12b-module%2F&#038;format=xml" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="icon" href="https://www.marrs.io/wp-content/uploads/2019/09/favicon.ico" sizes="32x32" />
+<link rel="icon" href="https://www.marrs.io/wp-content/uploads/2019/09/favicon.ico" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://www.marrs.io/wp-content/uploads/2019/09/favicon.ico" />
+<meta name="msapplication-TileImage" content="https://www.marrs.io/wp-content/uploads/2019/09/favicon.ico" />
+	<style id="egf-frontend-styles" type="text/css">
+		p {color: #000000;font-family: 'Courier New', sans-serif;font-style: normal;font-weight: 400;} h1 {color: #000000;font-family: 'Courier New', sans-serif;font-style: normal;font-weight: 400;} h2 {color: #000000;font-family: 'Courier New', sans-serif;font-style: normal;font-weight: 400;} h3 {font-family: 'Courier New', sans-serif;font-style: normal;font-weight: 400;} h4 {font-family: 'Courier New', sans-serif;font-style: normal;font-weight: 400;} h5 {font-family: 'Courier New', sans-serif;font-style: normal;font-weight: 400;} h6 {font-family: 'Courier New', sans-serif;font-style: normal;font-weight: 400;} 	</style>
+	<style id="wpforms-css-vars-root">
+				:root {
+					--wpforms-field-border-radius: 3px;
+--wpforms-field-background-color: #ffffff;
+--wpforms-field-border-color: rgba( 0, 0, 0, 0.25 );
+--wpforms-field-text-color: rgba( 0, 0, 0, 0.7 );
+--wpforms-label-color: rgba( 0, 0, 0, 0.85 );
+--wpforms-label-sublabel-color: rgba( 0, 0, 0, 0.55 );
+--wpforms-label-error-color: #d63637;
+--wpforms-button-border-radius: 3px;
+--wpforms-button-background-color: #066aab;
+--wpforms-button-text-color: #ffffff;
+--wpforms-page-break-color: #066aab;
+--wpforms-field-size-input-height: 43px;
+--wpforms-field-size-input-spacing: 15px;
+--wpforms-field-size-font-size: 16px;
+--wpforms-field-size-line-height: 19px;
+--wpforms-field-size-padding-h: 14px;
+--wpforms-field-size-checkbox-size: 16px;
+--wpforms-field-size-sublabel-spacing: 5px;
+--wpforms-field-size-icon-size: 1;
+--wpforms-label-size-font-size: 16px;
+--wpforms-label-size-line-height: 19px;
+--wpforms-label-size-sublabel-font-size: 14px;
+--wpforms-label-size-sublabel-line-height: 17px;
+--wpforms-button-size-font-size: 17px;
+--wpforms-button-size-height: 41px;
+--wpforms-button-size-padding-h: 15px;
+--wpforms-button-size-margin-top: 10px;
+
+				}
+			</style></head>
+
+<body class="post-template-default single single-post postid-908 single-format-standard boldgrid-ppb singular">
+<div id="page" class="hfeed site">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+		<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+							<a href="https://www.marrs.io/" class="site-logo-link" rel="home" itemprop="url"></a>										<p class="site-title"><a href="https://www.marrs.io/" rel="home">marrs.io</a></p>
+					</div><!-- .site-branding -->
+
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">Menu</button>
+			<div class="menu-menu-1-container"><ul id="primary-menu" class="menu"><li id="menu-item-816" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-816"><a href="https://www.marrs.io/about/">c.v.</a></li>
+<li id="menu-item-817" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-817"><a href="https://www.marrs.io/blog/">blog</a></li>
+</ul></div>		</nav><!-- #site-navigation -->
+
+	</header><!-- #masthead -->
+
+	<div id="content" class="site-content">
+
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-908" class="post-908 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+	<header class="entry-header">
+		<h1 class="entry-title">RF communication with the RFM12B module</h1>
+		<div class="entry-meta">
+			<span class="posted-on">Posted on <a href="https://www.marrs.io/rf-communication-with-the-rfm12b-module/" rel="bookmark"><time class="entry-date published updated" datetime="2019-10-04T15:22:57+00:00"></time></a></span><span class="byline"> by <span class="author vcard"><a class="url fn n" href="https://www.marrs.io/author/marrs_s836aq/">marrs</a></span></span>		</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<div class="boldgrid-section">
+<div class="container">
+<div class="row">
+<div class="col-md-12 col-xs-12 col-sm-12 boldgrid-section">
+<div class="container">
+<div class="row">
+<div class="col-lg-8 col-lg-offset-2 col-md-12 col-md-offset-1 col-xs-12 col-sm-12">
+<div>
+<article class="blog-post" role="main">&nbsp;</p>
+<p>(For the working code scroll all the way to the bottom!)</p>
+<p>I free-formed a simple RFM12B atmega168 temperature sensor circuit using a 3.7 lithium ion battery I would one day like to solar recharge. Behold!:</p>
+<p><img decoding="async" src="https://gitlab.com/fablabdigiscope/fablabdigiscope.gitlab.io/raw/master/themes/beautifulhugo/static/img/diagram%20of%20components%20in%20free%20dorm2-01.jpg" alt=""></p>
+<p><img decoding="async" src="https://gitlab.com/fablabdigiscope/fablabdigiscope.gitlab.io/raw/master/themes/beautifulhugo/static/img/rfm12%20atmega%20168%20freeform%20circuit-01.jpg" alt=""></p>
+<p><img decoding="async" src="https://gitlab.com/fablabdigiscope/fablabdigiscope.gitlab.io/raw/master/themes/beautifulhugo/static/img/IMG_2146_2.JPG" alt=""></p>
+<p><img decoding="async" src="https://gitlab.com/fablabdigiscope/fablabdigiscope.gitlab.io/raw/master/themes/beautifulhugo/static/img/HOOKUP.jpg" alt=""></p>
+<p>Notes: DO for Data Out and DI for Data In, from the perspective of the RFM12B. I’m using a 7cm long antenna because these modules are 868MHz (you can tell the frequency based on the existence or not of a certain capacitor).</p>
+<p><img decoding="async" src="https://gitlab.com/fablabdigiscope/fablabdigiscope.gitlab.io/raw/master/themes/beautifulhugo/static/img/IMG_2147_2.JPG" alt=""></p>
+<p>The MISO line is dead, the RFM12B is not responding to anything I’m sending it…</p>
+<p>The RFM works with 16 bit data and I am currently trying to squeeze two 8 bit data transmissions, this is why I think things are not currently working. This project might be the limit of where it is easy to make one’s own code and when one must rely on code produced by the manufacturer of the chip in question.</p>
+<p>An additional problem with the particilar project is the poor documentation by the manufacturer of the RFM12B module. Even the numbering of the registers is not consistent and there are errors in example code.</p>
+<p><img decoding="async" src="https://gitlab.com/fablabdigiscope/fablabdigiscope.gitlab.io/raw/master/themes/beautifulhugo/static/img/HopeRF.jpg" alt=""></p>
+<p>Here is the (not yet working) TX side code:</p>
+<pre><code class="language-c">
+// *
+// * Atmega168 RFM12B TX
+// *
+// * Created:
+// * Author : FablabDigiscope
+// */
+
+#define F_CPU 8000000
+
+#include &lt;avr/io.h&gt;
+#include &lt;util/delay.h&gt;
+
+#define NIRQ PB0 // input for nIRQ which goes low after a transmit is received?
+
+
+void SPI_Init();
+void SPI_Transmit(char dataout);
+void SPI_Stop();
+void rfInit();
+
+
+int main(void)
+{
+		SPI_Init();
+		SPDR = (0x00); // byte to send
+		SPDR = (0x00); // byte to send
+		rfInit();
+		DDRD = 0b10000000; //LED for RX/TX rec/sent
+
+	while (1)
+	{
+		char dataout = 0b10011001; // 0x99 //
+		
+
+		
+		SPI_Transmit(0xB8); //this must precede data, it is the transmit register write command.		
+		SPI_Transmit(0xAA); // PREAMBLE
+		
+		SPI_Transmit(0xB8); //this must precede data, it is the transmit register write command.
+		SPI_Transmit(0xAA);
+		
+		SPI_Transmit(0xB8); //this must precede data, it is the transmit register write command.		
+		SPI_Transmit(0xAA);
+		
+		SPI_Transmit(0xB8); //this must precede data, it is the transmit register write command.		
+		SPI_Transmit(0x2D); // SYNC
+		
+		SPI_Transmit(0xB8); //this must precede data, it is the transmit register write command.
+		SPI_Transmit(0xD4); // Network ID
+
+
+		SPI_Transmit(0xB8); //this must precede data, it is the transmit register write command.
+		SPI_Transmit(dataout);
+		
+		SPI_Transmit(0x00); //
+		SPI_Transmit(0xAA); // DUMMY BYTES, optional?
+		
+		SPI_Transmit(0x00); //
+		SPI_Transmit(0xAA);
+		
+		SPI_Transmit(0x00); //
+		SPI_Transmit(0xAA);
+		
+		SPI_Stop();
+
+		_delay_ms(1);
+		
+		PORTD = 0b10000000; // turn on LED
+
+	}
+}
+
+
+
+void SPI_Init()
+{
+	DDRB = ((1&lt;&lt;DDB2)|(1&lt;&lt;DDB5)|(1&lt;&lt;DDB3)); //SPI pins on port B: SS, SCK, MOSI outputs
+	//set MISO as input
+	PORTB |= (1&lt;&lt;DDB2); //start with SS high (slave not selected). DO THIS BEFORE BEGINING ISP
+	PORTB |= (1&lt;&lt;DDB4); //MISO pull-up activated
+	SPCR = ((1&lt;&lt;SPE)|(1&lt;&lt;MSTR)|(1&lt;&lt;SPR1));  // SPI enable, Master enable, f/64. DO THIS AFTER DDR!
+}
+
+void SPI_Transmit(char dataout)
+{
+	//SPI_Transmit
+	PORTB &amp;= ~(1&lt;&lt;DDB2); // pull slave select low
+	while(PINB &amp; (1&lt;&lt;NIRQ)); // wait until ready signal (low)
+	SPDR = (dataout); // byte to send
+	while(!(SPSR &amp; (1&lt;&lt;SPIF))); // wait for SPIF transmit flag to be set. After this, SPDR will contain the received byte!
+}
+
+
+void SPI_Stop()
+{
+	PORTB |= (1&lt;&lt;DDB2); //slave select high
+}
+
+void rfInit()
+{
+	SPI_Transmit(0x80);
+	SPI_Transmit(0xE7); //EL (turn on internal data reg.),EF (FIFO rx mode enabled, data and dclk used for data and data clock output),868band,12.0pF
+	
+	SPI_Transmit(0x82);
+	SPI_Transmit(0x39); //er (for rec. mode),!ebb,ET(for rec. mode),ES,EX,!eb,!ew,DC for receiver mode//
+	
+	SPI_Transmit(0xA6);
+	SPI_Transmit(0x40); //frequency select
+	
+	SPI_Transmit(0xC6);
+	SPI_Transmit(0x47); //4.8kbps
+	
+	SPI_Transmit(0x94);
+	SPI_Transmit(0xA0); //VDI,FAST,134kHz,0dBm,-103dBm
+	
+	SPI_Transmit(0xC2);
+	SPI_Transmit(0xAC); //AL,!ml,DIG,DQD4
+	
+	SPI_Transmit(0xCA);
+	SPI_Transmit(0x81); //FIFO8,SYNC,!ff,DR ***** (this must be set to 0xCA83 to rx)
+	
+	SPI_Transmit(0xCE);
+	SPI_Transmit(0xD4); //SYNC=2DD4 ,AG
+	
+	SPI_Transmit(0xC4);
+	SPI_Transmit(0x83); //@PWR,NO RSTRIC,!st,!fi,OE,EN
+	
+	SPI_Transmit(0x98);
+	SPI_Transmit(0x50); //!mp,90kHz,MAX OUT
+	
+	SPI_Transmit(0xCC);
+	SPI_Transmit(0x17); //OB1 , ACOB0, LPX,Iddy,CDDIT,CBW0
+	
+	SPI_Transmit(0xE0);
+	SPI_Transmit(0x00); //NOT USED
+	
+	SPI_Transmit(0xC8);
+	SPI_Transmit(0x00); //NOT USED
+	
+	SPI_Transmit(0xC0);
+	SPI_Transmit(0x40); //1.66MHz,2.2V
+}
+
+
+</code></pre>
+<p>Here is the (not yet working) RX side of the code:</p>
+<pre><code class="language-c">
+// *
+// * Atmega168 RFM12B RX
+// *
+// * Created:
+// * Author : FablabDigiscope
+// */
+
+
+		#define F_CPU 8000000
+
+		#include &lt;avr/io.h&gt;
+		#include &lt;util/delay.h&gt;
+
+		#define NIRQ PB0 // input for nIRQ which goes low after a transmit is received?
+		
+		void FIFO_Reset();
+		void SPI_Transmit(char dataout);
+		void SPI_Init();
+		void rfInit();
+		void SPI_Stop();
+		char SPI_Receive();
+
+		int main(void)
+		{
+		DDRD = 0b10000000; //LED for RX/TX rec/sent
+		
+		SPI_Init();
+		rfInit();
+
+
+		
+	
+		
+		while (1)
+		{
+		char storage; 
+		SPI_Transmit(0x00);
+		SPI_Transmit(0x00);
+		
+		FIFO_Reset();
+		storage = SPI_Receive(); //should get only last byte of message?	
+			
+		if(storage == 0b10011001) // 0x99
+		{
+		PORTD = 0b10000000; //turn on LED
+		FIFO_Reset();
+		}
+		SPI_Stop();
+		_delay_us(1);
+		}
+		}
+
+
+
+
+void SPI_Init()
+{
+	DDRB = ((1&lt;&lt;DDB2)|(1&lt;&lt;DDB5)|(1&lt;&lt;DDB3)); //SPI pins on port B: SS, SCK, MOSI outputs
+	//set MISO as input
+	PORTB |= (1&lt;&lt;DDB2); //start with SS high (slave not selected). DO THIS BEFORE BEGINING ISP
+	PORTB |= (1&lt;&lt;DDB4); //MISO pull-up activated
+	SPCR = ((1&lt;&lt;SPE)|(1&lt;&lt;MSTR)|(1&lt;&lt;SPR1));  // SPI enable, Master enable, f/64. DO THIS AFTER DDR!
+}
+
+char SPI_Receive() //must be in receive mode for this to work//
+{
+	char received;
+	//SPI_Receive
+	PORTB &amp;= ~(1&lt;&lt;DDB2); // pull slave select low
+	while(PINB &amp; (1&lt;&lt;NIRQ)); // wait until ready signal (low)
+	SPDR = (0xB0); // byte to send
+	while(!(SPSR &amp; (1&lt;&lt;SPIF))); // wait for SPIF transmit flag to be set. After this, SPDR will contain the received byte!
+	
+	while(PINB &amp; (1&lt;&lt;NIRQ)); // wait until ready signal (low)
+	SPDR = (0x00); // byte to send
+	while(!(SPSR &amp; (1&lt;&lt;SPIF))); // wait for SPIF transmit flag to be set. After this, SPDR will contain the received byte!
+	
+	received = SPDR;
+	return received;
+}
+
+void SPI_Transmit(char dataout)
+{
+	//SPI_Transmit
+	PORTB &amp;= ~(1&lt;&lt;DDB2); // pull slave select low
+	while(PINB &amp; (1&lt;&lt;NIRQ)); // wait until ready signal (low)
+	SPDR = (dataout); // byte to send
+	while(!(SPSR &amp; (1&lt;&lt;SPIF))); // wait for SPIF transmit flag to be set. After this, SPDR will contain the received byte!
+}
+
+void FIFO_Reset()
+{
+	SPI_Transmit(0xCA);
+	SPI_Transmit(0x81);
+
+	SPI_Transmit(0xCA);
+	SPI_Transmit(0x83);
+}
+
+
+void rfInit()
+{
+	SPI_Transmit(0x80); 
+	SPI_Transmit(0xE7); //EL (turn on internal data reg.),EF (FIFO rx mode enabled, data and dclk used for data and data clock output),868band,12.0pF
+	
+	SPI_Transmit(0x82); 
+	SPI_Transmit(0x99); //er (for rec. mode),!ebb,ET(for rec. mode),ES,EX,!eb,!ew,DC for receiver mode//
+	
+	SPI_Transmit(0xA6); 
+	SPI_Transmit(0x40); //frequency select
+	
+	SPI_Transmit(0xC6); 
+	SPI_Transmit(0x47); //4.8kbps
+	
+	SPI_Transmit(0x94); 
+	SPI_Transmit(0xA0); //VDI,FAST,134kHz,0dBm,-103dBm
+		
+	SPI_Transmit(0xC2); 
+	SPI_Transmit(0xAC); //AL,!ml,DIG,DQD4	
+	
+	SPI_Transmit(0xCA); 
+	SPI_Transmit(0x81); //FIFO8,SYNC,!ff,DR ***** (this must be set to 0xCA83 to rx)	
+	
+	SPI_Transmit(0xCE); 
+	SPI_Transmit(0xD4); //SYNC=2DD4 ,AG
+		
+	SPI_Transmit(0xC4); 
+	SPI_Transmit(0x83); //@PWR,NO RSTRIC,!st,!fi,OE,EN	
+	
+	SPI_Transmit(0x98); 
+	SPI_Transmit(0x50); //!mp,90kHz,MAX OUT
+		
+	SPI_Transmit(0xCC); 
+	SPI_Transmit(0x17); //OB1 , ACOB0, LPX,Iddy,CDDIT,CBW0	
+	
+	SPI_Transmit(0xE0); 
+	SPI_Transmit(0x00); //NOT USED	
+	
+	SPI_Transmit(0xC8); 
+	SPI_Transmit(0x00); //NOT USED	
+		
+	SPI_Transmit(0xC0); 
+	SPI_Transmit(0x40); //1.66MHz,2.2V
+}
+
+void SPI_Stop()
+{
+	PORTB |= (1&lt;&lt;DDB2); //slave select high
+}
+
+
+
+</code></pre>
+<p>This code works (most of the time!), it’s from&nbsp;<a href="http://dlehard.narod.ru/quick_start.pdf">http://dlehard.narod.ru/quick_start.pdf</a>, dlehard did a wonderful job making this clear and legible, thank you for your work!</p>
+<p>I think the main reason it is working is the fact that it does not rely on the AVR USI but has its own custom 16 bit Write(Cmd) function. This function is straight forward, it takes a 16 bit input and bit bangs the SDO (Microchip input from RFM12B output) one bit at a time while also reading the SDI (Microchip output to RFM12B input) and writing it to the recv variable. It manually does the basic SPI stuff, pulling Chip Select (CS) low and pulling the clock low before putting SDI in the appropriate state and ticking the clock up. The part I had difficulty understanding was the ANDing with 0x8000, now I understand this is a bitmask which looks only at the highest bit in the 16 bit value (0x8000 = 0b1000000000000000) while the loop bitshifts the Cmd to the left each time, ANDing the next bit with 1. ANDing produces a 1 only if A and B are both 1 and otherwise produces a 0, this is why it is useful as a bitmask.</p>
+<p>I don’t know how the timing of this SPI setup is controlled but I guess it’s not critical.</p>
+<p>The TX side turns on an LED everytime it transmits, the RX side turns on an LED if it receives the byte 0x30.</p>
+<p>I was too lazy to get the USART to work with the Atmega168 (I have a previous post on getting it going with an Attiny2313) so that part of the code is commented out.</p>
+<p>Here is the RX side:</p>
+<pre><code class="language-c">/*
+ * Atmega168 RFM12B rev.2 RX.c
+ *
+ * Created: 4/30/2019 2:56:31 PM
+ * Author : FablabDigiscope
+ */ 
+
+
+#include &lt;avr/io.h&gt;
+
+/* RFM12B INTERFACE */
+#define SCK 5 // SPI clock
+#define SDO 4 // SPI Data output (RFM12B side)
+#define SDI 3 // SPI Data input (RFM12B side)
+#define CS 2 // SPI SS (chip select)
+#define NIRQ 2 // (PORTD)
+
+/* IO CONTROL */
+#define HI(x) PORTB |= (1&lt;&lt;(x))
+#define LO(x) PORTB &amp;= ~(1&lt;&lt;(x))
+
+
+/* LED */
+#define LED 6
+#define LED_OFF() PORTD &amp;= ~(1&lt;&lt;LED)
+#define LED_ON() PORTD |= (1&lt;&lt;LED)
+
+/* USART */
+//#define BAUDRATE 25 // 19200 at 8MHz
+
+void portInit() {
+	HI(CS);
+	HI(SDI);
+	LO(SCK);
+	DDRB = (1&lt;&lt;CS) | (1&lt;&lt;SDI) | (1&lt;&lt;SCK);
+	DDRD = (1&lt;&lt;LED);
+}
+
+unsigned int writeCmd(unsigned int cmd) {
+	unsigned char i;
+	unsigned int recv;
+	recv = 0;
+	LO(SCK);
+	LO(CS);
+	
+	for(i=0; i&lt;16; i++) {
+		if(cmd&amp;0x8000) HI(SDI); else LO(SDI);
+		HI(SCK);
+		recv&lt;&lt;=1;
+		if( PINB&amp;(1&lt;&lt;SDO) ) {
+			recv|=0x0001;
+		}
+		LO(SCK);
+		cmd&lt;&lt;=1;
+	}
+	HI(CS);
+	return recv;
+}
+
+
+/* 
+void rsInit(unsigned char baud) {
+	UBRRL = baud;
+	UCSRC = (1&lt;&lt;UCSZ0) | (1&lt;&lt;UCSZ1); // 8N1
+	UCSRB = (1&lt;&lt;RXEN) | (1&lt;&lt;TXEN); // enable tx and rx
+}
+void rsSend(unsigned char data) {
+	while( !(UCSRA &amp; (1&lt;&lt;UDRE)));
+	UDR = data;
+}
+unsigned char rsRecv() {
+	while( !(UCSRA &amp; (1&lt;&lt;RXC)));
+	return UDR;
+}
+ */
+
+void rfInit() {
+	writeCmd(0x80E7); //EL,EF,868band,12.0pF
+	writeCmd(0x8299); //er,!ebb,ET,ES,EX,!eb,!ew,DC (bug was here)
+	writeCmd(0xA640); //freq select
+	writeCmd(0xC647); //4.8kbps
+	writeCmd(0x94A0); //VDI,FAST,134kHz,0dBm,-103dBm
+	writeCmd(0xC2AC); //AL,!ml,DIG,DQD4
+	writeCmd(0xCA81); //FIFO8,SYNC,!ff,DR (FIFO level = 8)
+	writeCmd(0xCED4); //SYNC=2DD4;
+	writeCmd(0xC483); //@PWR,NO RSTRIC,!st,!fi,OE,EN
+	writeCmd(0x9850); //!mp,90kHz,MAX OUT
+	writeCmd(0xCC17); //!OB1,!OB0, LPX,!ddy,DDIT,BW0
+	writeCmd(0xE000); //NOT USE
+	writeCmd(0xC800); //NOT USE
+	writeCmd(0xC040); //1.66MHz,2.2V
+}
+
+/*
+void rfSend(unsigned char data){
+	while(PIND&amp;(1&lt;&lt;NIRQ));
+	writeCmd(0xB800 + data);
+}
+*/
+
+unsigned char rfRecv() {
+	unsigned int data;
+	while(1) {
+		data = writeCmd(0x0000);
+		if ( (data&amp;0x8000) ) {
+			data = writeCmd(0xB000);
+			return (data&amp;0x00FF);
+		}
+	}
+}
+void FIFOReset() {
+	writeCmd(0xCA81);
+	writeCmd(0xCA83);
+}
+
+int main(void) {
+
+	unsigned char data, i;
+	LED_OFF();
+	portInit();
+	rfInit();
+//	rsInit(BAUDRATE); 
+	FIFOReset();
+	while(1) {
+		//waitForData();
+		
+		for (i=0; i&lt;16; i++) {
+			data = rfRecv();
+			if (data == 0x30){
+			LED_ON(); //delete this
+			}
+		}
+		FIFOReset();
+		LED_OFF();
+	}
+	return 0;
+}
+
+
+
+</code></pre>
+<p>Here is the TX side:</p>
+<pre><code class="language-c">/*
+ * Atmega168 RFM12B rev.2.c
+ *
+ * Created: 4/25/2019 5:27:15 PM
+ * Author : FablabDigiscope
+ */ 
+
+#include &lt;avr/io.h&gt;
+
+/* RFM12B INTERFACE */
+#define SCK 5 // SPI clock
+#define SDO 4 // SPI Data output (RFM12B side)
+#define SDI 3 // SPI Data input (RFM12B side)
+#define CS 2 // SPI SS (chip select)
+#define NIRQ 2 // (PORTD)
+
+/* IO CONTROL */
+#define HI(x) PORTB |= (1&lt;&lt;(x))
+#define LO(x) PORTB &amp;= ~(1&lt;&lt;(x))
+
+
+/* LED */
+#define LED 6
+#define LED_OFF() PORTD &amp;= ~(1&lt;&lt;LED)
+#define LED_ON() PORTD |= (1&lt;&lt;LED)
+
+void portInit() {
+	HI(CS);
+	HI(SDI);
+	LO(SCK);
+	DDRB = (1&lt;&lt;CS) | (1&lt;&lt;SDI) | (1&lt;&lt;SCK);
+	DDRD = (1&lt;&lt;LED);
+}
+
+unsigned int writeCmd(unsigned int cmd) {
+	unsigned char i;
+	unsigned int recv;
+	recv = 0;
+	LO(SCK);
+	LO(CS);
+	
+	for(i=0; i&lt;16; i++) {
+		if(cmd&amp;0x8000) HI(SDI); else LO(SDI);
+		HI(SCK);
+		recv&lt;&lt;=1;
+		if( PINB&amp;(1&lt;&lt;SDO) ) {
+			recv|=0x0001;
+		}
+		LO(SCK);
+		cmd&lt;&lt;=1;
+	}
+	HI(CS);
+	return recv;
+}
+
+void rfInit() {
+	writeCmd(0x80E7); //EL,EF,868band,12.0pF
+	writeCmd(0x8239); //!er,!ebb,ET,ES,EX,!eb,!ew,DC
+	writeCmd(0xA640); //frequency select
+	writeCmd(0xC647); //4.8kbps
+	writeCmd(0x94A0); //VDI,FAST,134kHz,0dBm,-103dBm
+	writeCmd(0xC2AC); //AL,!ml,DIG,DQD4
+	writeCmd(0xCA81); //FIFO8,SYNC,!ff,DR
+	writeCmd(0xCED4); //SYNC=2DD4,AG
+	writeCmd(0xC483); //@PWR,NO RSTRIC,!st,!fi,OE,EN
+	writeCmd(0x9850); //!mp,90kHz,MAX OUT
+	writeCmd(0xCC17); //OB1,ACOB0, LPX,Iddy,CDDIT,CBW0
+	writeCmd(0xE000); //NOT USED
+	writeCmd(0xC800); //NOT USED
+	writeCmd(0xC040); //1.66MHz,2.2V
+}
+
+
+void rfSend(unsigned char data){
+	while(PIND&amp;(1&lt;&lt;NIRQ));
+	writeCmd(0xB800 + data);
+}
+
+
+int main() {
+	volatile unsigned int i,j;
+	asm("cli");
+	for(i=0;i&lt;1000;i++)for(j=0;j&lt;123;j++);
+	portInit();
+	rfInit();
+	while(1){
+		LED_ON();
+		writeCmd(0x0000);
+		rfSend(0xAA); // PREAMBLE
+		rfSend(0xAA);
+		rfSend(0xAA);
+		rfSend(0x2D); // SYNC
+		rfSend(0xD4);
+		for(i=0; i&lt;16; i++) {
+			rfSend(0x30+i);
+		}
+		rfSend(0xAA); // DUMMY BYTES
+		rfSend(0xAA);
+		rfSend(0xAA);
+		LED_OFF();
+		for(i=0; i&lt;10000; i++) // some not very
+		for(j=0; j&lt;123; j++); // sophisticated delay
+	}
+}
+
+
+</code></pre>
+<p>And here’s a photo of the two modules communicating when each is battery powered from two 1.5 watch battery cells. They continue to be able to communicate after a shortish but not insignificant walk to the coffee machine (50 meters or so).</p>
+<p><img decoding="async" src="https://gitlab.com/fablabdigiscope/fablabdigiscope.gitlab.io/raw/master/themes/beautifulhugo/static/img/IMG_2389ed.jpg" alt=""></p>
+<p>Here is the code for one RFM12B taking an analog measurement and sending it to the other which is printing the result via USART to a serial port.</p>
+<p>TX side:</p>
+<pre><code class="language-c">
+/*
+ * Atmega168 RFM12B TX rev.2.c
+ *
+ * Created: 4/25/2019 5:27:15 PM
+ * Author : FablabDigiscope
+ */ 
+
+#include &lt;avr/io.h&gt;
+
+/* RFM12B INTERFACE */
+#define SCK 5 // SPI clock
+#define SDO 4 // SPI Data output (RFM12B side)
+#define SDI 3 // SPI Data input (RFM12B side)
+#define CS 2 // SPI SS (chip select)
+#define NIRQ 2 // (PORTD)
+
+/* IO CONTROL */
+#define HI(x) PORTB |= (1&lt;&lt;(x))
+#define LO(x) PORTB &amp;= ~(1&lt;&lt;(x))
+
+
+/* LED */
+#define LED 6
+#define LED_OFF() PORTD &amp;= ~(1&lt;&lt;LED)
+#define LED_ON() PORTD |= (1&lt;&lt;LED)
+
+void analogInit() {
+	ADMUX |= (1 &lt;&lt; REFS0); // AREF ref voltage connected to power
+	// PC0 input select
+	ADCSRA |= (1 &lt;&lt; ADPS2) | (1 &lt;&lt; ADPS0); // set clock to 32 divisions for 8MHz
+	ADCSRA |= (1 &lt;&lt; ADEN); /* enable ADC */
+	
+	
+}
+
+unsigned int analogRead() {
+	uint16_t adcValue; //16 bit variable because the ADC on the Attiny84 is 10 bits.
+	ADCSRA |= (1 &lt;&lt; ADSC); /* start conversion */
+	adcValue = ADC; /* store high byte into adcValue */
+	return adcValue;
+}
+
+
+void portInit() {
+	HI(CS);
+	HI(SDI);
+	LO(SCK);
+	DDRB = (1&lt;&lt;CS) | (1&lt;&lt;SDI) | (1&lt;&lt;SCK);
+	DDRD = (1&lt;&lt;LED);
+}
+
+unsigned int writeCmd(unsigned int cmd) {
+	unsigned char i;
+	unsigned int recv;
+	recv = 0;
+	LO(SCK);
+	LO(CS);
+	
+	for(i=0; i&lt;16; i++) {
+		if(cmd&amp;0x8000) HI(SDI); else LO(SDI);
+		HI(SCK);
+		recv&lt;&lt;=1;
+		if( PINB&amp;(1&lt;&lt;SDO) ) {
+			recv|=0x0001;
+		}
+		LO(SCK);
+		cmd&lt;&lt;=1;
+	}
+	HI(CS);
+	return recv;
+}
+
+void rfInit() {
+	writeCmd(0x80E7); //EL,EF,868band,12.0pF
+	writeCmd(0x8239); //!er,!ebb,ET,ES,EX,!eb,!ew,DC
+	writeCmd(0xA640); //frequency select
+	writeCmd(0xC647); //4.8kbps
+	writeCmd(0x94A0); //VDI,FAST,134kHz,0dBm,-103dBm
+	writeCmd(0xC2AC); //AL,!ml,DIG,DQD4
+	writeCmd(0xCA81); //FIFO8,SYNC,!ff,DR
+	writeCmd(0xCED4); //SYNC=2DD4,AG
+	writeCmd(0xC483); //@PWR,NO RSTRIC,!st,!fi,OE,EN
+	writeCmd(0x9850); //!mp,90kHz,MAX OUT
+	writeCmd(0xCC17); //OB1,ACOB0, LPX,Iddy,CDDIT,CBW0
+	writeCmd(0xE000); //NOT USED
+	writeCmd(0xC800); //NOT USED
+	writeCmd(0xC040); //1.66MHz,2.2V
+}
+
+
+void rfSend(unsigned char data){
+	while(PIND&amp;(1&lt;&lt;NIRQ));
+	writeCmd(0xB800 + data);
+}
+
+
+int main() {
+	volatile unsigned int i,j;
+	asm("cli");
+	for(i=0;i&lt;1000;i++)for(j=0;j&lt;123;j++);
+	portInit();
+	analogInit();
+	rfInit();
+	while(1){
+		LED_ON();
+		writeCmd(0x0000);
+		rfSend(0xAA); // PREAMBLE
+		rfSend(0xAA);
+		rfSend(0xAA);
+		rfSend(0x2D); // SYNC
+		rfSend(0xD4);
+		for(i=0; i&lt;16; i++) {
+			rfSend(analogRead());
+		}
+		rfSend(0xAA); // DUMMY BYTES
+		rfSend(0xAA);
+		rfSend(0xAA);
+		LED_OFF();
+		for(i=0; i&lt;10000; i++) // some not very
+		for(j=0; j&lt;123; j++); // sophisticated delay
+	}
+}
+
+</code></pre>
+<p>RX side:</p>
+<pre><code class="language-c">
+/*
+ * Atmega168 RFM12B rev.2 RX.c
+ *
+ * Created: 4/30/2019 2:56:31 PM
+ * Author : FablabDigiscope
+ */ 
+
+
+#include &lt;avr/io.h&gt;
+
+/* RFM12B INTERFACE */
+#define SCK 5 // SPI clock
+#define SDO 4 // SPI Data output (RFM12B side)
+#define SDI 3 // SPI Data input (RFM12B side)
+#define CS 2 // SPI SS (chip select)
+#define NIRQ 2 // (PORTD)
+
+/* IO CONTROL */
+#define HI(x) PORTB |= (1&lt;&lt;(x))
+#define LO(x) PORTB &amp;= ~(1&lt;&lt;(x))
+
+
+/* LED */
+#define LED 6
+#define LED_OFF() PORTD &amp;= ~(1&lt;&lt;LED)
+#define LED_ON() PORTD |= (1&lt;&lt;LED)
+
+/* USART */
+#define BAUDRATE 25 // 19200 at 8MHz
+
+void portInit() {
+	HI(CS);
+	HI(SDI);
+	LO(SCK);
+	DDRB = (1&lt;&lt;CS) | (1&lt;&lt;SDI) | (1&lt;&lt;SCK);
+	DDRD = (1&lt;&lt;LED);
+}
+
+
+
+unsigned int writeCmd(unsigned int cmd) {
+	unsigned char i;
+	unsigned int recv;
+	recv = 0;
+	LO(SCK);
+	LO(CS);
+	
+	for(i=0; i&lt;16; i++) {
+		if(cmd&amp;0x8000) HI(SDI); else LO(SDI);
+		HI(SCK);
+		recv&lt;&lt;=1;
+		if( PINB&amp;(1&lt;&lt;SDO) ) {
+			recv|=0x0001;
+		}
+		LO(SCK);
+		cmd&lt;&lt;=1;
+	}
+	HI(CS);
+	return recv;
+}
+
+void rsInit(unsigned char baud) {
+	UBRR0L = baud;
+	UCSR0C = (1&lt;&lt;UCSZ00) | (1&lt;&lt;UCSZ01); // 8N1
+	UCSR0B = (1&lt;&lt;RXEN0) | (1&lt;&lt;TXEN0); // enable tx and rx
+}
+
+void rsSend(unsigned char data) {
+	while( !(UCSR0A &amp; (1&lt;&lt;UDRE0)));
+	UDR0 = data;
+}
+
+
+unsigned char rsRecv() {
+	while( !(UCSR0A &amp; (1&lt;&lt;RXC0)));
+	return UDR0;
+}
+
+/*    FOR ATTINY 2313
+void rsInit(unsigned char baud) {
+	UBRRL = baud;
+	UCSRC = (1&lt;&lt;UCSZ0) | (1&lt;&lt;UCSZ1); // 8N1
+	UCSRB = (1&lt;&lt;RXEN) | (1&lt;&lt;TXEN); // enable tx and rx
+}
+void rsSend(unsigned char data) {
+	while( !(UCSRA &amp; (1&lt;&lt;UDRE)));
+	UDR = data;
+}
+unsigned char rsRecv() {
+	while( !(UCSRA &amp; (1&lt;&lt;RXC)));
+	return UDR;
+}
+ */
+
+void rfInit() {
+	writeCmd(0x80E7); //EL,EF,868band,12.0pF
+	writeCmd(0x8299); //er,!ebb,ET,ES,EX,!eb (low batt detector disabled),!ew,DC (bug was here)
+	writeCmd(0xA640); //freq select
+	writeCmd(0xC647); //4.8kbps
+	writeCmd(0x94A0); //VDI,FAST,134kHz,0dBm,-103dBm
+	writeCmd(0xC2AC); //AL,!ml,DIG,DQD4
+	writeCmd(0xCA81); //FIFO8,SYNC,!ff,DR (FIFO level = 8)
+	writeCmd(0xCED4); //SYNC=2DD4;
+	writeCmd(0xC483); //@PWR,NO RSTRIC,!st,!fi,OE,EN
+	writeCmd(0x9850); //!mp,90kHz,MAX OUT
+	writeCmd(0xCC17); //!OB1,!OB0, LPX,!ddy,DDIT,BW0
+	writeCmd(0xE000); //NOT USE
+	writeCmd(0xC800); //NOT USE
+	writeCmd(0xC040); //1.66MHz,2.2V
+}
+
+
+void rfSend(unsigned char data){
+	while(PIND&amp;(1&lt;&lt;NIRQ));
+	writeCmd(0xB800 + data);
+}
+
+
+unsigned char rfRecv() {
+	unsigned int data;
+	while(1) {
+		data = writeCmd(0x0000); // I think I would add here responses to Status 
+		if ( (data&amp;0x8000) ) {
+			data = writeCmd(0xB000);
+			return (data&amp;0x00FF);
+		}
+	}
+}
+void FIFOReset() {
+	writeCmd(0xCA81);
+	writeCmd(0xCA83);
+}
+
+int main(void) {
+
+	unsigned char data, i;
+	LED_OFF();
+	portInit();
+	rfInit();
+	rsInit(BAUDRATE); 
+	//analogInit();
+	FIFOReset();
+	while(1) {
+		//waitForData();
+	for (i=0; i&lt;16; i++) {
+		data = rfRecv();
+		rsSend(data);
+		}
+		FIFOReset();
+		LED_OFF();
+	}
+	return 0;
+}
+</code></pre>
+</article>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+			</div><!-- .entry-content -->
+
+	<footer class="entry-footer">
+			</footer><!-- .entry-footer -->
+</article><!-- #post-## -->
+
+
+			
+	<nav class="navigation post-navigation" aria-label="Posts">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://www.marrs.io/i2c-demo-board-design/" rel="prev"><span class="meta-nav">Previous Post</span> I2C Demo Board Design</a></div><div class="nav-next"><a href="https://www.marrs.io/debugging/" rel="next"><span class="meta-nav">Next Post</span> Debugging</a></div></div>
+	</nav>
+			
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+
+	</div><!-- #content -->
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+		
+			<div class="footer-widgets clear">
+
+				
+					<div class="widget-area">
+
+						
+					</div><!-- .widget-area -->
+
+				
+				
+				
+			</div><!-- .footer-widgets -->
+
+		
+		<div class="site-info">
+		</div><!-- .site-info -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<style id='core-block-supports-inline-css' type='text/css'>
+/**
+ * Core styles: block-supports
+ */
+
+</style>
+<script type="text/javascript" src="https://www.marrs.io/wp-includes/js/imagesloaded.min.js?ver=5.0.0" id="imagesloaded-js"></script>
+<script type="text/javascript" src="https://www.marrs.io/wp-includes/js/masonry.min.js?ver=4.2.2" id="masonry-js"></script>
+<script type="text/javascript" src="https://www.marrs.io/wp-includes/js/jquery/jquery.masonry.min.js?ver=3.1.2b" id="jquery-masonry-js"></script>
+<script type="text/javascript" id="libre-script-js-extra">
+/* <![CDATA[ */
+var libreadminbar = [""];
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.marrs.io/wp-content/themes/libre/js/libre.js?ver=20150623" id="libre-script-js"></script>
+<script type="text/javascript" src="https://www.marrs.io/wp-content/themes/libre/js/navigation.js?ver=20120206" id="libre-navigation-js"></script>
+<script type="text/javascript" src="https://www.marrs.io/wp-content/themes/libre/js/skip-link-focus-fix.js?ver=20130115" id="libre-skip-link-focus-fix-js"></script>
+<script type="text/javascript" src="https://www.marrs.io/wp-content/plugins/highlighting-code-block/assets/js/prism.js?ver=2.0.1" id="hcb-prism-js"></script>
+<script type="text/javascript" src="https://www.marrs.io/wp-includes/js/clipboard.js?ver=2.0.11" id="clipboard-js"></script>
+<script type="text/javascript" id="hcb-script-js-extra">
+/* <![CDATA[ */
+var hcbVars = {"showCopyBtn":"1","copyBtnLabel":"Copy code to clipboard"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.marrs.io/wp-content/plugins/highlighting-code-block/build/js/hcb_script.js?ver=2.0.1" id="hcb-script-js"></script>
+<script type="text/javascript" id="boldgrid-editor-public-js-extra">
+/* <![CDATA[ */
+var BoldgridEditorPublic = {"is_boldgrid_theme":"","colors":{"defaults":["rgb(33, 150, 243)","rgb(13, 71, 161)","rgb(187, 222, 251)","rgb(238, 238, 238)","rgb(19, 19, 19)"],"neutral":"white"},"theme":"Libre"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.marrs.io/wp-content/plugins/post-and-page-builder/assets/dist/public.min.js?ver=1.26.3" id="boldgrid-editor-public-js"></script>
+<script type="text/javascript" src="https://www.marrs.io/wp-content/plugins/post-and-page-builder-premium/dist/application.min.js?ver=1.1.2" id="bgpbpp-public-js"></script>
+
+</body>
+</html>
