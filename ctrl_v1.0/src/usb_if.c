@@ -4,7 +4,7 @@
 #include "flasher_hal.h"
 #include "main.h"
 #include "power.h"
-#include "serial_suit_protocol.h"
+#include "air_protocol.h"
 #include "usbd_cdc_if.h"
 
 #include <stdbool.h>

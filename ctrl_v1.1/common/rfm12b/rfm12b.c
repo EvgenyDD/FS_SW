@@ -125,7 +125,6 @@ static volatile uint8_t rxfill = 0;
 static uint8_t networkID = 0;
 
 static volatile bool irq_fired = false;
-volatile uint32_t irq_counter = 0;
 
 uint8_t rfm12b_get_sender_id(void) { return RF12_SOURCEID; }
 bool rfm12b_is_ack_requested(void) { return RF12_WANTS_ACK; }

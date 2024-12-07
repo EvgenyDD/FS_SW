@@ -1,7 +1,7 @@
 #include "debug.h"
 #include "main.h"
 #include "usbd_cdc_if.h"
-#include <serial_suit_protocol.h>
+#include "air_protocol.h"
 
 #include <stdarg.h>
 #include <stdbool.h>

@@ -37,8 +37,6 @@ void led_drv_poll(uint32_t diff_ms);
 void led_drv_set_led(uint32_t led_id, LED_MODE mode);
 void led_drv_set_led_manual(uint32_t led_id, float brightness);
 
-// demo
-int led_startup_sample(void);
-void led_startup_restart(void);
+float interval_hit(int32_t value, int32_t middle, int32_t half_sector, int32_t range);
 
 #endif // LED_DRV_H

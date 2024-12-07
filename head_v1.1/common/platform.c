@@ -383,7 +383,7 @@ static const char *get_rst_src(void)
 	return "unknown";
 }
 
-const char *paltform_reset_cause_get(void)
+const char *platform_reset_cause_get(void)
 {
 	const char *src = get_rst_src();
 	RCC_ClearFlag();

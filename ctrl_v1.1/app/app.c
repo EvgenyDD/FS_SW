@@ -26,8 +26,8 @@ uint32_t g_uid[3];
 volatile uint32_t system_time_ms = 0;
 static int32_t prev_systick_poll = 0;
 
-config_entry_t g_device_config[] = {};
-const uint32_t g_device_config_count = sizeof(g_device_config) / sizeof(g_device_config[0]);
+// config_entry_t g_device_config[] = {};
+// const uint32_t g_device_config_count = sizeof(g_device_config) / sizeof(g_device_config[0]);
 
 static debounce_t btn[4][3];
 static uint32_t to_without_press = 0;
@@ -121,13 +121,6 @@ void main(void)
 
 	platform_init();
 
-	GPIO_InitTypeDef GPIO_InitStructure;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3 | GPIO_Pin_7; // DCDC_FAULT, SNS_KEY
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
-	GPIO_Init(GPIOC, &GPIO_InitStructure);
-
 	fw_header_check_all();
 
 	for(uint32_t i = 0; i < 4; i++)
@@ -139,7 +132,7 @@ void main(void)
 
 	adc_init();
 
-	if(config_validate() == CONFIG_STS_OK) config_read_storage();
+	// if(config_validate() == CONFIG_STS_OK) config_read_storage();
 
 	usb_init();
 

@@ -37,8 +37,6 @@
 #include <stdarg.h>
 #include <string.h>
 
-extern void process_data(uint8_t sender_node_id, const volatile uint8_t *data, uint8_t data_len);
-
 #define SYSTICK_IN_MS (168000000 / 1000)
 
 // 0 - none, 1 - only critical, 2 - all
@@ -140,6 +138,7 @@ static bool waitForAck(uint8_t dest_node_id)
 	for(;;)
 	{
 		start += (uint32_t)prof_mark(&mark_prev);
+		poll_main();
 		if(start >= time_limit) return false;
 		if(rfm12b_is_ack_received(dest_node_id)) return true;
 	}
@@ -284,7 +283,7 @@ static void poll_rx(void)
 #endif
 				}
 
-				if(precessed == false) process_data(rfm12b_get_sender_id(), rfm12b_get_data(), rfm12b_get_data_len());
+				if(precessed == false) rfm12b_process_data(rfm12b_get_sender_id(), rfm12b_get_data(), rfm12b_get_data_len());
 
 				// __enable_irq();
 				// HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);

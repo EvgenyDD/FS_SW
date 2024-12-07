@@ -65,20 +65,20 @@ float interval_hit(int32_t value, int32_t middle, int32_t half_sector, int32_t r
 
 typedef void (*f)(void);
 
-void _led_prc_f10(void) { leds[current_led].brightness = (counter_2000 % 100) <= 50 ? 1.0f : 0; }
-void _led_prc_f2_5(void) { leds[current_led].brightness = (counter_2000 % 400) > 50 && (counter_2000 % 400) <= 200 ? 1.0f : 0; }
-void _led_prc_fs(void) { leds[current_led].brightness = counter_2000 <= 200 ? 1.0f : 0; }
-void _led_prc_fd(void) { leds[current_led].brightness = counter_2000 < 200 || (counter_2000 >= 400 && counter_2000 < 600) ? 1.0f : 0; }
-void _led_prc_ft(void) { leds[current_led].brightness = counter_2000 < 200 || (counter_2000 >= 400 && counter_2000 < 600) || (counter_2000 >= 800 && counter_2000 < 1000) ? 1.0f : 0; }
-void _led_prc_sf2_5(void) { leds[current_led].brightness = interval_hit((int32_t)(counter_2000 % 400), 100, half_period_flash, 2000); }
-void _led_prc_sfs(void) { leds[current_led].brightness = interval_hit((int32_t)(counter_2000 % 400), 100, half_period_flash, 2000); }
-void _led_prc_sfd(void)
+static void _led_prc_f10(void) { leds[current_led].brightness = (counter_2000 % 100) <= 50 ? 1.0f : 0; }
+static void _led_prc_f2_5(void) { leds[current_led].brightness = (counter_2000 % 400) > 50 && (counter_2000 % 400) <= 200 ? 1.0f : 0; }
+static void _led_prc_fs(void) { leds[current_led].brightness = counter_2000 <= 200 ? 1.0f : 0; }
+static void _led_prc_fd(void) { leds[current_led].brightness = counter_2000 < 200 || (counter_2000 >= 400 && counter_2000 < 600) ? 1.0f : 0; }
+static void _led_prc_ft(void) { leds[current_led].brightness = counter_2000 < 200 || (counter_2000 >= 400 && counter_2000 < 600) || (counter_2000 >= 800 && counter_2000 < 1000) ? 1.0f : 0; }
+static void _led_prc_sf2_5(void) { leds[current_led].brightness = interval_hit((int32_t)(counter_2000 % 400), 100, half_period_flash, 2000); }
+static void _led_prc_sfs(void) { leds[current_led].brightness = interval_hit((int32_t)(counter_2000 % 400), 100, half_period_flash, 2000); }
+static void _led_prc_sfd(void)
 {
 	float y1 = interval_hit((int32_t)counter_2000, 100, half_period_flash, 2000);
 	float y2 = interval_hit((int32_t)counter_2000, 500, half_period_flash, 2000);
 	leds[current_led].brightness = y1 > 0 ? y1 : y2;
 }
-void _led_prc_sft(void)
+static void _led_prc_sft(void)
 {
 	float y1 = interval_hit((int32_t)counter_2000, 100, half_period_flash, 2000),
 		  y2 = interval_hit((int32_t)counter_2000, 500, half_period_flash, 2000),
