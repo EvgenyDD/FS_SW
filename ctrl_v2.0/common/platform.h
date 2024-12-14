@@ -7,8 +7,6 @@
 
 #define _BV(x) (1ULL << (x))
 
-#define PAGE_SIZE (2 * 1024)
-
 #define FLASH_LEN (0x00040000U) // 256kB
 #define FLASH_START FLASH_BASE
 #define FLASH_ORIGIN FLASH_BASE

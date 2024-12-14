@@ -121,7 +121,6 @@
 /**
   * @brief  Deinitializes the DCMI registers to their default reset values.
   * @param  None
-  * @retval None
   */
 void DCMI_DeInit(void)
 {
@@ -138,7 +137,6 @@ void DCMI_DeInit(void)
   * @brief  Initializes the DCMI according to the specified parameters in the DCMI_InitStruct.
   * @param  DCMI_InitStruct: pointer to a DCMI_InitTypeDef structure that contains 
   *         the configuration information for the DCMI.
-  * @retval None
   */
 void DCMI_Init(DCMI_InitTypeDef* DCMI_InitStruct)
 {
@@ -180,7 +178,6 @@ void DCMI_Init(DCMI_InitTypeDef* DCMI_InitStruct)
   * @brief  Fills each DCMI_InitStruct member with its default value.
   * @param  DCMI_InitStruct : pointer to a DCMI_InitTypeDef structure which will
   *         be initialized.
-  * @retval None
   */
 void DCMI_StructInit(DCMI_InitTypeDef* DCMI_InitStruct)
 {
@@ -200,7 +197,6 @@ void DCMI_StructInit(DCMI_InitTypeDef* DCMI_InitStruct)
   * @note   This function should be called before to enable and start the DCMI interface.   
   * @param  DCMI_CROPInitStruct:  pointer to a DCMI_CROPInitTypeDef structure that 
   *         contains the configuration information for the DCMI peripheral CROP mode.
-  * @retval None
   */
 void DCMI_CROPConfig(DCMI_CROPInitTypeDef* DCMI_CROPInitStruct)
 {  
@@ -218,7 +214,6 @@ void DCMI_CROPConfig(DCMI_CROPInitTypeDef* DCMI_CROPInitStruct)
   * @note   This function should be called before to enable and start the DCMI interface.
   * @param  NewState: new state of the DCMI Crop feature. 
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void DCMI_CROPCmd(FunctionalState NewState)
 {
@@ -241,7 +236,6 @@ void DCMI_CROPCmd(FunctionalState NewState)
   * @brief  Sets the embedded synchronization codes
   * @param  DCMI_CodesInitTypeDef: pointer to a DCMI_CodesInitTypeDef structure that
   *         contains the embedded synchronization codes for the DCMI peripheral.
-  * @retval None
   */
 void DCMI_SetEmbeddedSynchroCodes(DCMI_CodesInitTypeDef* DCMI_CodesInitStruct)
 {
@@ -256,7 +250,6 @@ void DCMI_SetEmbeddedSynchroCodes(DCMI_CodesInitTypeDef* DCMI_CodesInitStruct)
   * @note   The Crop and Embedded Synchronization features cannot be used in this mode.  
   * @param  NewState: new state of the DCMI JPEG format. 
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void DCMI_JPEGCmd(FunctionalState NewState)
 {
@@ -294,7 +287,6 @@ void DCMI_JPEGCmd(FunctionalState NewState)
   * @brief  Enables or disables the DCMI interface.
   * @param  NewState: new state of the DCMI interface. 
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void DCMI_Cmd(FunctionalState NewState)
 {
@@ -317,7 +309,6 @@ void DCMI_Cmd(FunctionalState NewState)
   * @brief  Enables or disables the DCMI Capture.
   * @param  NewState: new state of the DCMI capture. 
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void DCMI_CaptureCmd(FunctionalState NewState)
 {
@@ -372,7 +363,6 @@ uint32_t DCMI_ReadData(void)
   *            @arg DCMI_IT_LINE: Line interrupt mask
   * @param  NewState: new state of the specified DCMI interrupts.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void DCMI_ITConfig(uint16_t DCMI_IT, FunctionalState NewState)
 {
@@ -456,7 +446,6 @@ FlagStatus DCMI_GetFlagStatus(uint16_t DCMI_FLAG)
   *            @arg DCMI_FLAG_ERRRI: Synchronization error Raw flag mask
   *            @arg DCMI_FLAG_VSYNCRI: VSYNC Raw flag mask
   *            @arg DCMI_FLAG_LINERI: Line Raw flag mask
-  * @retval None
   */
 void DCMI_ClearFlag(uint16_t DCMI_FLAG)
 {
@@ -510,7 +499,6 @@ ITStatus DCMI_GetITStatus(uint16_t DCMI_IT)
   *            @arg DCMI_IT_ERR: Synchronization error interrupt mask
   *            @arg DCMI_IT_VSYNC: VSYNC interrupt mask
   *            @arg DCMI_IT_LINE: Line interrupt mask
-  * @retval None
   */
 void DCMI_ClearITPendingBit(uint16_t DCMI_IT)
 {

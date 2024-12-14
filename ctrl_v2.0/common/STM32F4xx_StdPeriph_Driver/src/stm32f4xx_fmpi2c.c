@@ -140,7 +140,6 @@
 /**
   * @brief  Deinitializes the FMPI2Cx peripheral registers to their default reset values.
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
-  * @retval None
   */
 void FMPI2C_DeInit(FMPI2C_TypeDef* FMPI2Cx)
 {
@@ -162,7 +161,6 @@ void FMPI2C_DeInit(FMPI2C_TypeDef* FMPI2Cx)
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
   * @param  FMPI2C_InitStruct: pointer to a FMPI2C_InitTypeDef structure that
   *         contains the configuration information for the specified FMPI2C peripheral.
-  * @retval None
   */
 void FMPI2C_Init(FMPI2C_TypeDef* FMPI2Cx, FMPI2C_InitTypeDef* FMPI2C_InitStruct)
 {
@@ -241,7 +239,6 @@ void FMPI2C_Init(FMPI2C_TypeDef* FMPI2Cx, FMPI2C_InitTypeDef* FMPI2C_InitStruct)
 /**
   * @brief  Fills each FMPI2C_InitStruct member with its default value.
   * @param  FMPI2C_InitStruct: pointer to an FMPI2C_InitTypeDef structure which will be initialized.
-  * @retval None
   */
 void FMPI2C_StructInit(FMPI2C_InitTypeDef* FMPI2C_InitStruct)
 {
@@ -267,7 +264,6 @@ void FMPI2C_StructInit(FMPI2C_InitTypeDef* FMPI2C_InitStruct)
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
   * @param  NewState: new state of the FMPI2Cx peripheral. 
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void FMPI2C_Cmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
 {
@@ -290,7 +286,6 @@ void FMPI2C_Cmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
 /**
   * @brief  Enables or disables the specified FMPI2C software reset.
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
-  * @retval None
   */
 void FMPI2C_SoftwareResetCmd(FMPI2C_TypeDef* FMPI2Cx)
 {
@@ -322,7 +317,6 @@ void FMPI2C_SoftwareResetCmd(FMPI2C_TypeDef* FMPI2Cx)
   *     @arg FMPI2C_IT_TXI: TX interrupt mask
   * @param  NewState: new state of the specified FMPI2C interrupts.
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void FMPI2C_ITConfig(FMPI2C_TypeDef* FMPI2Cx, uint32_t FMPI2C_IT, FunctionalState NewState)
 {
@@ -348,7 +342,6 @@ void FMPI2C_ITConfig(FMPI2C_TypeDef* FMPI2Cx, uint32_t FMPI2C_IT, FunctionalStat
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
   * @param  NewState: new state of the FMPI2Cx Clock stretching.
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void FMPI2C_StretchClockCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
 {
@@ -373,7 +366,6 @@ void FMPI2C_StretchClockCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
   * @param  NewState: new state of the FMPI2C own address 2.
   *   This parameter can be: ENABLE or DISABLE.  
-  * @retval None
   */
 void FMPI2C_DualAddressCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
 {
@@ -407,7 +399,6 @@ void FMPI2C_DualAddressCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
   *     @arg FMPI2C_OA2_Mask05: OA2[5:1] are masked and don't care.
   *     @arg FMPI2C_OA2_Mask06: OA2[6:1] are masked and don't care.
   *     @arg FMPI2C_OA2_Mask07: OA2[7:1] are masked and don't care.
-  * @retval None
   */
 void FMPI2C_OwnAddress2Config(FMPI2C_TypeDef* FMPI2Cx, uint16_t Address, uint8_t Mask)
 {
@@ -437,7 +428,6 @@ void FMPI2C_OwnAddress2Config(FMPI2C_TypeDef* FMPI2Cx, uint16_t Address, uint8_t
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
   * @param  NewState: new state of the FMPI2C general call mode.
   *   This parameter can be: ENABLE or DISABLE.  
-  * @retval None
   */
 void FMPI2C_GeneralCallCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
 {
@@ -462,7 +452,6 @@ void FMPI2C_GeneralCallCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
   * @param  NewState: new state of the FMPI2C slave byte control.
   *   This parameter can be: ENABLE or DISABLE.  
-  * @retval None
   */
 void FMPI2C_SlaveByteControlCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
 {
@@ -487,7 +476,6 @@ void FMPI2C_SlaveByteControlCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewStat
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
   * @param  Address: specifies the slave address to be programmed.
   * @note   This function should be called before generating start condition.  
-  * @retval None
   */
 void FMPI2C_SlaveAddressConfig(FMPI2C_TypeDef* FMPI2Cx, uint16_t Address)
 {
@@ -516,7 +504,6 @@ void FMPI2C_SlaveAddressConfig(FMPI2C_TypeDef* FMPI2Cx, uint16_t Address)
   * @param  NewState: new state of the FMPI2C 10-bit addressing mode.
   *   This parameter can be: ENABLE or DISABLE.
   * @note   This function should be called before generating start condition.  
-  * @retval None
   */
 void FMPI2C_10BitAddressingModeCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
 {
@@ -581,7 +568,6 @@ void FMPI2C_10BitAddressingModeCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewS
   * @param  NewState: new state of the FMPI2C automatic end mode.
   *   This parameter can be: ENABLE or DISABLE.
   * @note   This function has effect if Reload mode is disabled.   
-  * @retval None
   */
 void FMPI2C_AutoEndCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
 {
@@ -606,7 +592,6 @@ void FMPI2C_AutoEndCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
   * @param  NewState: new state of the nbytes reload mode.
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void FMPI2C_ReloadCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
 {
@@ -630,7 +615,6 @@ void FMPI2C_ReloadCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
   * @brief  Configures the number of bytes to be transmitted/received.
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
   * @param  Number_Bytes: specifies the number of bytes to be programmed.
-  * @retval None
   */
 void FMPI2C_NumberOfBytesConfig(FMPI2C_TypeDef* FMPI2Cx, uint8_t Number_Bytes)
 {
@@ -659,7 +643,6 @@ void FMPI2C_NumberOfBytesConfig(FMPI2C_TypeDef* FMPI2Cx, uint8_t Number_Bytes)
   *    This parameter can be one of the following values:
   *     @arg FMPI2C_Direction_Transmitter: Master request a write transfer
   *     @arg FMPI2C_Direction_Receiver: Master request a read transfer 
-  * @retval None
   */
 void FMPI2C_MasterRequestConfig(FMPI2C_TypeDef* FMPI2Cx, uint16_t FMPI2C_Direction)
 {
@@ -685,7 +668,6 @@ void FMPI2C_MasterRequestConfig(FMPI2C_TypeDef* FMPI2Cx, uint16_t FMPI2C_Directi
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
   * @param  NewState: new state of the FMPI2C START condition generation.
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void FMPI2C_GenerateSTART(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
 {
@@ -710,7 +692,6 @@ void FMPI2C_GenerateSTART(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
   * @param  NewState: new state of the FMPI2C STOP condition generation.
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void FMPI2C_GenerateSTOP(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
 {
@@ -737,7 +718,6 @@ void FMPI2C_GenerateSTOP(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
   *   This parameter can be: ENABLE or DISABLE.
   * @note   This mode can be used only when switching from master transmitter mode 
   *         to master receiver mode.        
-  * @retval None
   */
 void FMPI2C_10BitAddressHeaderCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
 {
@@ -762,7 +742,6 @@ void FMPI2C_10BitAddressHeaderCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewSt
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
   * @param  NewState: new state of the Acknowledge.
   *   This parameter can be: ENABLE or DISABLE.  
-  * @retval None
   */
 void FMPI2C_AcknowledgeConfig(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
 {
@@ -843,7 +822,6 @@ uint16_t FMPI2C_GetTransferDirection(FMPI2C_TypeDef* FMPI2Cx)
   *     @arg FMPI2C_Generate_Stop: Generate stop condition (Number_Bytes should be set to 0).
   *     @arg FMPI2C_Generate_Start_Read: Generate Restart for read request.
   *     @arg FMPI2C_Generate_Start_Write: Generate Restart for write request.
-  * @retval None
   */
 void FMPI2C_TransferHandling(FMPI2C_TypeDef* FMPI2Cx, uint16_t Address, uint8_t Number_Bytes, uint32_t ReloadEndMode, uint32_t StartStopMode)
 {
@@ -914,7 +892,6 @@ void FMPI2C_TransferHandling(FMPI2C_TypeDef* FMPI2Cx, uint16_t Address, uint8_t 
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
   * @param  NewState: new state of the FMPI2Cx SMBus alert.
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void FMPI2C_SMBusAlertCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
 {
@@ -939,7 +916,6 @@ void FMPI2C_SMBusAlertCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
   * @param  NewState: new state of the FMPI2Cx clock Timeout.
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void FMPI2C_ClockTimeoutCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
 {
@@ -964,7 +940,6 @@ void FMPI2C_ClockTimeoutCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
   * @param  NewState: new state of the FMPI2Cx Extended clock Timeout.
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void FMPI2C_ExtendedClockTimeoutCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
 {
@@ -990,7 +965,6 @@ void FMPI2C_ExtendedClockTimeoutCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState New
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
   * @param  NewState: new state of the FMPI2Cx Idle clock Timeout.
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void FMPI2C_IdleClockTimeoutCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
 {
@@ -1015,7 +989,6 @@ void FMPI2C_IdleClockTimeoutCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewStat
   *   idle SCL and SDA high when TIDLE = 1).
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
   * @param  Timeout: specifies the TimeoutA to be programmed. 
-  * @retval None
   */
 void FMPI2C_TimeoutAConfig(FMPI2C_TypeDef* FMPI2Cx, uint16_t Timeout)
 {
@@ -1042,7 +1015,6 @@ void FMPI2C_TimeoutAConfig(FMPI2C_TypeDef* FMPI2Cx, uint16_t Timeout)
   * @brief  Configures the FMPI2C Bus Timeout B (SCL cumulative Timeout).
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
   * @param  Timeout: specifies the TimeoutB to be programmed. 
-  * @retval None
   */
 void FMPI2C_TimeoutBConfig(FMPI2C_TypeDef* FMPI2Cx, uint16_t Timeout)
 {
@@ -1070,7 +1042,6 @@ void FMPI2C_TimeoutBConfig(FMPI2C_TypeDef* FMPI2Cx, uint16_t Timeout)
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
   * @param  NewState: new state of the FMPI2Cx PEC calculation.
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void FMPI2C_CalculatePEC(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
 {
@@ -1095,7 +1066,6 @@ void FMPI2C_CalculatePEC(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
   * @param  NewState: new state of the FMPI2Cx PEC request.
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void FMPI2C_PECRequestCmd(FMPI2C_TypeDef* FMPI2Cx, FunctionalState NewState)
 {
@@ -1207,7 +1177,6 @@ uint32_t FMPI2C_ReadRegister(FMPI2C_TypeDef* FMPI2Cx, uint8_t FMPI2C_Register)
   * @brief  Sends a data byte through the FMPI2Cx peripheral.
   * @param  FMPI2Cx: where x can be 1 to select the FMPI2C peripheral.
   * @param  Data: Byte to be transmitted..
-  * @retval None
   */
 void FMPI2C_SendData(FMPI2C_TypeDef* FMPI2Cx, uint8_t Data)
 {
@@ -1264,7 +1233,6 @@ uint8_t FMPI2C_ReceiveData(FMPI2C_TypeDef* FMPI2Cx)
   *     @arg FMPI2C_DMAReq_Rx: Rx DMA transfer request
   * @param  NewState: new state of the selected FMPI2C DMA transfer request.
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void FMPI2C_DMACmd(FMPI2C_TypeDef* FMPI2Cx, uint32_t FMPI2C_DMAReq, FunctionalState NewState)
 {

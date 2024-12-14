@@ -15,7 +15,7 @@ CFLAGS   += -fvisibility=hidden -funsafe-math-optimizations -fdata-sections -ffu
 CFLAGS   += -fmessage-length=0 -fno-exceptions -fno-common -fno-builtin -ffreestanding
 CFLAGS   += -fsingle-precision-constant
 CFLAGS   += $(C_FULL_FLAGS)
-# CFLAGS   += -Werror
+CFLAGS   += -Werror
 
 CXXFLAGS += -fvisibility=hidden -funsafe-math-optimizations -fdata-sections -ffunction-sections -fno-move-loop-invariants
 CXXFLAGS += -fmessage-length=0 -fno-exceptions -fno-common -fno-builtin -ffreestanding
@@ -33,6 +33,7 @@ EXT_LIBS +=c nosys
 PPDEFS += USE_STDPERIPH_DRIVER STM32F40_41xxx STM32F407xx FW_HEADER_REDUCED FW_TYPE=FW_LDR CFG_SYSTEM_SAVES_NON_NATIVE_DATA=1 DEV=\"FS_CTRL2\"
 PPDEFS += USBD_CLASS_COMPOSITE_DFU_CDC
 PPDEFS += USBD_DFU_USES_SUB_FLASHING
+PPDEFS += DFU_READS_CFG_SECTION
 
 INCDIR += .
 INCDIR += ../common

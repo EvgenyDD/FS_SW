@@ -123,7 +123,6 @@
   * @brief  Deinitializes the LTDC peripheral registers to their default reset
   *         values.
   * @param  None
-  * @retval None
   */
 
 void LTDC_DeInit(void)
@@ -140,7 +139,6 @@ void LTDC_DeInit(void)
   * @note   This function can be used only when the LTDC is disabled.
   * @param  LTDC_InitStruct: pointer to a LTDC_InitTypeDef structure that contains
   *         the configuration information for the specified LTDC peripheral.
-  * @retval None
   */
 
 void LTDC_Init(LTDC_InitTypeDef* LTDC_InitStruct)
@@ -205,7 +203,6 @@ void LTDC_Init(LTDC_InitTypeDef* LTDC_InitStruct)
   * @brief  Fills each LTDC_InitStruct member with its default value.
   * @param  LTDC_InitStruct: pointer to a LTDC_InitTypeDef structure which will
   *         be initialized.
-  * @retval None
   */
 
 void LTDC_StructInit(LTDC_InitTypeDef* LTDC_InitStruct)
@@ -232,7 +229,6 @@ void LTDC_StructInit(LTDC_InitTypeDef* LTDC_InitStruct)
   * @brief  Enables or disables the LTDC Controller.
   * @param  NewState: new state of the LTDC peripheral.
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 
 void LTDC_Cmd(FunctionalState NewState)
@@ -256,7 +252,6 @@ void LTDC_Cmd(FunctionalState NewState)
   * @brief  Enables or disables Dither.
   * @param  NewState: new state of the Dither.
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 
 void LTDC_DitherCmd(FunctionalState NewState)
@@ -280,7 +275,6 @@ void LTDC_DitherCmd(FunctionalState NewState)
   * @brief  Get the dither RGB width.
   * @param  LTDC_RGB_InitStruct: pointer to a LTDC_RGBTypeDef structure that contains
   *         the Dither RGB width.
-  * @retval None
   */
 
 LTDC_RGBTypeDef LTDC_GetRGBWidth(void)
@@ -300,7 +294,6 @@ LTDC_RGBTypeDef LTDC_GetRGBWidth(void)
   * @brief  Fills each LTDC_RGBStruct member with its default value.
   * @param  LTDC_RGB_InitStruct: pointer to a LTDC_RGBTypeDef structure which will
   *         be initialized.
-  * @retval None
   */
 
 void LTDC_RGBStructInit(LTDC_RGBTypeDef* LTDC_RGB_InitStruct)
@@ -314,7 +307,6 @@ void LTDC_RGBStructInit(LTDC_RGBTypeDef* LTDC_RGB_InitStruct)
 /**
   * @brief  Define the position of the line interrupt .
   * @param  LTDC_LIPositionConfig: Line Interrupt Position.
-  * @retval None
   */
 
 void LTDC_LIPConfig(uint32_t LTDC_LIPositionConfig)
@@ -332,7 +324,6 @@ void LTDC_LIPConfig(uint32_t LTDC_LIPositionConfig)
   *   This parameter can be one of the following values:
   *     @arg LTDC_IMReload: Vertical blanking reload.
   *     @arg LTDC_VBReload: Immediate reload.  
-  * @retval None
   */
 
 void LTDC_ReloadConfig(uint32_t LTDC_Reload)
@@ -353,7 +344,6 @@ void LTDC_ReloadConfig(uint32_t LTDC_Reload)
   *         one of the following values: LTDC_Layer1, LTDC_Layer2    
   * @param  LTDC_LayerStruct: pointer to a LTDC_LayerTypeDef structure that contains
   *         the configuration information for the specified LTDC peripheral.
-  * @retval None
   */
 
 void LTDC_LayerInit(LTDC_Layer_TypeDef* LTDC_Layerx, LTDC_Layer_InitTypeDef* LTDC_Layer_InitStruct)
@@ -431,7 +421,6 @@ void LTDC_LayerInit(LTDC_Layer_TypeDef* LTDC_Layerx, LTDC_Layer_InitTypeDef* LTD
   * @brief  Fills each LTDC_Layer_InitStruct member with its default value.
   * @param  LTDC_Layer_InitStruct: pointer to a LTDC_LayerTypeDef structure which will
   *         be initialized.
-  * @retval None
   */
 
 void LTDC_LayerStructInit(LTDC_Layer_InitTypeDef * LTDC_Layer_InitStruct)
@@ -480,7 +469,6 @@ void LTDC_LayerStructInit(LTDC_Layer_InitTypeDef * LTDC_Layer_InitStruct)
   *         one of the following values: LTDC_Layer1, LTDC_Layer2
   * @param  NewState: new state of the LTDC_Layer peripheral.
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 
 void LTDC_LayerCmd(LTDC_Layer_TypeDef* LTDC_Layerx, FunctionalState NewState)
@@ -505,7 +493,6 @@ void LTDC_LayerCmd(LTDC_Layer_TypeDef* LTDC_Layerx, FunctionalState NewState)
   * @brief  Get the current position.
   * @param  LTDC_Pos_InitStruct: pointer to a LTDC_PosTypeDef structure that contains
   *         the current position.
-  * @retval None
   */
 
 LTDC_PosTypeDef LTDC_GetPosStatus(void)
@@ -524,7 +511,6 @@ LTDC_PosTypeDef LTDC_GetPosStatus(void)
   * @brief  Fills each LTDC_Pos_InitStruct member with its default value.
   * @param  LTDC_Pos_InitStruct: pointer to a LTDC_PosTypeDef structure which will
   *         be initialized.
-  * @retval None
   */
 
 void LTDC_PosStructInit(LTDC_PosTypeDef* LTDC_Pos_InitStruct)
@@ -568,7 +554,6 @@ FlagStatus LTDC_GetCDStatus(uint32_t LTDC_CD)
   *         structure that contains the color keying configuration.
   * @param  LTDC_layerx: Select the layer to be configured, this parameter can be 
   *         one of the following values: LTDC_Layer1, LTDC_Layer2   
-  * @retval None
   */
 
 void LTDC_ColorKeyingConfig(LTDC_Layer_TypeDef* LTDC_Layerx, LTDC_ColorKeying_InitTypeDef* LTDC_colorkeying_InitStruct, FunctionalState NewState)
@@ -607,7 +592,6 @@ void LTDC_ColorKeyingConfig(LTDC_Layer_TypeDef* LTDC_Layerx, LTDC_ColorKeying_In
   * @brief  Fills each LTDC_colorkeying_InitStruct member with its default value.
   * @param  LTDC_colorkeying_InitStruct: pointer to a LTDC_ColorKeying_InitTypeDef structure which will
   *         be initialized.
-  * @retval None
   */
 
 void LTDC_ColorKeyingStructInit(LTDC_ColorKeying_InitTypeDef* LTDC_colorkeying_InitStruct)
@@ -625,7 +609,6 @@ void LTDC_ColorKeyingStructInit(LTDC_ColorKeying_InitTypeDef* LTDC_colorkeying_I
   * @param  LTDC_layerx: Select the layer to be configured, this parameter can be 
   *         one of the following values: LTDC_Layer1, LTDC_Layer2  
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 
 void LTDC_CLUTCmd(LTDC_Layer_TypeDef* LTDC_Layerx, FunctionalState NewState)
@@ -654,7 +637,6 @@ void LTDC_CLUTCmd(LTDC_Layer_TypeDef* LTDC_Layerx, FunctionalState NewState)
   *         the CLUT configuration.
   * @param  LTDC_layerx: Select the layer to be configured, this parameter can be 
   *         one of the following values: LTDC_Layer1, LTDC_Layer2   
-  * @retval None
   */
 
 void LTDC_CLUTInit(LTDC_Layer_TypeDef* LTDC_Layerx, LTDC_CLUT_InitTypeDef* LTDC_CLUT_InitStruct)
@@ -681,7 +663,6 @@ void LTDC_CLUTInit(LTDC_Layer_TypeDef* LTDC_Layerx, LTDC_CLUT_InitTypeDef* LTDC_
   * @brief  Fills each LTDC_CLUT_InitStruct member with its default value.
   * @param  LTDC_CLUT_InitStruct: pointer to a LTDC_CLUT_InitTypeDef structure which will
   *         be initialized.
-  * @retval None
   */
 
 void LTDC_CLUTStructInit(LTDC_CLUT_InitTypeDef* LTDC_CLUT_InitStruct)
@@ -970,7 +951,6 @@ void LTDC_LayerPixelFormat(LTDC_Layer_TypeDef* LTDC_Layerx, uint32_t PixelFormat
   *     @arg LTDC_IT_RR: Register Reload interrupt enable.  
   * @param NewState: new state of the specified LTDC interrupts.
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void LTDC_ITConfig(uint32_t LTDC_IT, FunctionalState NewState)
 {
@@ -1024,7 +1004,6 @@ FlagStatus LTDC_GetFlagStatus(uint32_t LTDC_FLAG)
   *     @arg LTDC_FLAG_FU:   FIFO Underrun Interrupt flag.
   *     @arg LTDC_FLAG_TERR: Transfer Error Interrupt flag.
   *     @arg LTDC_FLAG_RR:   Register Reload interrupt flag.  
-  * @retval None
   */
 void LTDC_ClearFlag(uint32_t LTDC_FLAG)
 {
@@ -1081,7 +1060,6 @@ ITStatus LTDC_GetITStatus(uint32_t LTDC_IT)
   *     @arg LTDC_IT_FUIE:   FIFO Underrun Interrupt.
   *     @arg LTDC_IT_TERRIE: Transfer Error Interrupt.
   *     @arg LTDC_IT_RRIE:   Register Reload interrupt.
-  * @retval None
   */
 void LTDC_ClearITPendingBit(uint32_t LTDC_IT)
 {

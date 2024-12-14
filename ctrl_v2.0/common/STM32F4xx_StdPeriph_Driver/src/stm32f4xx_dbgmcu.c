@@ -79,7 +79,6 @@ uint32_t DBGMCU_GetDEVID(void)
   *     @arg DBGMCU_STANDBY: Keep debugger connection during STANDBY mode        
   * @param  NewState: new state of the specified low power mode in Debug mode.
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void DBGMCU_Config(uint32_t DBGMCU_Periph, FunctionalState NewState)
 {
@@ -118,7 +117,6 @@ void DBGMCU_Config(uint32_t DBGMCU_Periph, FunctionalState NewState)
   *     @arg DBGMCU_CAN2_STOP: Debug CAN1 stopped when Core is halted           
   *     @arg DBGMCU_CAN1_STOP: Debug CAN2 stopped when Core is halted        
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void DBGMCU_APB1PeriphConfig(uint32_t DBGMCU_Periph, FunctionalState NewState)
 {
@@ -147,7 +145,6 @@ void DBGMCU_APB1PeriphConfig(uint32_t DBGMCU_Periph, FunctionalState NewState)
   *     @arg DBGMCU_TIM11_STOP: TIM11 counter stopped when Core is halted                                                                                  
   * @param  NewState: new state of the specified peripheral in Debug mode.
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void DBGMCU_APB2PeriphConfig(uint32_t DBGMCU_Periph, FunctionalState NewState)
 {

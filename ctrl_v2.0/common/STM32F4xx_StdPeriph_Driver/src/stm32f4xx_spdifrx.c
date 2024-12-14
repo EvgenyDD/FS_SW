@@ -80,7 +80,6 @@
 /**
   * @brief  Deinitialize the SPDIFRXx peripheral registers to their default reset values.
   * @param  void
-  * @retval None
   */
 void SPDIFRX_DeInit(void)
 {
@@ -99,7 +98,6 @@ void SPDIFRX_DeInit(void)
   *        
   * @param  SPDIFRX_InitStruct: pointer to a SPDIFRX_InitTypeDef structure that
   *         contains the configuration information for the specified SPDIFRX Block peripheral.             
-  * @retval None
   */
 void SPDIFRX_Init(SPDIFRX_InitTypeDef* SPDIFRX_InitStruct)
 {
@@ -140,7 +138,6 @@ void SPDIFRX_Init(SPDIFRX_InitTypeDef* SPDIFRX_InitStruct)
   * @brief  Fills each SPDIFRX_InitStruct member with its default value.
   * @param  SPDIFRX_InitStruct: pointer to a SPDIFRX_InitTypeDef structure which will 
   *         be initialized.  
-  * @retval None
   */
 void SPDIFRX_StructInit(SPDIFRX_InitTypeDef* SPDIFRX_InitStruct)
 {
@@ -163,7 +160,6 @@ void SPDIFRX_StructInit(SPDIFRX_InitTypeDef* SPDIFRX_InitStruct)
   * @brief  Enables or disables the SPDIFRX frame x bit.
   * @param  NewState: new state of the selected SPDIFRX frame bit.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SPDIFRX_SetPreambleTypeBit(FunctionalState NewState)
 {
@@ -186,7 +182,6 @@ void SPDIFRX_SetPreambleTypeBit(FunctionalState NewState)
   * @brief  Enables or disables the SPDIFRX frame x bit.
   * @param  NewState: new state of the selected SPDIFRX frame bit.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SPDIFRX_SetUserDataChannelStatusBits(FunctionalState NewState)
 {
@@ -209,7 +204,6 @@ void SPDIFRX_SetUserDataChannelStatusBits(FunctionalState NewState)
   * @brief  Enables or disables the SPDIFRX frame x bit.
   * @param  NewState: new state of the selected SPDIFRX frame bit.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SPDIFRX_SetValidityBit(FunctionalState NewState)
 {
@@ -232,7 +226,6 @@ void SPDIFRX_SetValidityBit(FunctionalState NewState)
   * @brief  Enables or disables the SPDIFRX frame x bit.
   * @param  NewState: new state of the selected SPDIFRX frame bit.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SPDIFRX_SetParityBit(FunctionalState NewState)
 {
@@ -255,7 +248,6 @@ void SPDIFRX_SetParityBit(FunctionalState NewState)
   * @brief  Enables or disables the SPDIFRX DMA interface (RX).
   * @param  NewState: new state of the selected SPDIFRX DMA transfer request.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SPDIFRX_RxDMACmd(FunctionalState NewState)
 {
@@ -278,7 +270,6 @@ void SPDIFRX_RxDMACmd(FunctionalState NewState)
   * @brief  Enables or disables the SPDIFRX DMA interface (Control Buffer).
   * @param  NewState: new state of the selected SPDIFRX DMA transfer request.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SPDIFRX_CbDMACmd(FunctionalState NewState)
 {
@@ -304,7 +295,6 @@ void SPDIFRX_CbDMACmd(FunctionalState NewState)
   *            @arg SPDIFRX_STATE_IDLE : Disable SPDIFRX-RX (STATE_IDLE)
   *            @arg SPDIFRX_STATE_SYNC : Enable SPDIFRX-RX Synchronization only 
   *            @arg SPDIFRX_STATE_RCV  : Enable SPDIFRX Receiver 
-  * @retval None
   */
 void SPDIFRX_Cmd(uint32_t SPDIFRX_State)
 {
@@ -330,7 +320,6 @@ void SPDIFRX_Cmd(uint32_t SPDIFRX_State)
   *            @arg SPDIFRX_IT_IFEIE: Serial Interface Error Interrupt Enable      
   * @param  NewState: new state of the specified SPDIFRX interrupt.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SPDIFRX_ITConfig(uint32_t SPDIFRX_IT, FunctionalState NewState)
 { 
@@ -396,7 +385,6 @@ FlagStatus SPDIFRX_GetFlagStatus(uint32_t SPDIFRX_FLAG)
   *            @arg SPDIFRX_FLAG_SBD: Synchronization Block Detected flag. 
   *            @arg SPDIFRX_FLAG_SYNCD: Synchronization Done flag.          
   *  
-  * @retval None
   */
 void SPDIFRX_ClearFlag(uint32_t SPDIFRX_FLAG)
 {
@@ -463,7 +451,6 @@ ITStatus SPDIFRX_GetITStatus(uint32_t SPDIFRX_IT)
   *            SPDIFRX_xCR2 register.
   *          - When the audio block is receiver and the FIFO is not empty  
   *            
-  * @retval None
   */
 void SPDIFRX_ClearITPendingBit(uint32_t SPDIFRX_IT)
 {

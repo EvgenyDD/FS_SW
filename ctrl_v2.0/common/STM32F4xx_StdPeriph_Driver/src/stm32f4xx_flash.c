@@ -272,7 +272,6 @@
   * @note For STM32F42xxx/43xxx devices this parameter can be a value between 
   *       FLASH_Latency_0 and FLASH_Latency_15. 
   *         
-  * @retval None
   */
 void FLASH_SetLatency(uint32_t FLASH_Latency)
 {
@@ -287,7 +286,6 @@ void FLASH_SetLatency(uint32_t FLASH_Latency)
   * @brief  Enables or disables the Prefetch Buffer.
   * @param  NewState: new state of the Prefetch Buffer.
   *          This parameter  can be: ENABLE or DISABLE.
-  * @retval None
   */
 void FLASH_PrefetchBufferCmd(FunctionalState NewState)
 {
@@ -309,7 +307,6 @@ void FLASH_PrefetchBufferCmd(FunctionalState NewState)
   * @brief  Enables or disables the Instruction Cache feature.
   * @param  NewState: new state of the Instruction Cache.
   *          This parameter  can be: ENABLE or DISABLE.
-  * @retval None
   */
 void FLASH_InstructionCacheCmd(FunctionalState NewState)
 {
@@ -330,7 +327,6 @@ void FLASH_InstructionCacheCmd(FunctionalState NewState)
   * @brief  Enables or disables the Data Cache feature.
   * @param  NewState: new state of the Data Cache.
   *          This parameter  can be: ENABLE or DISABLE.
-  * @retval None
   */
 void FLASH_DataCacheCmd(FunctionalState NewState)
 {
@@ -351,7 +347,6 @@ void FLASH_DataCacheCmd(FunctionalState NewState)
   * @brief  Resets the Instruction Cache.
   * @note   This function must be used only when the Instruction Cache is disabled.  
   * @param  None
-  * @retval None
   */
 void FLASH_InstructionCacheReset(void)
 {
@@ -362,7 +357,6 @@ void FLASH_InstructionCacheReset(void)
   * @brief  Resets the Data Cache.
   * @note   This function must be used only when the Data Cache is disabled.  
   * @param  None
-  * @retval None
   */
 void FLASH_DataCacheReset(void)
 {
@@ -409,7 +403,6 @@ void FLASH_DataCacheReset(void)
 /**
   * @brief  Unlocks the FLASH control register access
   * @param  None
-  * @retval None
   */
 void FLASH_Unlock(void)
 {
@@ -424,7 +417,6 @@ void FLASH_Unlock(void)
 /**
   * @brief  Locks the FLASH control register access
   * @param  None
-  * @retval None
   */
 void FLASH_Lock(void)
 {
@@ -969,7 +961,6 @@ FLASH_Status FLASH_ProgramByte(uint32_t Address, uint8_t Data)
 /**
   * @brief  Unlocks the FLASH Option Control Registers access.
   * @param  None
-  * @retval None
   */
 void FLASH_OB_Unlock(void)
 {
@@ -984,7 +975,6 @@ void FLASH_OB_Unlock(void)
 /**
   * @brief  Locks the FLASH Option Control Registers access.
   * @param  None
-  * @retval None
   */
 void FLASH_OB_Lock(void)
 {
@@ -1099,7 +1089,6 @@ void FLASH_OB_WRP1Config(uint32_t OB_WRP, FunctionalState NewState)
   *          This parameter can be one of the following values:
   *            @arg OB_PcROP_Disable: nWRPi control the write protection of respective user sectors.
   *            @arg OB_PcROP_Enable: nWRPi control the  read&write protection (PCROP) of respective user sectors.
-  * @retval None
   */
 void FLASH_OB_PCROPSelectionConfig(uint8_t OB_PcROP)
 {  
@@ -1203,7 +1192,6 @@ void FLASH_OB_PCROP1Config(uint32_t OB_PCROP, FunctionalState NewState)
   *   
   * /!\ Warning /!\ When enabling OB_RDP level 2 it's no more possible to go back to level 1 or 0
   *    
-  * @retval None
   */
 void FLASH_OB_RDPConfig(uint8_t OB_RDP)
 {
@@ -1235,7 +1223,6 @@ void FLASH_OB_RDPConfig(uint8_t OB_RDP)
   *          This parameter  can be one of the following values:
   *            @arg OB_STDBY_NoRST: No reset generated when entering in STANDBY
   *            @arg OB_STDBY_RST: Reset generated when entering in STANDBY
-  * @retval None
   */
 void FLASH_OB_UserConfig(uint8_t OB_IWDG, uint8_t OB_STOP, uint8_t OB_STDBY)
 {
@@ -1276,7 +1263,6 @@ void FLASH_OB_UserConfig(uint8_t OB_IWDG, uint8_t OB_STOP, uint8_t OB_STDBY)
   *          This parameter can be one of the following values:
   *            @arg OB_Dual_BootEnabled: Dual Bank Boot Enable
   *            @arg OB_Dual_BootDisabled: Dual Bank Boot Disabled
-  * @retval None
   */
 void FLASH_OB_BootConfig(uint8_t OB_BOOT)
 {
@@ -1297,7 +1283,6 @@ void FLASH_OB_BootConfig(uint8_t OB_BOOT)
   *            @arg OB_BOR_LEVEL2: Supply voltage ranges from 2.4 to 2.7 V
   *            @arg OB_BOR_LEVEL1: Supply voltage ranges from 2.1 to 2.4 V
   *            @arg OB_BOR_OFF: Supply voltage ranges from 1.62 to 2.1 V
-  * @retval None
   */
 void FLASH_OB_BORConfig(uint8_t OB_BOR)
 {
@@ -1515,7 +1500,6 @@ FlagStatus FLASH_GetFlagStatus(uint32_t FLASH_FLAG)
   *            @arg FLASH_FLAG_PGPERR: FLASH Programming Parallelism error flag
   *            @arg FLASH_FLAG_PGSERR: FLASH Programming Sequence error flag
   *            @arg FLASH_FLAG_RDERR: FLASH Read Protection error flag (STM32F42xx/43xxx and STM32F401xx/411xE devices)   
-  * @retval None
   */
 void FLASH_ClearFlag(uint32_t FLASH_FLAG)
 {

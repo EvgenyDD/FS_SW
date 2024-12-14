@@ -100,7 +100,6 @@
   * @brief  Deinitializes the Alternate Functions (remap and EXTI configuration)
   *   registers to their default reset values.
   * @param  None
-  * @retval None
   */
 void SYSCFG_DeInit(void)
 {
@@ -119,7 +118,6 @@ void SYSCFG_DeInit(void)
   *            @arg SYSCFG_MemoryRemap_ExtMEM:      External Memory mapped at 0x00000000 for STM32F446xx/STM32F469_479xx devices. 
   *            @arg SYSCFG_MemoryRemap_SRAM:        Embedded SRAM (112kB) mapped at 0x00000000
   *            @arg SYSCFG_MemoryRemap_SDRAM:       FMC (External SDRAM)  mapped at 0x00000000 for STM32F42xxx/43xxx devices.            
-  * @retval None
   */
 void SYSCFG_MemoryRemapConfig(uint8_t SYSCFG_MemoryRemap)
 {
@@ -140,7 +138,6 @@ void SYSCFG_MemoryRemapConfig(uint8_t SYSCFG_MemoryRemap)
   *                         and Flash Bank1 mapped at 0x08100000 (and aliased at 0x00100000)   
   *            @arg DISABLE:(the default state) Flash Bank1 mapped at 0x08000000 (and aliased @0x0000 0000) 
                             and Flash Bank2 mapped at 0x08100000 (and aliased at 0x00100000)  
-  * @retval None
   */
 void SYSCFG_MemorySwappingBank(FunctionalState NewState)
 {
@@ -163,7 +160,6 @@ void SYSCFG_MemorySwappingBank(FunctionalState NewState)
   *           and STM32F405xx/407xx devices and for EXTI_PortSourceGPIOK x can   
   *           be (0..7) for STM32F42xxx/43xxx devices. 
   *             
-  * @retval None
   */
 void SYSCFG_EXTILineConfig(uint8_t EXTI_PortSourceGPIOx, uint8_t EXTI_PinSourcex)
 {
@@ -201,7 +197,6 @@ void SYSCFG_ETH_MediaInterfaceConfig(uint32_t SYSCFG_ETH_MediaInterface)
   *          This parameter can be one of the following values:
   *            @arg ENABLE: I/O compensation cell enabled  
   *            @arg DISABLE: I/O compensation cell power-down mode  
-  * @retval None
   */
 void SYSCFG_CompensationCellCmd(FunctionalState NewState)
 {
@@ -240,7 +235,6 @@ FlagStatus SYSCFG_GetCompensationCellStatus(void)
   *   This parameter can be any combination of the following values:
   *     @arg SYSCFG_Break_PVD: PVD interrupt is connected to the break input of TIM1/8.
   *     @arg SYSCFG_Break_HardFault: Lockup output of CortexM4 is connected to the break input of TIM1/8.
-  * @retval None
   */
 void SYSCFG_BreakConfig(uint32_t SYSCFG_Break)
 {
@@ -256,7 +250,6 @@ void SYSCFG_BreakConfig(uint32_t SYSCFG_Break)
   * @brief  Select the DFSDM2 or TIM2_OC1 as clock source for the bitstream clock.
   * @param source: BITSTREAM_CLOCK_DFSDM2.
   *                BITSTREAM_CLOCK_TIM2OC1.           
-  * @retval None
   */
 void DFSDM_BitstreamClock_SourceSelection(uint32_t source)
 {
@@ -272,7 +265,6 @@ void DFSDM_BitstreamClock_SourceSelection(uint32_t source)
   * @brief  Disable Delay Clock for DFSDM1/2.
   * @param MCHDLY: MCHDLY_CLOCK_DFSDM2.
   *                MCHDLY_CLOCK_DFSDM1.               
-  * @retval None
   */
 void DFSDM_DisableDelayClock(uint32_t MCHDLY)
 {
@@ -295,7 +287,6 @@ void DFSDM_DisableDelayClock(uint32_t MCHDLY)
   * @brief  Enable Delay Clock for DFSDM1/2.
   * @param MCHDLY: MCHDLY_CLOCK_DFSDM2.
   *                MCHDLY_CLOCK_DFSDM1.         
-  * @retval None
   */
 void DFSDM_EnableDelayClock(uint32_t MCHDLY)
 {
@@ -313,7 +304,6 @@ void DFSDM_EnableDelayClock(uint32_t MCHDLY)
   *                DFSDM2_CKIN_DM. 
   *                DFSDM1_CKIN_PAD.
   *                DFSDM1_CKIN_DM.            
-  * @retval None
   */
 void DFSDM_ClockIn_SourceSelection(uint32_t source)
 {
@@ -338,7 +328,6 @@ void DFSDM_ClockIn_SourceSelection(uint32_t source)
   *                DFSDM2_CKOUT_M27. 
   *                DFSDM1_CKOUT_DFSDM1.
   *                DFSDM1_CKOUT_M27.            
-  * @retval None
   */
 void DFSDM_ClockOut_SourceSelection(uint32_t source)
 {
@@ -364,7 +353,6 @@ void DFSDM_ClockOut_SourceSelection(uint32_t source)
   *                DATAIN0_DFSDM2_DATAIN1. 
   *                DATAIN0_DFSDM1_PAD.
   *                DATAIN0_DFSDM1_DATAIN1.                  
-  * @retval None
   */
 void DFSDM_DataIn0_SourceSelection(uint32_t source)
 {
@@ -389,7 +377,6 @@ void DFSDM_DataIn0_SourceSelection(uint32_t source)
   *                DATAIN2_DFSDM2_DATAIN3. 
   *                DATAIN2_DFSDM1_PAD.
   *                DATAIN2_DFSDM1_DATAIN3.                  
-  * @retval None
   */
 void DFSDM_DataIn2_SourceSelection(uint32_t source)
 {
@@ -412,7 +399,6 @@ void DFSDM_DataIn2_SourceSelection(uint32_t source)
   * @brief  Select the source for DataIn4 signals for DFSDM2.
   * @param source: DATAIN4_DFSDM2_PAD.
   *                DATAIN4_DFSDM2_DATAIN5                
-  * @retval None
   */
 void DFSDM_DataIn4_SourceSelection(uint32_t source)
 {
@@ -428,7 +414,6 @@ void DFSDM_DataIn4_SourceSelection(uint32_t source)
   * @brief  Select the source for DataIn6 signals for DFSDM2.
   * @param source: DATAIN6_DFSDM2_PAD.
   *                DATAIN6_DFSDM2_DATAIN7.                  
-  * @retval None
   */
 void DFSDM_DataIn6_SourceSelection(uint32_t source)
 {
@@ -447,7 +432,6 @@ void DFSDM_DataIn6_SourceSelection(uint32_t source)
   *                DFSDM1_CLKIN2_TIM4OC2
   *                DFSDM1_CLKIN1_TIM4OC1
   *                DFSDM1_CLKIN3_TIM4OC1                         
-  * @retval None
   */
 void DFSDM1_BitStreamClk_Config(uint32_t source)
 {
@@ -477,7 +461,6 @@ void DFSDM1_BitStreamClk_Config(uint32_t source)
   *                DFSDM2_CLKIN6_TIM3OC2
   *                DFSDM2_CLKIN3_TIM3OC1
   *                DFSDM2_CLKIN7_TIM3OC1                        
-  * @retval None
   */
 void DFSDM2_BitStreamClk_Config(uint32_t source)
 {

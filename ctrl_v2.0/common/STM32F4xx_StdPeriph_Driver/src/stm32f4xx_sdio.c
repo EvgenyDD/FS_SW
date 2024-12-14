@@ -261,7 +261,6 @@
 /**
   * @brief  Deinitializes the SDIO peripheral registers to their default reset values.
   * @param  None
-  * @retval None
   */
 void SDIO_DeInit(void)
 {
@@ -274,7 +273,6 @@ void SDIO_DeInit(void)
   *         parameters in the SDIO_InitStruct.
   * @param  SDIO_InitStruct : pointer to a SDIO_InitTypeDef structure 
   *         that contains the configuration information for the SDIO peripheral.
-  * @retval None
   */
 void SDIO_Init(SDIO_InitTypeDef* SDIO_InitStruct)
 {
@@ -312,7 +310,6 @@ void SDIO_Init(SDIO_InitTypeDef* SDIO_InitStruct)
   * @brief  Fills each SDIO_InitStruct member with its default value.
   * @param  SDIO_InitStruct: pointer to an SDIO_InitTypeDef structure which 
   *         will be initialized.
-  * @retval None
   */
 void SDIO_StructInit(SDIO_InitTypeDef* SDIO_InitStruct)
 {
@@ -329,7 +326,6 @@ void SDIO_StructInit(SDIO_InitTypeDef* SDIO_InitStruct)
   * @brief  Enables or disables the SDIO Clock.
   * @param  NewState: new state of the SDIO Clock. 
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SDIO_ClockCmd(FunctionalState NewState)
 {
@@ -345,7 +341,6 @@ void SDIO_ClockCmd(FunctionalState NewState)
   *          This parameter can be one of the following values:
   *            @arg SDIO_PowerState_OFF: SDIO Power OFF
   *            @arg SDIO_PowerState_ON: SDIO Power ON
-  * @retval None
   */
 void SDIO_SetPowerState(uint32_t SDIO_PowerState)
 {
@@ -394,7 +389,6 @@ uint32_t SDIO_GetPowerState(void)
   * @param  SDIO_CmdInitStruct : pointer to a SDIO_CmdInitTypeDef 
   *         structure that contains the configuration information for the SDIO 
   *         command.
-  * @retval None
   */
 void SDIO_SendCommand(SDIO_CmdInitTypeDef *SDIO_CmdInitStruct)
 {
@@ -430,7 +424,6 @@ void SDIO_SendCommand(SDIO_CmdInitTypeDef *SDIO_CmdInitStruct)
   * @brief  Fills each SDIO_CmdInitStruct member with its default value.
   * @param  SDIO_CmdInitStruct: pointer to an SDIO_CmdInitTypeDef 
   *         structure which will be initialized.
-  * @retval None
   */
 void SDIO_CmdStructInit(SDIO_CmdInitTypeDef* SDIO_CmdInitStruct)
 {
@@ -498,7 +491,6 @@ uint32_t SDIO_GetResponse(uint32_t SDIO_RESP)
   *         parameters in the SDIO_DataInitStruct.
   * @param  SDIO_DataInitStruct : pointer to a SDIO_DataInitTypeDef structure 
   *         that contains the configuration information for the SDIO command.
-  * @retval None
   */
 void SDIO_DataConfig(SDIO_DataInitTypeDef* SDIO_DataInitStruct)
 {
@@ -539,7 +531,6 @@ void SDIO_DataConfig(SDIO_DataInitTypeDef* SDIO_DataInitStruct)
   * @brief  Fills each SDIO_DataInitStruct member with its default value.
   * @param  SDIO_DataInitStruct: pointer to an SDIO_DataInitTypeDef structure 
   *         which will be initialized.
-  * @retval None
   */
 void SDIO_DataStructInit(SDIO_DataInitTypeDef* SDIO_DataInitStruct)
 {
@@ -575,7 +566,6 @@ uint32_t SDIO_ReadData(void)
 /**
   * @brief  Write one data word to Tx FIFO.
   * @param  Data: 32-bit data word to write.
-  * @retval None
   */
 void SDIO_WriteData(uint32_t Data)
 { 
@@ -614,7 +604,6 @@ uint32_t SDIO_GetFIFOCount(void)
   * @brief  Starts the SD I/O Read Wait operation.	
   * @param  NewState: new state of the Start SDIO Read Wait operation. 
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SDIO_StartSDIOReadWait(FunctionalState NewState)
 { 
@@ -628,7 +617,6 @@ void SDIO_StartSDIOReadWait(FunctionalState NewState)
   * @brief  Stops the SD I/O Read Wait operation.	
   * @param  NewState: new state of the Stop SDIO Read Wait operation. 
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SDIO_StopSDIOReadWait(FunctionalState NewState)
 { 
@@ -644,7 +632,6 @@ void SDIO_StopSDIOReadWait(FunctionalState NewState)
   *          This parameter can be:
   *            @arg SDIO_ReadWaitMode_CLK: Read Wait control by stopping SDIOCLK
   *            @arg SDIO_ReadWaitMode_DATA2: Read Wait control using SDIO_DATA2
-  * @retval None
   */
 void SDIO_SetSDIOReadWaitMode(uint32_t SDIO_ReadWaitMode)
 {
@@ -658,7 +645,6 @@ void SDIO_SetSDIOReadWaitMode(uint32_t SDIO_ReadWaitMode)
   * @brief  Enables or disables the SD I/O Mode Operation.
   * @param  NewState: new state of SDIO specific operation. 
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SDIO_SetSDIOOperation(FunctionalState NewState)
 { 
@@ -672,7 +658,6 @@ void SDIO_SetSDIOOperation(FunctionalState NewState)
   * @brief  Enables or disables the SD I/O Mode suspend command sending.
   * @param  NewState: new state of the SD I/O Mode suspend command.
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SDIO_SendSDIOSuspendCmd(FunctionalState NewState)
 { 
@@ -704,7 +689,6 @@ void SDIO_SendSDIOSuspendCmd(FunctionalState NewState)
   * @brief  Enables or disables the command completion signal.
   * @param  NewState: new state of command completion signal. 
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SDIO_CommandCompletionCmd(FunctionalState NewState)
 { 
@@ -718,7 +702,6 @@ void SDIO_CommandCompletionCmd(FunctionalState NewState)
   * @brief  Enables or disables the CE-ATA interrupt.
   * @param  NewState: new state of CE-ATA interrupt. 
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SDIO_CEATAITCmd(FunctionalState NewState)
 { 
@@ -732,7 +715,6 @@ void SDIO_CEATAITCmd(FunctionalState NewState)
   * @brief  Sends CE-ATA command (CMD61).
   * @param  NewState: new state of CE-ATA command. 
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SDIO_SendCEATACmd(FunctionalState NewState)
 { 
@@ -764,7 +746,6 @@ void SDIO_SendCEATACmd(FunctionalState NewState)
   * @brief  Enables or disables the SDIO DMA request.
   * @param  NewState: new state of the selected SDIO DMA request.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SDIO_DMACmd(FunctionalState NewState)
 {
@@ -907,7 +888,6 @@ FlagStatus SDIO_GetFlagStatus(uint32_t SDIO_FLAG)
   *            @arg SDIO_FLAG_DBCKEND:  Data block sent/received (CRC check passed)
   *            @arg SDIO_FLAG_SDIOIT:   SD I/O interrupt received
   *            @arg SDIO_FLAG_CEATAEND: CE-ATA command completion signal received for CMD61
-  * @retval None
   */
 void SDIO_ClearFlag(uint32_t SDIO_FLAG)
 { 
@@ -982,7 +962,6 @@ ITStatus SDIO_GetITStatus(uint32_t SDIO_IT)
   *                                   bus mode interrupt
   *            @arg SDIO_IT_SDIOIT:   SD I/O interrupt received interrupt
   *            @arg SDIO_IT_CEATAEND: CE-ATA command completion signal received for CMD61
-  * @retval None
   */
 void SDIO_ClearITPendingBit(uint32_t SDIO_IT)
 { 

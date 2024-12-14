@@ -100,7 +100,6 @@
   *        It should be done with specific routine executed from RAM.     
   * @param  NewState: new state of the Smart Card mode.
   *          This parameter can be: ENABLE or DISABLE.  
-  * @retval None
   */
 __RAM_FUNC FLASH_FlashInterfaceCmd(FunctionalState NewState)
 {
@@ -123,7 +122,6 @@ __RAM_FUNC FLASH_FlashInterfaceCmd(FunctionalState NewState)
   *        It should be done with specific routine executed from RAM.     
   * @param  NewState: new state of the Smart Card mode.
   *          This parameter can be: ENABLE or DISABLE.  
-  * @retval None
   */
 __RAM_FUNC FLASH_FlashSleepModeCmd(FunctionalState NewState)
 {

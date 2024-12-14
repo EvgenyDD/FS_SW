@@ -124,7 +124,6 @@ const FSMC_NORSRAMTimingInitTypeDef FSMC_DefaultTimingStruct = {0x0F, /* FSMC_Ad
   *            @arg FSMC_Bank1_NORSRAM2: FSMC Bank1 NOR/SRAM2 
   *            @arg FSMC_Bank1_NORSRAM3: FSMC Bank1 NOR/SRAM3 
   *            @arg FSMC_Bank1_NORSRAM4: FSMC Bank1 NOR/SRAM4 
-  * @retval None
   */
 void FSMC_NORSRAMDeInit(uint32_t FSMC_Bank)
 {
@@ -151,7 +150,6 @@ void FSMC_NORSRAMDeInit(uint32_t FSMC_Bank)
   * @param  FSMC_NORSRAMInitStruct : pointer to a FSMC_NORSRAMInitTypeDef structure
   *         that contains the configuration information for the FSMC NOR/SRAM 
   *         specified Banks.                       
-  * @retval None
   */
 void FSMC_NORSRAMInit(FSMC_NORSRAMInitTypeDef* FSMC_NORSRAMInitStruct)
 { 
@@ -264,7 +262,6 @@ void FSMC_NORSRAMInit(FSMC_NORSRAMInitTypeDef* FSMC_NORSRAMInitStruct)
   * @brief  Fills each FSMC_NORSRAMInitStruct member with its default value.
   * @param  FSMC_NORSRAMInitStruct: pointer to a FSMC_NORSRAMInitTypeDef structure 
   *         which will be initialized.
-  * @retval None
   */
 void FSMC_NORSRAMStructInit(FSMC_NORSRAMInitTypeDef* FSMC_NORSRAMInitStruct)
 {  
@@ -295,7 +292,6 @@ void FSMC_NORSRAMStructInit(FSMC_NORSRAMInitTypeDef* FSMC_NORSRAMInitStruct)
   *            @arg FSMC_Bank1_NORSRAM3: FSMC Bank1 NOR/SRAM3 
   *            @arg FSMC_Bank1_NORSRAM4: FSMC Bank1 NOR/SRAM4 
   * @param  NewState: new state of the FSMC_Bank. This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void FSMC_NORSRAMCmd(uint32_t FSMC_Bank, FunctionalState NewState)
 {
@@ -368,7 +364,6 @@ void FSMC_NORSRAMCmd(uint32_t FSMC_Bank, FunctionalState NewState)
   *          This parameter can be one of the following values:
   *            @arg FSMC_Bank2_NAND: FSMC Bank2 NAND 
   *            @arg FSMC_Bank3_NAND: FSMC Bank3 NAND 
-  * @retval None
   */
 void FSMC_NANDDeInit(uint32_t FSMC_Bank)
 {
@@ -399,7 +394,6 @@ void FSMC_NANDDeInit(uint32_t FSMC_Bank)
   *         in the FSMC_NANDInitStruct.
   * @param  FSMC_NANDInitStruct : pointer to a FSMC_NANDInitTypeDef structure that
   *         contains the configuration information for the FSMC NAND specified Banks.                       
-  * @retval None
   */
 void FSMC_NANDInit(FSMC_NANDInitTypeDef* FSMC_NANDInitStruct)
 {
@@ -510,7 +504,6 @@ void FSMC_NANDInit(FSMC_NANDInitTypeDef* FSMC_NANDInitStruct)
   * @brief  Fills each FSMC_NANDInitStruct member with its default value.
   * @param  FSMC_NANDInitStruct: pointer to a FSMC_NANDInitTypeDef structure which
   *         will be initialized.
-  * @retval None
   */
 void FSMC_NANDStructInit(FSMC_NANDInitTypeDef* FSMC_NANDInitStruct)
 { 
@@ -539,7 +532,6 @@ void FSMC_NANDStructInit(FSMC_NANDInitTypeDef* FSMC_NANDInitStruct)
   *            @arg FSMC_Bank2_NAND: FSMC Bank2 NAND 
   *            @arg FSMC_Bank3_NAND: FSMC Bank3 NAND
   * @param  NewState: new state of the FSMC_Bank. This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void FSMC_NANDCmd(uint32_t FSMC_Bank, FunctionalState NewState)
 {
@@ -579,7 +571,6 @@ void FSMC_NANDCmd(uint32_t FSMC_Bank, FunctionalState NewState)
   *            @arg FSMC_Bank3_NAND: FSMC Bank3 NAND
   * @param  NewState: new state of the FSMC NAND ECC feature.  
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void FSMC_NANDECCCmd(uint32_t FSMC_Bank, FunctionalState NewState)
 {
@@ -682,7 +673,6 @@ uint32_t FSMC_GetECC(uint32_t FSMC_Bank)
 /**
   * @brief  De-initializes the FSMC PCCARD Bank registers to their default reset values.
   * @param  None                       
-  * @retval None
   */
 void FSMC_PCCARDDeInit(void)
 {
@@ -699,7 +689,6 @@ void FSMC_PCCARDDeInit(void)
   *         in the FSMC_PCCARDInitStruct.
   * @param  FSMC_PCCARDInitStruct : pointer to a FSMC_PCCARDInitTypeDef structure
   *         that contains the configuration information for the FSMC PCCARD Bank.                       
-  * @retval None
   */
 void FSMC_PCCARDInit(FSMC_PCCARDInitTypeDef* FSMC_PCCARDInitStruct)
 {
@@ -789,7 +778,6 @@ void FSMC_PCCARDInit(FSMC_PCCARDInitTypeDef* FSMC_PCCARDInitStruct)
   * @brief  Fills each FSMC_PCCARDInitStruct member with its default value.
   * @param  FSMC_PCCARDInitStruct: pointer to a FSMC_PCCARDInitTypeDef structure
   *         which will be initialized.
-  * @retval None
   */
 void FSMC_PCCARDStructInit(FSMC_PCCARDInitTypeDef* FSMC_PCCARDInitStruct)
 {
@@ -815,7 +803,6 @@ void FSMC_PCCARDStructInit(FSMC_PCCARDInitTypeDef* FSMC_PCCARDInitStruct)
   * @brief  Enables or disables the PCCARD Memory Bank.
   * @param  NewState: new state of the PCCARD Memory Bank.  
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void FSMC_PCCARDCmd(FunctionalState NewState)
 {
@@ -862,7 +849,6 @@ void FSMC_PCCARDCmd(FunctionalState NewState)
   *            @arg FSMC_IT_FallingEdge: Falling edge detection interrupt.
   * @param  NewState: new state of the specified FSMC interrupts.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void FSMC_ITConfig(uint32_t FSMC_Bank, uint32_t FSMC_IT, FunctionalState NewState)
 {
@@ -972,7 +958,6 @@ FlagStatus FSMC_GetFlagStatus(uint32_t FSMC_Bank, uint32_t FSMC_FLAG)
   *            @arg FSMC_FLAG_RisingEdge: Rising edge detection Flag.
   *            @arg FSMC_FLAG_Level: Level detection Flag.
   *            @arg FSMC_FLAG_FallingEdge: Falling edge detection Flag.
-  * @retval None
   */
 void FSMC_ClearFlag(uint32_t FSMC_Bank, uint32_t FSMC_FLAG)
 {
@@ -1058,7 +1043,6 @@ ITStatus FSMC_GetITStatus(uint32_t FSMC_Bank, uint32_t FSMC_IT)
   *            @arg FSMC_IT_RisingEdge: Rising edge detection interrupt. 
   *            @arg FSMC_IT_Level: Level edge detection interrupt.
   *            @arg FSMC_IT_FallingEdge: Falling edge detection interrupt.
-  * @retval None
   */
 void FSMC_ClearITPendingBit(uint32_t FSMC_Bank, uint32_t FSMC_IT)
 {

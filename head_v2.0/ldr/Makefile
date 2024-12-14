@@ -15,7 +15,7 @@ CFLAGS   += -fvisibility=hidden -funsafe-math-optimizations -fdata-sections -ffu
 CFLAGS   += -fmessage-length=0 -fno-exceptions -fno-common -fno-builtin -ffreestanding
 CFLAGS   += -fsingle-precision-constant
 CFLAGS   += $(C_FULL_FLAGS)
-# CFLAGS   += -Werror
+CFLAGS   += -Werror
 
 CXXFLAGS += -fvisibility=hidden -funsafe-math-optimizations -fdata-sections -ffunction-sections -fno-move-loop-invariants
 CXXFLAGS += -fmessage-length=0 -fno-exceptions -fno-common -fno-builtin -ffreestanding

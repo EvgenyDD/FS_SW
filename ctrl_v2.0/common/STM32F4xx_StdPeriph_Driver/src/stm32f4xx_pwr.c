@@ -163,7 +163,6 @@
 /**
   * @brief  Deinitializes the PWR peripheral registers to their default reset values.     
   * @param  None
-  * @retval None
   */
 void PWR_DeInit(void)
 {
@@ -178,7 +177,6 @@ void PWR_DeInit(void)
   *         Backup Domain Access should be kept enabled.
   * @param  NewState: new state of the access to the backup domain.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void PWR_BackupAccessCmd(FunctionalState NewState)
 {
@@ -226,7 +224,6 @@ void PWR_BackupAccessCmd(FunctionalState NewState)
   * @note   Refer to the electrical characteristics of your device datasheet for
   *         more details about the voltage threshold corresponding to each 
   *         detection level.
-  * @retval None
   */
 void PWR_PVDLevelConfig(uint32_t PWR_PVDLevel)
 {
@@ -251,7 +248,6 @@ void PWR_PVDLevelConfig(uint32_t PWR_PVDLevel)
   * @brief  Enables or disables the Power Voltage Detector(PVD).
   * @param  NewState: new state of the PVD.
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void PWR_PVDCmd(FunctionalState NewState)
 {
@@ -286,7 +282,6 @@ void PWR_PVDCmd(FunctionalState NewState)
   * @brief  Enables or disables the WakeUp Pin functionality.
   * @param  NewState: new state of the WakeUp Pin functionality.
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void PWR_WakeUpPinCmd(FunctionalState NewState)
 {
@@ -307,7 +302,6 @@ void PWR_WakeUpPinCmd(FunctionalState NewState)
   *            @arg PWR_WakeUp_Pin3: WKUP3 pin is used for wakeup from Standby mode.(only for STM32F410xx, STM32F412xG and STM32F413_423xx Devices)
   * @param  NewState: new state of the WakeUp Pin functionality.
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void PWR_WakeUpPinCmd(uint32_t PWR_WakeUpPinx, FunctionalState NewState)
 {
@@ -418,7 +412,6 @@ void PWR_WakeUpPinCmd(uint32_t PWR_WakeUpPinx, FunctionalState NewState)
   * @brief  Enables or disables the Backup Regulator.
   * @param  NewState: new state of the Backup Regulator.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void PWR_BackupRegulatorCmd(FunctionalState NewState)
 {
@@ -440,7 +433,6 @@ void PWR_BackupRegulatorCmd(FunctionalState NewState)
   *                                                System frequency up to 144 MHz.    
   *            @arg PWR_Regulator_Voltage_Scale3: Regulator voltage output Scale 3 mode, 
   *                                                System frequency up to 120 MHz (only for STM32F42xxx/43xxx devices)
-  * @retval None
   */
 void PWR_MainRegulatorModeConfig(uint32_t PWR_Regulator_Voltage)
 {
@@ -475,7 +467,6 @@ void PWR_MainRegulatorModeConfig(uint32_t PWR_Regulator_Voltage)
   *            
   * @param  NewState: new state of the Over Drive mode.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void PWR_OverDriveCmd(FunctionalState NewState)
 {
@@ -493,7 +484,6 @@ void PWR_OverDriveCmd(FunctionalState NewState)
   *       
   * @param  NewState: new state of the Over Drive switching mode.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void PWR_OverDriveSWCmd(FunctionalState NewState)
 {
@@ -520,7 +510,6 @@ void PWR_OverDriveSWCmd(FunctionalState NewState)
   *                    
   * @param  NewState: new state of the Under Drive mode.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void PWR_UnderDriveCmd(FunctionalState NewState)
 {
@@ -547,7 +536,6 @@ void PWR_UnderDriveCmd(FunctionalState NewState)
   *
   * @param  NewState: new state of the Main Regulator Under Drive mode.
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void PWR_MainRegulatorUnderDriveCmd(FunctionalState NewState)
 { 
@@ -571,7 +559,6 @@ void PWR_MainRegulatorUnderDriveCmd(FunctionalState NewState)
   *
   * @param  NewState: new state of the Low Power Regulator Under Drive mode.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void PWR_LowRegulatorUnderDriveCmd(FunctionalState NewState)
 {
@@ -597,7 +584,6 @@ void PWR_LowRegulatorUnderDriveCmd(FunctionalState NewState)
   *
   * @param  NewState: new state of the Main Regulator Low Voltage mode.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void PWR_MainRegulatorLowVoltageCmd(FunctionalState NewState)
 { 
@@ -621,7 +607,6 @@ void PWR_MainRegulatorLowVoltageCmd(FunctionalState NewState)
   *
   * @param  NewState: new state of the Low Power Regulator Low Voltage mode.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void PWR_LowRegulatorLowVoltageCmd(FunctionalState NewState)
 {
@@ -664,7 +649,6 @@ void PWR_LowRegulatorLowVoltageCmd(FunctionalState NewState)
   * @brief  Enables or disables the Flash Power Down in STOP mode.
   * @param  NewState: new state of the Flash power mode.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void PWR_FlashPowerDownCmd(FunctionalState NewState)
 {
@@ -810,7 +794,6 @@ void PWR_FlashPowerDownCmd(FunctionalState NewState)
   *          This parameter can be one of the following values:
   *            @arg PWR_STOPEntry_WFI: enter STOP mode with WFI instruction
   *            @arg PWR_STOPEntry_WFE: enter STOP mode with WFE instruction
-  * @retval None
   */
 void PWR_EnterSTOPMode(uint32_t PWR_Regulator, uint8_t PWR_STOPEntry)
 {
@@ -874,7 +857,6 @@ void PWR_EnterSTOPMode(uint32_t PWR_Regulator, uint8_t PWR_STOPEntry)
   *          This parameter can be one of the following values:
   *            @arg PWR_STOPEntry_WFI: enter STOP mode with WFI instruction
   *            @arg PWR_STOPEntry_WFE: enter STOP mode with WFE instruction
-  * @retval None
   */
 void PWR_EnterUnderDriveSTOPMode(uint32_t PWR_Regulator, uint8_t PWR_STOPEntry)
 {
@@ -923,7 +905,6 @@ void PWR_EnterUnderDriveSTOPMode(uint32_t PWR_Regulator, uint8_t PWR_STOPEntry)
   *          - WKUP pin 1 (PA0) if enabled.
   * @note   The Wakeup flag (WUF) need to be cleared at application level before to call this function 
   * @param  None
-  * @retval None
   */
 void PWR_EnterSTANDBYMode(void)
 {
@@ -1011,7 +992,6 @@ FlagStatus PWR_GetFlagStatus(uint32_t PWR_FLAG)
   *            @arg PWR_FLAG_WU: Wake Up flag
   *            @arg PWR_FLAG_SB: StandBy flag
   *            @arg PWR_FLAG_UDRDY: Under-drive ready flag (STM32F42xxx/43xxx devices)
-  * @retval None
   */
 void PWR_ClearFlag(uint32_t PWR_FLAG)
 {

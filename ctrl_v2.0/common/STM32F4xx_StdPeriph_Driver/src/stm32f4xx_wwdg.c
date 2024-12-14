@@ -133,7 +133,6 @@
 /**
   * @brief  Deinitializes the WWDG peripheral registers to their default reset values.
   * @param  None
-  * @retval None
   */
 void WWDG_DeInit(void)
 {
@@ -149,7 +148,6 @@ void WWDG_DeInit(void)
   *     @arg WWDG_Prescaler_2: WWDG counter clock = (PCLK1/4096)/2
   *     @arg WWDG_Prescaler_4: WWDG counter clock = (PCLK1/4096)/4
   *     @arg WWDG_Prescaler_8: WWDG counter clock = (PCLK1/4096)/8
-  * @retval None
   */
 void WWDG_SetPrescaler(uint32_t WWDG_Prescaler)
 {
@@ -168,7 +166,6 @@ void WWDG_SetPrescaler(uint32_t WWDG_Prescaler)
   * @brief  Sets the WWDG window value.
   * @param  WindowValue: specifies the window value to be compared to the downcounter.
   *   This parameter value must be lower than 0x80.
-  * @retval None
   */
 void WWDG_SetWindowValue(uint8_t WindowValue)
 {
@@ -191,7 +188,6 @@ void WWDG_SetWindowValue(uint8_t WindowValue)
   * @brief  Enables the WWDG Early Wakeup interrupt(EWI).
   * @note   Once enabled this interrupt cannot be disabled except by a system reset.
   * @param  None
-  * @retval None
   */
 void WWDG_EnableIT(void)
 {
@@ -203,7 +199,6 @@ void WWDG_EnableIT(void)
   * @param  Counter: specifies the watchdog counter value.
   *   This parameter must be a number between 0x40 and 0x7F (to prevent generating
   *   an immediate reset) 
-  * @retval None
   */
 void WWDG_SetCounter(uint8_t Counter)
 {
@@ -234,7 +229,6 @@ void WWDG_SetCounter(uint8_t Counter)
   * @param  Counter: specifies the watchdog counter value.
   *   This parameter must be a number between 0x40 and 0x7F (to prevent generating
   *   an immediate reset)
-  * @retval None
   */
 void WWDG_Enable(uint8_t Counter)
 {
@@ -281,7 +275,6 @@ FlagStatus WWDG_GetFlagStatus(void)
 /**
   * @brief  Clears Early Wakeup interrupt flag.
   * @param  None
-  * @retval None
   */
 void WWDG_ClearFlag(void)
 {

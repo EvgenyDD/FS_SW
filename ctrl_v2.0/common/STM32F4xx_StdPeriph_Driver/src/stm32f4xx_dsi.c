@@ -108,7 +108,6 @@ static void DSI_ConfigPacketHeader(DSI_TypeDef *DSIx, uint32_t ChannelID, uint32
   * @brief  De-initializes the DSI peripheral registers to their default reset
   *         values.
   * @param  DSIx: To select the DSIx peripheral, where x can be the different DSI instances
-  * @retval None
   */
 void DSI_DeInit(DSI_TypeDef *DSIx)
 {  
@@ -145,7 +144,6 @@ void DSI_DeInit(DSI_TypeDef *DSIx)
   *        contains the configuration information for the specified DSI peripheral.
   * @param DSI_InitTIMStruct: pointer to a DSI_TIMTypeDef structure that
   *        contains the configuration information for the specified DSI Timings.
-  * @retval None
   */
 void DSI_Init(DSI_TypeDef *DSIx,DSI_InitTypeDef* DSI_InitStruct, DSI_PLLInitTypeDef *PLLInit)
 {
@@ -216,7 +214,6 @@ void DSI_Init(DSI_TypeDef *DSIx,DSI_InitTypeDef* DSI_InitStruct, DSI_PLLInitType
 /**
   * @brief Fills each DSI_InitStruct member with its default value.
   * @param DSI_InitStruct: pointer to a DSI_InitTypeDef structure which will be initialized.
-  * @retval None
   */
 void DSI_StructInit(DSI_InitTypeDef* DSI_InitStruct, DSI_HOST_TimeoutTypeDef* DSI_HOST_TimeoutInitStruct)
 {
@@ -253,7 +250,6 @@ void DSI_StructInit(DSI_InitTypeDef* DSI_InitStruct, DSI_HOST_TimeoutTypeDef* DS
   * @brief  Configure the Generic interface read-back Virtual Channel ID.
   * @param  DSIx: To select the DSIx peripheral, where x can be the different DSI instances
   * @param  VirtualChannelID: Virtual channel ID
-  * @retval None
   */
 void DSI_SetGenericVCID(DSI_TypeDef *DSIx, uint32_t VirtualChannelID)
 {  
@@ -267,7 +263,6 @@ void DSI_SetGenericVCID(DSI_TypeDef *DSIx, uint32_t VirtualChannelID)
   * @param  DSIx: To select the DSIx peripheral, where x can be the different DSI instances
   * @param  VidCfg: pointer to a DSI_VidCfgTypeDef structure that contains
   *                 the DSI video mode configuration parameters
-  * @retval None
   */
 void DSI_ConfigVideoMode(DSI_TypeDef *DSIx, DSI_VidCfgTypeDef *VidCfg)
 {  
@@ -408,7 +403,6 @@ void DSI_ConfigVideoMode(DSI_TypeDef *DSIx, DSI_VidCfgTypeDef *VidCfg)
   * @param  DSIx: To select the DSIx peripheral, where x can be the different DSI instances
   * @param  CmdCfg: pointer to a DSI_CmdCfgTypeDef structure that contains
   *                 the DSI command mode configuration parameters
-  * @retval None
   */
 void DSI_ConfigAdaptedCommandMode(DSI_TypeDef *DSIx, DSI_CmdCfgTypeDef *CmdCfg)
 {  
@@ -468,7 +462,6 @@ void DSI_ConfigAdaptedCommandMode(DSI_TypeDef *DSIx, DSI_CmdCfgTypeDef *CmdCfg)
   * @param  DSIx: To select the DSIx peripheral, where x can be the different DSI instances
   * @param  LPCmd: pointer to a DSI_LPCmdTypeDef structure that contains
   *                the DSI command transmission mode configuration parameters
-  * @retval None
   */
 void DSI_ConfigCommand(DSI_TypeDef *DSIx, DSI_LPCmdTypeDef *LPCmd)
 {
@@ -522,7 +515,6 @@ void DSI_ConfigCommand(DSI_TypeDef *DSIx, DSI_LPCmdTypeDef *LPCmd)
   * @param  DSIx: To select the DSIx peripheral, where x can be the different DSI instances
   * @param  FlowControl: flow control feature(s) to be enabled.
   *                      This parameter can be any combination of @ref DSI_FlowControl.
-  * @retval None
   */
 void DSI_ConfigFlowControl(DSI_TypeDef *DSIx, uint32_t FlowControl)
 {  
@@ -539,7 +531,6 @@ void DSI_ConfigFlowControl(DSI_TypeDef *DSIx, uint32_t FlowControl)
   * @param  DSIx: To select the DSIx peripheral, where x can be the different DSI instances
   * @param  PhyTimers: DSI_PHY_TimerTypeDef structure that contains
   *                    the DSI PHY timing parameters
-  * @retval None
   */
 void DSI_ConfigPhyTimer(DSI_TypeDef *DSIx, DSI_PHY_TimerTypeDef *PhyTimers)
 { 
@@ -574,7 +565,6 @@ void DSI_ConfigPhyTimer(DSI_TypeDef *DSIx, DSI_PHY_TimerTypeDef *PhyTimers)
   * @param  DSIx: To select the DSIx peripheral, where x can be the different DSI instances
   * @param  HostTimeouts: DSI_HOST_TimeoutTypeDef structure that contains
   *                       the DSI host timeout parameters
-  * @retval None
   */
 void DSI_ConfigHostTimeouts(DSI_TypeDef *DSIx, DSI_HOST_TimeoutTypeDef *HostTimeouts)
 {
@@ -619,7 +609,6 @@ void DSI_ConfigHostTimeouts(DSI_TypeDef *DSIx, DSI_HOST_TimeoutTypeDef *HostTime
   * @brief  Start the DSI module
   * @param  DSIx: To select the DSIx peripheral, where x can be the different DSI instances
   *               the configuration information for the DSI.
-  * @retval None
   */
 void DSI_Start(DSI_TypeDef *DSIx)
 {  
@@ -632,7 +621,6 @@ void DSI_Start(DSI_TypeDef *DSIx)
 /**
   * @brief  Stop the DSI module
   * @param  DSIx: To select the DSIx peripheral, where x can be the different DSI instances
-  * @retval None
   */
 void DSI_Stop(DSI_TypeDef *DSIx)
 {  
@@ -647,7 +635,6 @@ void DSI_Stop(DSI_TypeDef *DSIx)
   * @brief  Refresh the display in command mode
   * @param  DSIx: To select the DSIx peripheral, where x can be the different DSI instances
   *               the configuration information for the DSI.
-  * @retval None
   */
 void DSI_Refresh(DSI_TypeDef *DSIx)
 {  
@@ -660,7 +647,6 @@ void DSI_Refresh(DSI_TypeDef *DSIx)
   * @param  DSIx: To select the DSIx peripheral, where x can be the different DSI instances
   * @param  ColorMode: Color mode (full or 8-colors).
   *                    This parameter can be any value of @ref DSI_Color_Mode
-  * @retval None
   */
 void DSI_ColorMode(DSI_TypeDef *DSIx, uint32_t ColorMode)
 {  
@@ -677,7 +663,6 @@ void DSI_ColorMode(DSI_TypeDef *DSIx, uint32_t ColorMode)
   * @param  DSIx: To select the DSIx peripheral, where x can be the different DSI instances
   * @param  Shutdown: Shut-down (Display-ON or Display-OFF).
   *                   This parameter can be any value of @ref DSI_ShutDown
-  * @retval None
   */
 void DSI_Shutdown(DSI_TypeDef *DSIx, uint32_t Shutdown)
 {
@@ -714,7 +699,6 @@ void DSI_Shutdown(DSI_TypeDef *DSIx, uint32_t Shutdown)
   *                 This parameter can be any value of @ref DSI_DCS_Command or a
   *                 generic command code.
   * @param  Param2: DSC parameter or second generic parameter.
-  * @retval None
   */
 void DSI_ShortWrite(DSI_TypeDef *DSIx,
                                  uint32_t ChannelID,
@@ -748,7 +732,6 @@ void DSI_ShortWrite(DSI_TypeDef *DSIx,
   *                 This parameter can be any value of @ref DSI_DCS_Command or a 
   *                 generic command code
   * @param  ParametersTable: Pointer to parameter values table.
-  * @retval None
   */
 void DSI_LongWrite(DSI_TypeDef *DSIx,
                                 uint32_t ChannelID,
@@ -805,7 +788,6 @@ void DSI_LongWrite(DSI_TypeDef *DSIx,
   *               This parameter can be any value of @ref DSI_SHORT_READ_PKT_Data_Type.
   * @param  DCSCmd: DCS get/read command.
   * @param  ParametersTable: Pointer to parameter values table.
-  * @retval None
   */
 void DSI_Read(DSI_TypeDef *DSIx,
                                uint32_t ChannelNbr,
@@ -879,7 +861,6 @@ void DSI_Read(DSI_TypeDef *DSIx,
   *                   or DSI_MAX_RETURN_PKT_SIZE
   * @param  Data0: Word count LSB
   * @param  Data1: Word count MSB
-  * @retval None
   */
 static void DSI_ConfigPacketHeader(DSI_TypeDef *DSIx,
                                    uint32_t ChannelID,
@@ -911,7 +892,6 @@ static void DSI_ConfigPacketHeader(DSI_TypeDef *DSIx,
   * @brief  Enter the ULPM (Ultra Low Power Mode) with the D-PHY PLL running
   *         (only data lanes are in ULPM)
   * @param  DSIx: Pointer to DSI register base
-  * @retval None
   */
 void DSI_EnterULPMData(DSI_TypeDef *DSIx)
 {    
@@ -936,7 +916,6 @@ void DSI_EnterULPMData(DSI_TypeDef *DSIx)
   * @brief  Exit the ULPM (Ultra Low Power Mode) with the D-PHY PLL running
   *         (only data lanes are in ULPM)
   * @param  DSIx: Pointer to DSI register base
-  * @retval None
   */
 void DSI_ExitULPMData(DSI_TypeDef *DSIx)
 {  
@@ -963,7 +942,6 @@ void DSI_ExitULPMData(DSI_TypeDef *DSIx)
   * @brief  Enter the ULPM (Ultra Low Power Mode) with the D-PHY PLL turned off
   *         (both data and clock lanes are in ULPM)
   * @param  DSIx: Pointer to DSI register base
-  * @retval None
   */
 void DSI_EnterULPM(DSI_TypeDef *DSIx)
 {    
@@ -996,7 +974,6 @@ void DSI_EnterULPM(DSI_TypeDef *DSIx)
   * @brief  Exit the ULPM (Ultra Low Power Mode) with the D-PHY PLL turned off
   *         (both data and clock lanes are in ULPM)
   * @param  DSIx: Pointer to DSI register base
-  * @retval None
   */
 void DSI_ExitULPM(DSI_TypeDef *DSIx)
 {    
@@ -1043,7 +1020,6 @@ void DSI_ExitULPM(DSI_TypeDef *DSIx)
   *          This parameter can be one of the following values:
   *           0 : Vertical color bars
   *           1 : Horizontal color bars
-  * @retval None
   */
 void DSI_PatternGeneratorStart(DSI_TypeDef *DSIx, uint32_t Mode, uint32_t Orientation)
 {
@@ -1060,7 +1036,6 @@ void DSI_PatternGeneratorStart(DSI_TypeDef *DSIx, uint32_t Mode, uint32_t Orient
 /**
   * @brief  Stop test pattern generation
   * @param  DSIx: To select the DSIx peripheral, where x can be the different DSI instances
-  * @retval None
   */
 void DSI_PatternGeneratorStop(DSI_TypeDef *DSIx)
 {  
@@ -1076,7 +1051,6 @@ void DSI_PatternGeneratorStop(DSI_TypeDef *DSIx)
   * @param  Lane: select between clock or data lanes.
   *               This parameter can be any value of @ref DSI_Lane_Group
   * @param  Value: Custom value of the slew-rate or delay
-  * @retval None
   */
 void DSI_SetSlewRateAndDelayTuning(DSI_TypeDef *DSIx, uint32_t CommDelay, uint32_t Lane, uint32_t Value)
 {  
@@ -1137,7 +1111,6 @@ void DSI_SetSlewRateAndDelayTuning(DSI_TypeDef *DSIx, uint32_t CommDelay, uint32
   * @brief  Low-Power Reception Filter Tuning
   * @param  DSIx: Pointer to DSI register base
   * @param  Frequency: cutoff frequency of low-pass filter at the input of LPRX
-  * @retval None
   */
 void DSI_SetLowPowerRXFilter(DSI_TypeDef *DSIx, uint32_t Frequency)
 {  
@@ -1152,7 +1125,6 @@ void DSI_SetLowPowerRXFilter(DSI_TypeDef *DSIx, uint32_t Frequency)
   * @param  hdsi: pointer to a DSI_HandleTypeDef structure that contains
   *               the configuration information for the DSI.
   * @param  State: ENABLE or DISABLE
-  * @retval None
   */
 void DSI_SetSDD(DSI_TypeDef *DSIx, FunctionalState State)
 {  
@@ -1172,7 +1144,6 @@ void DSI_SetSDD(DSI_TypeDef *DSIx, FunctionalState State)
   * @param  Lane: select between clock or data lane 0 or data lane 1.
   *               This parameter can be any value of @ref DSI_Lane_Select
   * @param  State: ENABLE or DISABLE
-  * @retval None
   */
 void DSI_SetLanePinsConfiguration(DSI_TypeDef *DSIx, uint32_t CustomLane, uint32_t Lane, FunctionalState State)
 {
@@ -1235,7 +1206,6 @@ void DSI_SetLanePinsConfiguration(DSI_TypeDef *DSIx, uint32_t CustomLane, uint32
   *                 This parameter can be any value of @ref DSI_PHY_Timing
   * @param  State: ENABLE or DISABLE
   * @param  Value: Custom value of the timing
-  * @retval None
   */
 void DSI_SetPHYTimings(DSI_TypeDef *DSIx, uint32_t Timing, FunctionalState State, uint32_t Value)
 {  
@@ -1373,7 +1343,6 @@ void DSI_SetPHYTimings(DSI_TypeDef *DSIx, uint32_t Timing, FunctionalState State
   * @param  Lane: select between clock or data lanes.
   *               This parameter can be any value of @ref DSI_Lane_Group
   * @param  State: ENABLE or DISABLE
-  * @retval None
   */
 void DSI_ForceTXStopMode(DSI_TypeDef *DSIx, uint32_t Lane, FunctionalState State)
 {
@@ -1400,7 +1369,6 @@ void DSI_ForceTXStopMode(DSI_TypeDef *DSIx, uint32_t Lane, FunctionalState State
   * @param  hdsi: pointer to a DSI_HandleTypeDef structure that contains
   *               the configuration information for the DSI.
   * @param  State: ENABLE or DISABLE
-  * @retval None
   */
 void DSI_ForceRXLowPower(DSI_TypeDef *DSIx, FunctionalState State)
 {  
@@ -1417,7 +1385,6 @@ void DSI_ForceRXLowPower(DSI_TypeDef *DSIx, FunctionalState State)
   * @param  hdsi: pointer to a DSI_HandleTypeDef structure that contains
   *               the configuration information for the DSI.
   * @param  State: ENABLE or DISABLE
-  * @retval None
   */
 void DSI_ForceDataLanesInRX(DSI_TypeDef *DSIx, FunctionalState State)
 {  
@@ -1434,7 +1401,6 @@ void DSI_ForceDataLanesInRX(DSI_TypeDef *DSIx, FunctionalState State)
   * @param  hdsi: pointer to a DSI_HandleTypeDef structure that contains
   *               the configuration information for the DSI.
   * @param  State: ENABLE or DISABLE
-  * @retval None
   */
 void DSI_SetPullDown(DSI_TypeDef *DSIx, FunctionalState State)
 {  
@@ -1451,7 +1417,6 @@ void DSI_SetPullDown(DSI_TypeDef *DSIx, FunctionalState State)
   * @param  hdsi: pointer to a DSI_HandleTypeDef structure that contains
   *               the configuration information for the DSI.
   * @param  State: ENABLE or DISABLE
-  * @retval None
   */
 void DSI_SetContentionDetectionOff(DSI_TypeDef *DSIx, FunctionalState State)
 {  
@@ -1536,7 +1501,6 @@ void DSI_SetContentionDetectionOff(DSI_TypeDef *DSIx, FunctionalState State)
   *            @arg DSI_IT_RR  : Regulator Ready Interrupt
   * @param  NewState: new state of the specified DSI interrupt.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void DSI_ITConfig(DSI_TypeDef* DSIx, uint32_t DSI_IT, FunctionalState NewState)
 {
@@ -1604,7 +1568,6 @@ FlagStatus DSI_GetFlagStatus(DSI_TypeDef* DSIx, uint16_t DSI_FLAG)
   *            @arg DSI_FLAG_PLLL : PLL Lock Interrupt Flag
   *            @arg DSI_FLAG_PLLU : PLL Unlock Interrupt Flag
   *            @arg DSI_FLAG_RR   : Regulator Ready Interrupt Flag  
-  * @retval None
   */
 void DSI_ClearFlag(DSI_TypeDef* DSIx, uint16_t DSI_FLAG)
 {
@@ -1666,7 +1629,6 @@ ITStatus DSI_GetITStatus(DSI_TypeDef* DSIx, uint32_t DSI_IT)
   *            @arg DSI_IT_PLLL: PLL Lock Interrupt
   *            @arg DSI_IT_PLLU: PLL Unlock Interrupt
   *            @arg DSI_IT_RR  : Regulator Ready Interrupt
-  * @retval None
   */
 void DSI_ClearITPendingBit(DSI_TypeDef* DSIx, uint32_t DSI_IT)
 {

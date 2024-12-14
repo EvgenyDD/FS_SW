@@ -140,7 +140,6 @@
 /**
   * @brief  Deinitializes the CEC peripheral registers to their default reset values.
   * @param  None
-  * @retval None
   */
 void CEC_DeInit(void)
 {
@@ -154,7 +153,6 @@ void CEC_DeInit(void)
   * @note   The CEC parameters must be configured before enabling the CEC peripheral.
   * @param  CEC_InitStruct: pointer to an CEC_InitTypeDef structure that contains
   *         the configuration information for the specified CEC peripheral.
-  * @retval None
   */
 void CEC_Init(CEC_InitTypeDef* CEC_InitStruct)
 {
@@ -189,7 +187,6 @@ void CEC_Init(CEC_InitTypeDef* CEC_InitStruct)
   * @brief  Fills each CEC_InitStruct member with its default value.
   * @param  CEC_InitStruct: pointer to a CEC_InitTypeDef structure which will 
   *         be initialized.
-  * @retval None
   */
 void CEC_StructInit(CEC_InitTypeDef* CEC_InitStruct)
 {
@@ -206,7 +203,6 @@ void CEC_StructInit(CEC_InitTypeDef* CEC_InitStruct)
   * @brief  Enables or disables the CEC peripheral.
   * @param  NewState: new state of the CEC peripheral.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void CEC_Cmd(FunctionalState NewState)
 {
@@ -228,7 +224,6 @@ void CEC_Cmd(FunctionalState NewState)
   * @brief  Enables or disables the CEC Listen Mode.
   * @param  NewState: new state of the Listen Mode.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void CEC_ListenModeCmd(FunctionalState NewState)
 {
@@ -249,7 +244,6 @@ void CEC_ListenModeCmd(FunctionalState NewState)
 /**
   * @brief  Defines the Own Address of the CEC device.
   * @param  CEC_OwnAddress: The CEC own address.
-  * @retval None
   */
 void CEC_OwnAddressConfig(uint8_t CEC_OwnAddress)
 {
@@ -264,7 +258,6 @@ void CEC_OwnAddressConfig(uint8_t CEC_OwnAddress)
 /**
   * @brief  Clears the Own Address of the CEC device.
   * @param  CEC_OwnAddress: The CEC own address.
-  * @retval None
   */
 void CEC_OwnAddressClear(void)
 {
@@ -294,7 +287,6 @@ void CEC_OwnAddressClear(void)
 /**
   * @brief  Transmits single data through the CEC peripheral.
   * @param  Data: the data to transmit.
-  * @retval None
   */
 void CEC_SendData(uint8_t Data)
 {
@@ -316,7 +308,6 @@ uint8_t CEC_ReceiveData(void)
 /**
   * @brief  Starts a new message.
   * @param  None
-  * @retval None
   */
 void CEC_StartOfMessage(void)
 {
@@ -327,7 +318,6 @@ void CEC_StartOfMessage(void)
 /**
   * @brief  Transmits message with an EOM bit.
   * @param  None
-  * @retval None
   */
 void CEC_EndOfMessage(void)
 {
@@ -427,7 +417,6 @@ void CEC_EndOfMessage(void)
   *            @arg CEC_IT_RXBR: Rx-Byte Received
   * @param  NewState: new state of the selected CEC interrupts.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void CEC_ITConfig(uint16_t CEC_IT, FunctionalState NewState)
 {
@@ -505,7 +494,6 @@ FlagStatus CEC_GetFlagStatus(uint16_t CEC_FLAG)
   *            @arg CEC_FLAG_RXOVR: Rx Overrun
   *            @arg CEC_FLAG_RXEND: End Of Reception
   *            @arg CEC_FLAG_RXBR: Rx-Byte Received
-  * @retval None
   */
 void CEC_ClearFlag(uint32_t CEC_FLAG)
 {
@@ -578,7 +566,6 @@ ITStatus CEC_GetITStatus(uint16_t CEC_IT)
   *            @arg CEC_IT_RXOVR: Rx Overrun
   *            @arg CEC_IT_RXEND: End Of Reception
   *            @arg CEC_IT_RXBR: Rx-Byte Received
-  * @retval None
   */
 void CEC_ClearITPendingBit(uint16_t CEC_IT)
 {
