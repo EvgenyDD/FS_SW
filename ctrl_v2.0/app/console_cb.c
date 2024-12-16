@@ -1,3 +1,4 @@
+#include "adc.h"
 #include "console.h"
 #include "fw_header.h"
 
@@ -14,6 +15,7 @@ static void info_cb(const char *req, int len, int *ret)
 		const char *s = fw_fields_find_by_key_helper(&g_fw_info[i], "build_ts");
 		if(s) _console_print("\tBuild: %s\n", s);
 	}
+	_console_print("Vbat: %.2f | Tmcu: %.1f *C\n", adc_val.v_bat, adc_val.t_mcu);
 }
 
 const console_cmd_t console_cmd[] = {

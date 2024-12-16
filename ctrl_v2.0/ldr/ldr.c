@@ -107,7 +107,7 @@ void main(void)
 		   !g_stay_in_boot &&
 		   g_fw_info[FW_APP].locked == false)
 		{
-			platform_reset();
+			platform_reset_jump_ldr_app();
 		}
 
 		adc_track();
@@ -132,7 +132,9 @@ void main(void)
 		////// if(pwr_is_charging()) to_without_press = 0; // don't work ok
 		if(usb_is_configured()) to_without_press = 0;
 
-		if(usb_is_configured() == false && (to_without_press > 15000 || adc_val.v_bat < 3.2f)) pwr_off();
+		if(usb_is_configured() == false &&
+		   system_time_ms > 2000 &&
+		   (to_without_press > 15000 || adc_val.v_bat < 3.2f)) pwr_off();
 
 		// off button
 		{

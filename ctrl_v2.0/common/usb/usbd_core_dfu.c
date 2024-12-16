@@ -363,7 +363,7 @@ void usbd_dfu_poll(uint32_t diff_ms)
 		if(cnt_till_reset <= diff_ms)
 		{
 			if(!dwnload_was) ret_mem_set_bl_stuck(true);
-			platform_reset();
+			platform_reset_jump_ldr_app();
 		}
 		if(cnt_till_reset > diff_ms) cnt_till_reset -= diff_ms;
 	}

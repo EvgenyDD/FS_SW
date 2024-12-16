@@ -16,7 +16,7 @@ enum
 	ADC_CH,
 };
 
-adc_val_t adc_val = {0};
+adc_val_t adc_val = {0, 4.1f, 25.0f};
 
 static volatile uint16_t adc_buf[ADC_CH];
 static volatile uint32_t adc_buf_acc[ADC_CH][SAMPLE_ACC_COUNT] = {0};
@@ -74,8 +74,8 @@ void adc_init(void)
 	ADC_InitStructure.ADC_NbrOfConversion = ADC_CH;
 	ADC_Init(ADC1, &ADC_InitStructure);
 
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_1, 1, ADC_SampleTime_480Cycles);	 // PA1
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_6, 2, ADC_SampleTime_480Cycles);	 // PA6
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_1, 1, ADC_SampleTime_480Cycles); // PA1
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_6, 2, ADC_SampleTime_480Cycles); // PA6
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_TempSensor, 3, ADC_SampleTime_480Cycles);
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_Vrefint, 4, ADC_SampleTime_480Cycles);
 
@@ -111,7 +111,7 @@ void adc_track(void)
 	}
 	if(++adc_buf_ptr >= SAMPLE_ACC_COUNT) adc_buf_ptr = 0;
 
-	adc_val.i_chrg = buf_acc[ADC_CH_I_CHRG];
-	adc_val.v_bat = buf_acc[ADC_CH_V_BAT] / 4095.0f * 3.3f * (1.0f + 1000.0f / 470.0f);
+	adc_val.i_chrg = (float)buf_acc[ADC_CH_I_CHRG];
+	adc_val.v_bat = (float)buf_acc[ADC_CH_V_BAT] / 4095.0f * 3.3f * (1.0f + 1000.0f / 470.0f);
 	adc_val.t_mcu = ((float)buf_acc[ADC_CH_T_MCU] * adcVREFINTCAL / (float)buf_acc[ADC_CH_VREFINT] - adcTSCAL1) * adcTSSlopeK + 30.0f;
 }
