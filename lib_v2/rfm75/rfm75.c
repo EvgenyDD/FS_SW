@@ -115,13 +115,13 @@ static void select_bank(uint8_t bank)
 	if((currbank != 0 && bank == 0) || (currbank == 0 && bank != 0)) cmd_write(RFM75_CMD_ACTIVATE, 0x53);
 }
 
-static uint8_t rfm75_tx_fifo_full(void) { return (reg_read(RFM75_REG_FIFO_STATUS) & RFM75_FIFO_STATUS_TX_FULL) != 0; }
-static uint8_t rfm75_tx_fifo_empty(void) { return (reg_read(RFM75_REG_FIFO_STATUS) & RFM75_FIFO_STATUS_TX_EMPTY) != 0; }
-static uint8_t rfm75_rx_fifo_full(void) { return (reg_read(RFM75_REG_FIFO_STATUS) & RFM75_FIFO_STATUS_RX_FULL) != 0; }
-static uint8_t rx_fifo_empty(void) { return (reg_read(RFM75_REG_FIFO_STATUS) & RFM75_FIFO_STATUS_RX_EMPTY) != 0; }
+// static uint8_t rfm75_tx_fifo_full(void) { return (reg_read(RFM75_REG_FIFO_STATUS) & RFM75_FIFO_STATUS_TX_FULL) != 0; }
+// static uint8_t rfm75_tx_fifo_empty(void) { return (reg_read(RFM75_REG_FIFO_STATUS) & RFM75_FIFO_STATUS_TX_EMPTY) != 0; }
+// static uint8_t rfm75_rx_fifo_full(void) { return (reg_read(RFM75_REG_FIFO_STATUS) & RFM75_FIFO_STATUS_RX_FULL) != 0; }
+// static uint8_t rfm75_rx_fifo_empty(void) { return (reg_read(RFM75_REG_FIFO_STATUS) & RFM75_FIFO_STATUS_RX_EMPTY) != 0; }
 
 static uint8_t rx_next_pipe(void) { return (get_sts() >> 1) & 0x07; }
-static uint8_t rx_next_pipe_sts(uint8_t last_sts) { return (last_sts >> 1) & 0x07; }
+// static uint8_t rx_next_pipe_sts(uint8_t last_sts) { return (last_sts >> 1) & 0x07; }
 static uint8_t rx_next_size(void) { return cmd_read(RFM75_CMD_R_RX_PL_WID); }
 
 static uint8_t chip_is_present(void)

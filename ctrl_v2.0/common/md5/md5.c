@@ -157,7 +157,7 @@ void md5_string(const uint8_t *input, uint8_t *result)
 {
 	md5_ctx ctx;
 	md5_init(&ctx);
-	md5_update(&ctx, input, strlen(input));
+	md5_update(&ctx, input, strlen((const char *)input));
 	md5_finalize(&ctx);
 	memcpy(result, ctx.digest, 16);
 }

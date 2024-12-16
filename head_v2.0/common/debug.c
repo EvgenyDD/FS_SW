@@ -1,5 +1,6 @@
 #include "debug.h"
 #include "air_protocol.h"
+#include "console.h"
 #include "platform.h"
 #include "rfm75.h"
 #include <stdarg.h>
@@ -60,7 +61,7 @@ void debug_rx(char x)
 		{
 			buffer_rx[buffer_rx_cnt] = x;
 			buffer_rx[buffer_rx_cnt + 1] = '\0';
-			debug_parse(buffer_rx);
+			console_cb(buffer_rx, buffer_rx_cnt);
 		}
 		buffer_rx_cnt = 0;
 	}

@@ -38,6 +38,7 @@ INCDIR += common
 INCDIR += common/adc
 INCDIR += common/CMSIS
 INCDIR += common/config_system
+INCDIR += common/console
 INCDIR += common/crc
 INCDIR += common/fw_header
 INCDIR += common/led
@@ -50,6 +51,7 @@ SOURCES += $(call rwildcard, app, *.c *.S *.s)
 SOURCES += $(call rwildcard, common/adc, *.c *.S *.s)
 SOURCES += $(call rwildcard, common/CMSIS, *.c *.S *.s)
 SOURCES += $(call rwildcard, common/config_system, *.c *.S *.s)
+SOURCES += $(call rwildcard, common/console, *.c *.S *.s)
 SOURCES += $(call rwildcard, common/crc, *.c *.S *.s)
 SOURCES += $(call rwildcard, common/fw_header, *.c *.S *.s)
 SOURCES += $(call rwildcard, common/led, *.c *.S *.s)
@@ -116,7 +118,7 @@ program: $(BINARY_SIGNED)
 	@usb_dfu_flasher w a $< FS_CTRL2 fs_head2 26
 
 ds:
-	openocd -d0 -f target/stm32f4xx.cfg
+	@openocd -d0 -f target/stm32f4xx.cfg
 
 debug:
 	@set _NO_DEBUG_HEAP=1

@@ -8,6 +8,7 @@
 #include "usbd_req.h"
 
 #if defined(USBD_CLASS_COMPOSITE_DFU_CDC)
+// #define USE_STD_LIB_GEN
 #include "md5.h"
 #endif
 
@@ -89,14 +90,16 @@ static __ALIGN_BEGIN uint8_t usbd_lang_id_desc[USB_LEN_LANGID_DESC] __ALIGN_END 
 };
 
 #if defined(USBD_CLASS_COMPOSITE_DFU_CDC)
-struct
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpacked"
+struct __packed
 {
 	uint8_t bLength;
 	uint8_t bDescriptorType;
 	uint16_t wData[7];
 	uint8_t bVendorCode;
 	uint8_t bPadding;
-} usbd_os_str_desc __packed = {
+} usbd_os_str_desc = {
 	sizeof(usbd_os_str_desc),
 	USB_DESC_TYPE_STRING,
 	u"MSFT100",
@@ -104,7 +107,7 @@ struct
 	0,
 };
 
-struct
+struct __packed
 {
 	// Header
 	uint32_t dwLength;
@@ -118,7 +121,7 @@ struct
 	uint8_t bCompatibleID[8];
 	uint8_t bSubCompatibleID[8];
 	uint8_t bReserved3[6];
-} usbd_compat_id_desc __packed = {
+} usbd_compat_id_desc = {
 	sizeof(usbd_compat_id_desc),
 	WINUSB_BCD_VERSION,
 	WINUSB_REQ_GET_COMPATIBLE_ID_FEATURE_DESCRIPTOR, // wIndex
@@ -131,8 +134,6 @@ struct
 	{0},											 // bReserved3
 };
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wpacked"
 struct winusb_ext_prop_desc_hdr
 {
 	// header
@@ -461,13 +462,13 @@ static uint8_t *usbd_usr_lang_id_desc(uint8_t speed, uint16_t *length)
 
 static uint8_t *usbd_usr_prod_desc(uint8_t speed, uint16_t *length)
 {
-	USBD_GetString(speed == USB_OTG_SPEED_HIGH ? USBD_PRODUCT_HS_STRING : USBD_PRODUCT_FS_STRING, usbd_str_desc_buf, length);
+	USBD_GetString((const uint8_t *)(speed == USB_OTG_SPEED_HIGH ? USBD_PRODUCT_HS_STRING : USBD_PRODUCT_FS_STRING), usbd_str_desc_buf, length);
 	return usbd_str_desc_buf;
 }
 
 static uint8_t *usbd_usr_manuf_desc(uint8_t speed, uint16_t *length)
 {
-	USBD_GetString(USBD_MANUFACTURER_STRING, usbd_str_desc_buf, length);
+	USBD_GetString((const uint8_t *)USBD_MANUFACTURER_STRING, usbd_str_desc_buf, length);
 	return usbd_str_desc_buf;
 }
 
@@ -487,13 +488,13 @@ static uint8_t *usbd_usr_serial_desc(uint8_t speed, uint16_t *length)
 
 static uint8_t *usbd_usr_cfg_desc(uint8_t speed, uint16_t *length)
 {
-	USBD_GetString(speed == USB_OTG_SPEED_HIGH ? USBD_CONFIGURATION_HS_STRING : USBD_CONFIGURATION_FS_STRING, usbd_str_desc_buf, length);
+	USBD_GetString((const uint8_t *)(speed == USB_OTG_SPEED_HIGH ? USBD_CONFIGURATION_HS_STRING : USBD_CONFIGURATION_FS_STRING), usbd_str_desc_buf, length);
 	return usbd_str_desc_buf;
 }
 
 static uint8_t *usbd_usr_if_desc(uint8_t speed, uint16_t *length)
 {
-	USBD_GetString(speed == USB_OTG_SPEED_HIGH ? USBD_INTERFACE_HS_STRING : USBD_INTERFACE_FS_STRING, usbd_str_desc_buf, length);
+	USBD_GetString((const uint8_t *)(speed == USB_OTG_SPEED_HIGH ? USBD_INTERFACE_HS_STRING : USBD_INTERFACE_FS_STRING), usbd_str_desc_buf, length);
 	return usbd_str_desc_buf;
 }
 
@@ -503,7 +504,7 @@ static uint8_t *usbd_usr_os_str_desc(uint8_t speed, uint16_t *length)
 	*length = usbd_os_str_desc.bLength;
 	return (uint8_t *)&usbd_os_str_desc;
 #else
-	static char none[1] = "";
+	static uint8_t none[1] = "";
 	*length = 0;
 	return none;
 #endif
@@ -515,7 +516,7 @@ static uint8_t *usbd_usr_ext_prop_feat_desc(uint8_t speed, uint16_t *length)
 	*length = usbd_winusb_ex_prop_desc.header.dwLength;
 	return (uint8_t *)&usbd_winusb_ex_prop_desc;
 #else
-	static char none[1] = "";
+	static uint8_t none[1] = "";
 	*length = 0;
 	return none;
 #endif
@@ -527,7 +528,7 @@ static uint8_t *usbd_usr_ext_compat_id_feat_desc(uint8_t speed, uint16_t *length
 	*length = usbd_compat_id_desc.dwLength;
 	return (uint8_t *)&usbd_compat_id_desc;
 #else
-	static char none[1] = "";
+	static uint8_t none[1] = "";
 	*length = 0;
 	return none;
 #endif
@@ -539,17 +540,19 @@ uint8_t *usbd_get_cfg_desc(uint8_t speed, uint16_t *length)
 	return usbd_cfg_desc;
 }
 
+#if defined(USBD_CLASS_COMPOSITE_DFU_CDC) && defined(USE_STD_LIB_GEN)
 static uint8_t hex2ch(uint8_t num) { return num > 9 ? num - 10 + 'A' : num + '0'; }
+#endif
 
 void usdb_desc_init(void)
 {
 #if defined(USBD_CLASS_COMPOSITE_DFU_CDC)
 	// Generate GUID by PID/VID/NAME/SERIAL
-#if 1
+#ifndef USE_STD_LIB_GEN
 	uint8_t buf[64], hash[16];
-	int len = snprintf(buf, sizeof(buf), "USB\\VID_%04X&PID_%04X\\%s_%08lX%08lX%08lX", USBD_VID, USBD_PID, DEV, g_uid[0], g_uid[1], g_uid[2]);
+	int len = snprintf((char *)buf, sizeof(buf), "USB\\VID_%04X&PID_%04X\\%s_%08lX%08lX%08lX", USBD_VID, USBD_PID, DEV, g_uid[0], g_uid[1], g_uid[2]);
 	md5_data(buf, len, hash);
-	len = snprintf(buf, sizeof(buf), "{%02X%02X%02X%02X-%02X%02X-3%X%02X-%02X%02X-%02X%02X%02X%02X%02X%02X}", // RFC9562 - Type 3
+	len = snprintf((char *)buf, sizeof(buf), "{%02X%02X%02X%02X-%02X%02X-3%X%02X-%02X%02X-%02X%02X%02X%02X%02X%02X}", // RFC9562 - Type 3
 				   hash[0], hash[1], hash[2], hash[3], hash[4], hash[5], hash[6] & 0xF, hash[7],
 				   0x80 | (hash[8] & 0x3F), hash[9], hash[10], hash[11], hash[12], hash[13], hash[14], hash[15]);
 	for(int i = 0; i < len && i < (int)(sizeof(usbd_winusb_ex_prop_desc.features[0].bPropertyData) / sizeof(usbd_winusb_ex_prop_desc.features[0].bPropertyData[0])); i++)

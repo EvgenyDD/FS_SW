@@ -261,7 +261,14 @@ void main(void)
 	}
 }
 
-void usbd_cdc_rx(const uint8_t *data, uint32_t size) { console_print("RX: %.*s\n", size, data); }
+void usbd_cdc_rx(const uint8_t *data, uint32_t size)
+{
+	if(size > 1 && data[0] == '*')
+		rfm75_tx_force(NODE_HEAD, data + 1, size - 1);
+	else
+		console_cb(data, size);
+}
+
 void rfm75_tx_fail(uint8_t lost, uint8_t rt) {}
 void rfm75_tx_done(void) {}
 
@@ -277,7 +284,7 @@ void rfm75_process_data(uint8_t dev_idx, const uint8_t *data, uint8_t data_len)
 	case AIRPROTO_CMD_REBOOT: platform_reset_jump_ldr_app(); break;
 	case AIRPROTO_CMD_OFF: pwr_off(); break;
 	case AIRPROTO_CMD_DEBUG:
-		usbd_cdc_push_data("#", 1);
+		usbd_cdc_push_data((const uint8_t *)"*", 1);
 		usbd_cdc_push_data(data + 1, data_len - 1);
 		break;
 

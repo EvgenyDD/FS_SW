@@ -1,7 +1,8 @@
 #include "console.h"
 #include "_printf.h"
+#include "debug.h"
 #include "platform.h"
-#include "usbd_core_cdc.h"
+#include "rfm75.h"
 #include <stdarg.h>
 #include <string.h>
 
@@ -17,12 +18,12 @@ void _console_print(const char *fmt, ...)
 	int act_len = vsnprintf(print_buf, sizeof(print_buf) - 1, fmt, ap);
 	va_end(ap);
 
-	usbd_cdc_push_data((uint8_t *)print_buf, act_len);
+	rfm75_tx(0, (const uint8_t *)print_buf, act_len);
 }
 
 void _console_print_prefix(void) { _console_print("[" DT_FMT_MS "]:", DT_DATA_MS(system_time_ms)); }
 
-void console_str(const char *str) { usbd_cdc_push_data((const uint8_t *)str, strlen(str)); }
+void console_str(const char *str) { rfm75_tx(0, (const uint8_t *)str, strlen(str)); }
 
 /////////////////////////////////////////////////////
 

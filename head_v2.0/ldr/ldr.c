@@ -118,7 +118,7 @@ void rfm75_tx_fail(uint8_t lost, uint8_t rt) {}
 
 static void parse_debug(const char *s, uint32_t len)
 {
-	debug_rf("Can't parse debug now!\n");
+	debug_rf("Can't parse debug in BOOTLOADER!\n");
 }
 
 void rfm75_process_data(uint8_t dev_idx, const uint8_t *data, uint8_t data_len)
@@ -132,7 +132,7 @@ void rfm75_process_data(uint8_t dev_idx, const uint8_t *data, uint8_t data_len)
 
 	case AIRPROTO_CMD_REBOOT: platform_reset_jump_ldr_app(); break;
 	case AIRPROTO_CMD_OFF: pwr_off(); break;
-	case AIRPROTO_CMD_DEBUG: parse_debug(data + 1, data_len - 1); break;
+	case AIRPROTO_CMD_DEBUG: parse_debug((const char *)(data + 1), data_len - 1); break;
 
 	case AIRPROTO_CMD_FLASH_STS: air_flash_sts_cb(dev_idx, data, data_len); break;
 	case AIRPROTO_CMD_FLASH_TYPE: air_flash_type_cb(dev_idx, data, data_len); break;

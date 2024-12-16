@@ -65,7 +65,7 @@ static void clock_reinit(void)
 		;
 
 	FLASH_SetLatency(FLASH_Latency_5);
-
+	FLASH_PrefetchBufferCmd(ENABLE);
 	RCC_HCLKConfig(RCC_SYSCLK_Div2);
 	RCC_PCLK1Config(RCC_HCLK_Div4);
 	RCC_PCLK2Config(RCC_HCLK_Div4);

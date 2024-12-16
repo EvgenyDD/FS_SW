@@ -342,7 +342,7 @@ uint8_t usbd_dfu_ep0_rx_ready(void *pdev)
 			uint32_t entry_len = strlen(dfu_app_cb[i].name);
 			if(usbd_buffer_rtx_sz == entry_len)
 			{
-				if(strncmp(usbd_buffer, dfu_app_cb[i].name, entry_len) == 0)
+				if(strncmp((const char *)usbd_buffer, dfu_app_cb[i].name, entry_len) == 0)
 				{
 					sub_flash_cb = &dfu_app_cb[i];
 					return USBD_OK;

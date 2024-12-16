@@ -36,13 +36,6 @@ static debounce_t btn[4][3];
 static uint32_t to_without_press = 0;
 static bool btn_pwr_off_long_press = false;
 
-static struct
-{
-	uint32_t tx;
-	uint32_t tx_fail;
-	uint32_t rx;
-} stat;
-
 void delay_ms(volatile uint32_t delay_ms)
 {
 	volatile uint32_t start = 0;
@@ -177,7 +170,7 @@ void rfm75_process_data(uint8_t dev_idx, const uint8_t *data, uint8_t data_len)
 	case AIRPROTO_CMD_REBOOT: platform_reset_jump_ldr_app(); break;
 	case AIRPROTO_CMD_OFF: pwr_off(); break;
 	case AIRPROTO_CMD_DEBUG:
-		usbd_cdc_push_data("#", 1);
+		usbd_cdc_push_data((const uint8_t *)"#", 1);
 		usbd_cdc_push_data(data + 1, data_len - 1);
 		break;
 
