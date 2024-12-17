@@ -11,6 +11,7 @@
 #include "prof.h"
 #include "ret_mem.h"
 #include "rfm75.h"
+#include "servo.h"
 #include "usb_hw.h"
 #include "usbd_core_cdc.h"
 #include <string.h>
@@ -136,33 +137,29 @@ void main(void)
 		led_drv_set_led(LED_7, hb_tracker_is_timeout(NODE_HEAD) ? LED_MODE_FLASH_10HZ : LED_MODE_STROB_1HZ);
 
 		static int ear_move_step = -1;
+		static uint16_t ear_start_pos[2];
 		static uint32_t ear_move_delay = 0;
 
 		if(ear_move_step != -1 && ear_move_delay < system_time_ms)
 		{
-			static uint8_t data_ear_smooth_servo[] = {AIRPROTO_CMD_SERVO_SMOOTH, 0, 0,
-													  2 /*0*/, 0, 0,
-													  3 /*1*/, 0, 0};
+			static uint8_t ear_pkt[] = {AIRPROTO_CMD_SERVO_SMOOTH, 0, 0,
+										SERVO_EAR_R, 0, 0,
+										SERVO_EAR_L, 0, 0};
 			uint16_t time = 300;
-			memcpy(&data_ear_smooth_servo[1], &time, 2);
-			uint16_t pos[2][2] = {
+			memcpy(&ear_pkt[1], &time, 2);
+			const uint16_t ear_pos[2][2] = {
 				{750, 300},
 				{350, 750},
 			};
 
 			for(uint32_t i = 0; i < 2; i++)
-				memcpy(&data_ear_smooth_servo[3 + (3 * i + 1)], &pos[ear_move_step % 2][i], 2);
-			rfm75_tx_force(NODE_HEAD, data_ear_smooth_servo, sizeof(data_ear_smooth_servo));
+				memcpy(&ear_pkt[3 + (3 * i + 1)], ear_move_step == 4 ? &ear_start_pos[i] : &ear_pos[ear_move_step % 2][i], 2);
 
-			if(++ear_move_step >= 4) ear_move_step = -1;
+			rfm75_tx_force(NODE_HEAD, ear_pkt, sizeof(ear_pkt));
+
+			if(++ear_move_step >= 5) ear_move_step = -1;
 			ear_move_delay = system_time_ms + 400;
 		}
-
-#define CYCLIC_OP(num, op)                \
-	{                                     \
-		for(uint32_t i = 0; i < num; i++) \
-			op;                           \
-	}
 
 		// button handler
 		{
@@ -177,6 +174,8 @@ void main(void)
 			{
 				ear_move_step = 0;
 				ear_move_delay = 0;
+				ear_start_pos[0] = servo_get_approximation(SERVO_EAR_R, head_last_rpt.s_pos[SERVO_EAR_R]);
+				ear_start_pos[1] = servo_get_approximation(SERVO_EAR_L, head_last_rpt.s_pos[SERVO_EAR_L]);
 			}
 
 			if(btn[0][1].state == BTN_PRESS_SHOT)
@@ -209,20 +208,22 @@ void main(void)
 
 			if(btn[2][1].state == BTN_PRESS_SHOT)
 			{
-				static const uint16_t servo_tongue[] = {320, /*470,*/ 620};
+				static const uint16_t servo_tongue[] = {320, 470, 620};
 				static uint32_t mode = 0;
 				mode++;
 				if(mode >= sizeof(servo_tongue) / sizeof(servo_tongue[0])) mode = 0;
-				uint8_t data[] = {AIRPROTO_CMD_SERVO_RAW, 6, 0, 0};
-				memcpy(&data[2], &servo_tongue[mode], 2);
+				uint8_t data[] = {AIRPROTO_CMD_SERVO_SMOOTH, 0xFF, 0xFF, SERVO_TONGUE, 0, 0};
+				uint16_t time = 500;
+				memcpy(&data[1], &time, 2);
+				memcpy(&data[4], &servo_tongue[mode], 2);
 				rfm75_tx_force(NODE_HEAD, data, sizeof(data));
 			}
 
 			static uint8_t data_smooth_servo[] = {AIRPROTO_CMD_SERVO_SMOOTH, 0, 0,
-												  0 /*0*/, 0, 0,
-												  1 /*1*/, 0, 0,
-												  4 /*4*/, 0, 0,
-												  5 /*5*/, 0, 0};
+												  SERVO_EYE_R_FAR, 0, 0,
+												  SERVO_EYE_R_NEAR, 0, 0,
+												  SERVO_EYE_L_NEAR, 0, 0,
+												  SERVO_EYE_L_FAR, 0, 0};
 			if(btn[0][2].state == BTN_PRESS_SHOT)
 			{
 				uint16_t time = 800;
@@ -263,10 +264,15 @@ void main(void)
 	}
 }
 
+uint8_t pkt_console_tx[256] = {AIRPROTO_CMD_DEBUG};
 void usbd_cdc_rx(const uint8_t *data, uint32_t size)
 {
-	if(size > 1 && data[0] == '*')
-		rfm75_tx_force(NODE_HEAD, data + 1, size - 1);
+	usbd_cdc_unlock();
+	if(size > 1 && data[0] == '*' && size < sizeof(pkt_console_tx))
+	{
+		memcpy(&pkt_console_tx[1], data + 1, size - 1);
+		rfm75_tx_force(NODE_HEAD, pkt_console_tx, size);
+	}
 	else
 		console_cb(data, size);
 }
@@ -299,10 +305,15 @@ void rfm75_process_data(uint8_t dev_idx, const uint8_t *data, uint8_t data_len)
 		if(dev_idx == NODE_HEAD && data_len == sizeof(airproto_head_sts_t))
 		{
 			memcpy(&head_last_rpt, data, data_len);
-			console_print("=H: %.3fV | %d %d %d | %d %d %d %d %d %d %d\n",
-						  0.001f * (float)head_last_rpt.vbat_mv, head_last_rpt.t_mcu, head_last_rpt.t_ntc[0], head_last_rpt.t_ntc[1],
-						  head_last_rpt.s_pos[0], head_last_rpt.s_pos[1], head_last_rpt.s_pos[2], head_last_rpt.s_pos[3],
-						  head_last_rpt.s_pos[4], head_last_rpt.s_pos[5], head_last_rpt.s_pos[6]);
+			static uint32_t decimator = 0;
+			if(++decimator >= 5)
+			{
+				decimator = 0;
+				console_print("=H: %.3fV | %d %d %d | %d %d %d %d %d %d %d\n",
+							  0.001f * (float)head_last_rpt.vbat_mv, head_last_rpt.t_mcu, head_last_rpt.t_ntc[0], head_last_rpt.t_ntc[1],
+							  head_last_rpt.s_pos[0], head_last_rpt.s_pos[1], head_last_rpt.s_pos[2], head_last_rpt.s_pos[3],
+							  head_last_rpt.s_pos[4], head_last_rpt.s_pos[5], head_last_rpt.s_pos[6]);
+			}
 		}
 		break;
 	}

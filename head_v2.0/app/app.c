@@ -16,7 +16,7 @@
 
 #define MASTER_TO_MS_SHUTDOWN 10000
 
-#define SYSTICK_IN_US (48000000 / 1000000)
+// #define SYSTICK_IN_US (48000000 / 1000000)
 #define SYSTICK_IN_MS (48000000 / 1000)
 
 #define NODE_CTRL 0
@@ -46,7 +46,7 @@ void delay_ms(volatile uint32_t delay_ms)
 	}
 }
 
-static void power_off_animation(uint32_t diff_ms)
+static void power_off_animation(uint32_t reason, uint32_t diff_ms)
 {
 	static bool done = false;
 	static uint32_t cnt = 0;
@@ -54,17 +54,16 @@ static void power_off_animation(uint32_t diff_ms)
 	{
 		if(cnt == 0)
 		{
-			led_set(0, 200);
-			led_set(1, 0);
-			led_set(2, 0);
+			for(uint32_t i = 0; i < 3; i++)
+				led_set(i, i == reason - 1 ? 200 : 0);
 		}
 		if((cnt % 1000) > 500)
 		{
-			led_set(0, 0);
+			led_set(reason - 1, 0);
 		}
 		else
 		{
-			led_set(0, 200);
+			led_set(reason - 1, 200);
 		}
 		cnt += diff_ms;
 		if(cnt > 3000) done = true;
@@ -121,12 +120,16 @@ void main(void)
 
 		led_drv_set_led(LED_0, hb_tracker_is_timeout(NODE_CTRL) ? LED_MODE_SFLASH_2_5HZ : LED_MODE_STROB_1HZ);
 
-		if(hb_tracker_get_timeout(NODE_CTRL) > MASTER_TO_MS_SHUTDOWN ||
-		   btn_pwr.state == BTN_UNPRESS_SHOT ||
-		   adc_val.v_bat < 3.1f * 2.f)
+		static uint32_t off_triggered = 0;
+		bool off_to = hb_tracker_get_timeout(NODE_CTRL) > MASTER_TO_MS_SHUTDOWN;
+		bool off_btn = btn_pwr.state == BTN_UNPRESS_SHOT;
+		bool off_bat = adc_val.v_bat < 3.1f * 2.f;
+		if(system_time_ms > 2000 &&
+		   (off_to || off_btn || off_bat))
 		{
-			power_off_animation(diff_ms);
+			off_triggered = off_bat ? 1 : (off_to ? 3 : 2);
 		}
+		if(off_triggered) power_off_animation(off_triggered, diff_ms);
 
 		servo_poll(diff_ms);
 

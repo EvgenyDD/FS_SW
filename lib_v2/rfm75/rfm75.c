@@ -202,6 +202,7 @@ void rmf75_delay_packets(uint32_t time_ms)
 
 void rfm75_tx(uint8_t dev_idx, const uint8_t *data, uint32_t size)
 {
+	if(size > RFM75_MAX_PAYLOAD_SIZE) size = RFM75_MAX_PAYLOAD_SIZE;
 	if(delay_post_ms == 0)
 	{
 		rfm75_tx_force(dev_idx, data, size);
@@ -217,6 +218,7 @@ void rfm75_tx(uint8_t dev_idx, const uint8_t *data, uint32_t size)
 
 void rfm75_tx_force(uint8_t dev_idx, const uint8_t *data, uint32_t size)
 {
+	if(size > RFM75_MAX_PAYLOAD_SIZE) size = RFM75_MAX_PAYLOAD_SIZE;
 	rfm75_delay_tx();
 	while(is_sending && rfm75_delay_expired() == false)
 	{

@@ -155,7 +155,7 @@ void main(void)
 void usbd_cdc_rx(const uint8_t *data, uint32_t size)
 {
 	usbd_cdc_unlock();
-	console_print("RX: %.*s\n", size, data);
+	console_print("RX: %.*s\n", (int)size, data);
 }
 
 void rfm75_process_data(uint8_t dev_idx, const uint8_t *data, uint8_t data_len)

@@ -1,5 +1,6 @@
 #include "console.h"
 #include "_printf.h"
+#include "air_protocol.h"
 #include "debug.h"
 #include "platform.h"
 #include "rfm75.h"
@@ -8,22 +9,27 @@
 
 #define REQ_SIZE 256
 
-static char print_buf[512];
+static char print_buf[512] = {AIRPROTO_CMD_DEBUG};
 
 void _console_print(const char *fmt, ...)
 {
 	va_list ap;
 
 	va_start(ap, fmt);
-	int act_len = vsnprintf(print_buf, sizeof(print_buf) - 1, fmt, ap);
+	int act_len = vsnprintf(print_buf + 1, sizeof(print_buf) - 2, fmt, ap);
 	va_end(ap);
 
-	rfm75_tx(0, (const uint8_t *)print_buf, act_len);
+	rfm75_tx(0, (const uint8_t *)print_buf, 1 + act_len);
 }
 
 void _console_print_prefix(void) { _console_print("[" DT_FMT_MS "]:", DT_DATA_MS(system_time_ms)); }
 
-void console_str(const char *str) { rfm75_tx(0, (const uint8_t *)str, strlen(str)); }
+void console_str(const char *str)
+{
+	int len = strlen(str);
+	memcpy(print_buf + 1, str, len);
+	rfm75_tx(0, (const uint8_t *)print_buf, 1 + len);
+}
 
 /////////////////////////////////////////////////////
 

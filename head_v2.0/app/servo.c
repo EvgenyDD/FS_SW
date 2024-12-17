@@ -1,5 +1,6 @@
 #include "servo.h"
 #include "adc.h"
+#include "console.h"
 #include "debug.h"
 #include "platform.h"
 #include <string.h>
@@ -28,20 +29,17 @@ static __IO uint32_t *const ptr[SERVO_COUNT] = {&TIM1->CCR1, &TIM1->CCR2, &TIM1-
 
 static uint16_t get_approximation(uint8_t servo, float adc)
 {
-	/**/ if(servo == SERVO_EAR_R)
-		return adc * 1.604f - 89.163f;
-	else if(servo == SERVO_EAR_L)
-		return adc * 1.43534f + 3.56723f;
-	else if(servo == SERVO_EYE_L_NEAR)
-		return adc * (1.42778f + 1.39f) * 0.5f + (14.043f - 0.9757f) * 0.5f;
-	else if(servo == SERVO_EYE_L_FAR)
-		return adc * (1.409092f + 1.4254167f) * 0.5f + (10.18966f - 8.4515f) * 0.5f;
-	else if(servo == SERVO_EYE_R_FAR)
-		return adc * (1.3478f + 1.52054f) * 0.5f + (24.697f - 53.6587f) * 0.5f;
-	else if(servo == SERVO_EYE_R_NEAR)
-		return adc * (1.339815f + 1.3266f) * 0.5f + (27.574f + 6.81544f) * 0.5f;
-
-	return 0;
+	if(adc < 16) return servo_move[servo].pos_last;
+	switch(servo)
+	{
+	case SERVO_EAR_R: return adc * 1.604f - 89.163f;
+	case SERVO_EAR_L: return adc * 1.43534f + 3.56723f;
+	case SERVO_EYE_L_NEAR: return adc * (1.42778f + 1.39f) * 0.5f + (14.043f - 0.9757f) * 0.5f;
+	case SERVO_EYE_L_FAR: return adc * (1.409092f + 1.4254167f) * 0.5f + (10.18966f - 8.4515f) * 0.5f;
+	case SERVO_EYE_R_FAR: return adc * (1.3478f + 1.52054f) * 0.5f + (24.697f - 53.6587f) * 0.5f;
+	case SERVO_EYE_R_NEAR: return adc * (1.339815f + 1.3266f) * 0.5f + (27.574f + 6.81544f) * 0.5f;
+	default: return servo_move[servo].pos_last;
+	}
 }
 
 uint32_t map(int32_t x, int32_t in_min, int32_t in_max, int32_t out_min, int32_t out_max)
@@ -80,15 +78,19 @@ void servo_set(uint8_t servo, uint32_t value)
 {
 	uint32_t v = map((int32_t)value, 0, 1000, 400, 5600);
 	if(value == 0) v = 0;
-
 	if(servo >= SERVO_COUNT) return;
 	*ptr[servo] = v;
 }
 
 void servo_print(void)
 {
-	debug("Servo: \n\t 0\t%ld\n\t 1\t%ld\n\t 2\t%ld\n\t 3\t%ld\n\t 4\t%ld\n\t 5\t%ld\n\t 6\t%ld\n",
-		  TIM1->CCR1 / 2, TIM1->CCR2 / 2, TIM1->CCR3 / 2, TIM1->CCR4 / 2, TIM4->CCR1 / 2, TIM4->CCR2 / 2, TIM4->CCR3 / 2);
+	_console_print("Servo0: %ld\n", TIM1->CCR1 / 2);
+	_console_print("Servo1: %ld\n", TIM1->CCR2 / 2);
+	_console_print("Servo2: %ld\n", TIM1->CCR3 / 2);
+	_console_print("Servo3: %ld\n", TIM1->CCR4 / 2);
+	_console_print("Servo4: %ld\n", TIM4->CCR1 / 2);
+	_console_print("Servo5: %ld\n", TIM4->CCR2 / 2);
+	_console_print("Servo6: %ld\n", TIM4->CCR3 / 2);
 }
 
 void servo_poll(uint32_t diff_ms)
@@ -116,7 +118,7 @@ void servo_poll(uint32_t diff_ms)
 					servo_set(i, pos);
 					if(servo_move[i].time_print_state < time_now)
 					{
-						debug_rf("%d>%.1f|%.1f|%.1f|%.1f|%.1f|%.1f|(%.1f)", pos, adc_val.s_pos[0], adc_val.s_pos[1], adc_val.s_pos[2], adc_val.s_pos[3], adc_val.s_pos[4], adc_val.s_pos[5], adc_val.s_pos[6]);
+						// _console_print("%d>%.1f|%.1f|%.1f|%.1f|%.1f|%.1f|(%.1f)", pos, adc_val.s_pos[0], adc_val.s_pos[1], adc_val.s_pos[2], adc_val.s_pos[3], adc_val.s_pos[4], adc_val.s_pos[5], adc_val.s_pos[6]);
 						servo_move[i].time_print_state = time_now + 180;
 					}
 				}

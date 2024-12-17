@@ -104,9 +104,10 @@ void main(void)
 
 		led_drv_set_led(LED_0, hb_tracker_is_timeout(NODE_CTRL) ? LED_MODE_FLASH_10HZ : LED_MODE_STROB_5HZ);
 
-		if(hb_tracker_get_timeout(NODE_CTRL) > MASTER_TO_MS_SHUTDOWN ||
-		   btn_pwr.state == BTN_UNPRESS_SHOT ||
-		   adc_val.v_bat < 3.1f * 2.f)
+		if(system_time_ms > 2000 &&
+		   (hb_tracker_get_timeout(NODE_CTRL) > MASTER_TO_MS_SHUTDOWN ||
+			btn_pwr.state == BTN_UNPRESS_SHOT ||
+			adc_val.v_bat < 3.1f * 2.f))
 		{
 			pwr_off();
 		}
@@ -118,7 +119,7 @@ void rfm75_tx_fail(uint8_t lost, uint8_t rt) {}
 
 static void parse_debug(const char *s, uint32_t len)
 {
-	debug_rf("Can't parse debug in BOOTLOADER!\n");
+	debug_uart("Can't parse debug in BOOTLOADER!\n");
 }
 
 void rfm75_process_data(uint8_t dev_idx, const uint8_t *data, uint8_t data_len)

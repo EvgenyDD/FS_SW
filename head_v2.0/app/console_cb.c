@@ -20,9 +20,12 @@ static void info_cb(const char *req, int len, int *ret)
 		const char *s = fw_fields_find_by_key_helper(&g_fw_info[i], "build_ts");
 		if(s) _console_print("\tBuild: %s\n", s);
 	}
+	_console_print("UID0:x%08lx\n", g_uid[0]);
+	_console_print("UID1:x%08lx\n", g_uid[1]);
+	_console_print("UID2:x%08lx\n", g_uid[2]);
 	servo_print();
-	debug("Vbat: %.2f\n", adc_val.v_bat);
-	debug("Temp: %.2f %.2f\n", adc_val.t_ntc[0], adc_val.t_ntc[1]);
+	_console_print("Vbat: %.2f\n", adc_val.v_bat);
+	_console_print("Temp: %.2f %.2f\n", adc_val.t_ntc[0], adc_val.t_ntc[1]);
 }
 
 static void servo0_cb(const char *req, int len, int *ret)
@@ -32,12 +35,12 @@ static void servo0_cb(const char *req, int len, int *ret)
 	int c = sscanf(req, "%u %u", &servo, &val);
 	if(c == 2)
 	{
-		debug_rf("Set Servo %d to %d\n", servo, val);
+		_console_print("Set Servo %d to %d\n", servo, val);
 		servo_set(servo, val);
 	}
 	else
 	{
-		debug_rf("servo: fail Input\n");
+		_console_print("servo: fail Input\n");
 	}
 }
 
@@ -48,12 +51,12 @@ static void servo1_cb(const char *req, int len, int *ret)
 	int c = sscanf(req, "%u %u %u", &servo, &val, &delay_ms);
 	if(c == 3)
 	{
-		debug_rf("Set Servo Smth %d to %d %d ms\n", servo, val, delay_ms);
+		_console_print("Set Servo Smth %d to %d %d ms\n", servo, val, delay_ms);
 		servo_set_smooth_and_off(servo, val, delay_ms);
 	}
 	else
 	{
-		debug_rf("Servos: fail Input\n");
+		_console_print("Servos: fail Input\n");
 	}
 }
 
@@ -64,13 +67,13 @@ static void servo2_cb(const char *req, int len, int *ret)
 	int c = sscanf(req, "%u %u %u %u %u", &servo[0], &val[0], &servo[1], &val[1], &delay_ms);
 	if(c == 5)
 	{
-		debug_rf("Smth2 %d to %d | %d to %d\t%d ms\n", servo[0], val[0], servo[1], val[1], delay_ms);
+		_console_print("Smth2 %d to %d | %d to %d\t%d ms\n", servo[0], val[0], servo[1], val[1], delay_ms);
 		servo_set_smooth_and_off(servo[0], val[0], delay_ms);
 		servo_set_smooth_and_off(servo[1], val[1], delay_ms);
 	}
 	else
 	{
-		debug_rf("Servos2: fail Input %d\n", c);
+		_console_print("Servos2: fail Input %d\n", c);
 	}
 }
 
@@ -93,7 +96,7 @@ static void servo3_cb(const char *req, int len, int *ret)
 	int c = sscanf(req, "%u %u %u %u %u %u %u %u %u", &servo[0], &val[0], &servo[1], &val[1], &servo[2], &val[2], &servo[3], &val[3], &delay_ms);
 	if(c == 9)
 	{
-		debug_rf("Smth2 %d to %d | %d to %d | %d to %d | %d to %d\t%d ms\n", servo[0], val[0], servo[1], val[1], servo[2], val[2], servo[3], val[3], delay_ms);
+		_console_print("Smth2 %d to %d | %d to %d | %d to %d | %d to %d\t%d ms\n", servo[0], val[0], servo[1], val[1], servo[2], val[2], servo[3], val[3], delay_ms);
 		servo_set_smooth_and_off(servo[0], val[0], delay_ms);
 		servo_set_smooth_and_off(servo[1], val[1], delay_ms);
 		servo_set_smooth_and_off(servo[2], val[2], delay_ms);
@@ -101,7 +104,7 @@ static void servo3_cb(const char *req, int len, int *ret)
 	}
 	else
 	{
-		debug_rf("Servos4: fail Input %d\n", c);
+		_console_print("Servos4: fail Input %d\n", c);
 	}
 }
 
@@ -113,12 +116,12 @@ static void fan_cb(const char *req, int len, int *ret)
 	if(c == 2)
 	{
 		val = val % 100;
-		debug_rf("Set Fan %d to %d\n", fan, val);
+		_console_print("Set Fan %d to %d\n", fan, val);
 		fan_set(fan, val);
 	}
 	else
 	{
-		debug_rf("fan: fail Input\n");
+		_console_print("fan: fail Input\n");
 	}
 }
 
@@ -130,12 +133,12 @@ static void led_cb(const char *req, int len, int *ret)
 	if(c == 2)
 	{
 		val = val % 100;
-		debug_rf("Set LED %d to %d\n", led, val);
+		_console_print("Set LED %d to %d\n", led, val);
 		led_set(led, val);
 	}
 	else
 	{
-		debug_rf("LED: fail Input\n");
+		_console_print("LED: fail Input\n");
 	}
 }
 

@@ -18,7 +18,7 @@ static int buffer_rx_cnt = 0;
 static char buffer_rx_rf[60 + 1];
 static volatile bool is_tx = false;
 
-void debug(const char *format, ...)
+void debug_uart(const char *format, ...)
 {
 	if(is_tx) return;
 	is_tx = true;
@@ -35,21 +35,6 @@ void debug(const char *format, ...)
 		}
 		USART_SendData(USART3, buffer_tx[i]);
 	}
-	is_tx = false;
-}
-
-void debug_rf(const char *format, ...)
-{
-	if(is_tx) return;
-	is_tx = true;
-
-	buffer_rx_rf[0] = AIRPROTO_CMD_DEBUG;
-	va_list ap;
-	va_start(ap, format);
-	int len = 1 + vsnprintf(buffer_rx_rf + 1, sizeof(buffer_rx_rf) - 1, format, ap);
-	va_end(ap);
-
-	rfm75_tx(0, (const uint8_t *)buffer_rx_rf, len);
 	is_tx = false;
 }
 
