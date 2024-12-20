@@ -1,7 +1,12 @@
+.mxproject
+*.elf
+*.map
+*.lss
+*.o
+*.d
+*.exe
+*.gdbinit
 build/
 .vscode
 .gdbinit
-*.user*
-*.Release
-*.Debug
-*.stash
+signer_fw_tool/signer_fw_tool*
