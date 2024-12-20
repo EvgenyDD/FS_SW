@@ -1,23 +1,10 @@
 #ifndef LED_DRV_H
 #define LED_DRV_H
 
-#include "led_drv.h"
+#include "led_hw.h"
 #include "platform.h"
 #include <stdbool.h>
 #include <stdint.h>
-
-enum LEDS
-{
-	LED_0 = 0,
-	LED_1,
-	LED_2,
-	LED_3,
-	LED_4,
-	LED_5,
-	LED_6,
-	LED_7,
-	LED_COUNT
-};
 
 typedef enum
 {

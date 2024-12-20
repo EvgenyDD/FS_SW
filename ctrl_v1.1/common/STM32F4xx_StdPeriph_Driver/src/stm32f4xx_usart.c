@@ -182,7 +182,6 @@
   * @brief  Deinitializes the USARTx peripheral registers to their default reset values.
   * @param  USARTx: where x can be 1, 2, 3, 4, 5, 6, 7 or 8 to select the USART or 
   *         UART peripheral.
-  * @retval None
   */
 void USART_DeInit(USART_TypeDef* USARTx)
 {
@@ -241,7 +240,6 @@ void USART_DeInit(USART_TypeDef* USARTx)
   *         UART peripheral.
   * @param  USART_InitStruct: pointer to a USART_InitTypeDef structure that contains
   *         the configuration information for the specified USART peripheral.
-  * @retval None
   */
 void USART_Init(USART_TypeDef* USARTx, USART_InitTypeDef* USART_InitStruct)
 {
@@ -354,7 +352,6 @@ void USART_Init(USART_TypeDef* USARTx, USART_InitTypeDef* USART_InitStruct)
   * @brief  Fills each USART_InitStruct member with its default value.
   * @param  USART_InitStruct: pointer to a USART_InitTypeDef structure which will
   *         be initialized.
-  * @retval None
   */
 void USART_StructInit(USART_InitTypeDef* USART_InitStruct)
 {
@@ -374,7 +371,6 @@ void USART_StructInit(USART_InitTypeDef* USART_InitStruct)
   * @param  USART_ClockInitStruct: pointer to a USART_ClockInitTypeDef structure that
   *         contains the configuration information for the specified  USART peripheral.
   * @note   The Smart Card and Synchronous modes are not available for UART4 and UART5.    
-  * @retval None
   */
 void USART_ClockInit(USART_TypeDef* USARTx, USART_ClockInitTypeDef* USART_ClockInitStruct)
 {
@@ -405,7 +401,6 @@ void USART_ClockInit(USART_TypeDef* USARTx, USART_ClockInitTypeDef* USART_ClockI
   * @brief  Fills each USART_ClockInitStruct member with its default value.
   * @param  USART_ClockInitStruct: pointer to a USART_ClockInitTypeDef structure
   *         which will be initialized.
-  * @retval None
   */
 void USART_ClockStructInit(USART_ClockInitTypeDef* USART_ClockInitStruct)
 {
@@ -422,7 +417,6 @@ void USART_ClockStructInit(USART_ClockInitTypeDef* USART_ClockInitStruct)
   *         UART peripheral.
   * @param  NewState: new state of the USARTx peripheral.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void USART_Cmd(USART_TypeDef* USARTx, FunctionalState NewState)
 {
@@ -448,7 +442,6 @@ void USART_Cmd(USART_TypeDef* USARTx, FunctionalState NewState)
   *         UART peripheral.
   * @param  USART_Prescaler: specifies the prescaler clock. 
   * @note   The function is used for IrDA mode with UART4 and UART5.   
-  * @retval None
   */
 void USART_SetPrescaler(USART_TypeDef* USARTx, uint8_t USART_Prescaler)
 { 
@@ -469,7 +462,6 @@ void USART_SetPrescaler(USART_TypeDef* USARTx, uint8_t USART_Prescaler)
   *         UART peripheral.
   * @param  NewState: new state of the USART 8x oversampling mode.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void USART_OverSampling8Cmd(USART_TypeDef* USARTx, FunctionalState NewState)
 {
@@ -495,7 +487,6 @@ void USART_OverSampling8Cmd(USART_TypeDef* USARTx, FunctionalState NewState)
   *         UART peripheral.
   * @param  NewState: new state of the USART one bit sampling method.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void USART_OneBitMethodCmd(USART_TypeDef* USARTx, FunctionalState NewState)
 {
@@ -552,7 +543,6 @@ void USART_OneBitMethodCmd(USART_TypeDef* USARTx, FunctionalState NewState)
   * @param  USARTx: where x can be 1, 2, 3, 4, 5, 6, 7 or 8 to select the USART or 
   *         UART peripheral.
   * @param  Data: the data to transmit.
-  * @retval None
   */
 void USART_SendData(USART_TypeDef* USARTx, uint16_t Data)
 {
@@ -620,7 +610,6 @@ uint16_t USART_ReceiveData(USART_TypeDef* USARTx)
   * @param  USARTx: where x can be 1, 2, 3, 4, 5, 6, 7 or 8 to select the USART or 
   *         UART peripheral.
   * @param  USART_Address: Indicates the address of the USART node.
-  * @retval None
   */
 void USART_SetAddress(USART_TypeDef* USARTx, uint8_t USART_Address)
 {
@@ -640,7 +629,6 @@ void USART_SetAddress(USART_TypeDef* USARTx, uint8_t USART_Address)
   *         UART peripheral.
   * @param  NewState: new state of the USART mute mode.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void USART_ReceiverWakeUpCmd(USART_TypeDef* USARTx, FunctionalState NewState)
 {
@@ -667,7 +655,6 @@ void USART_ReceiverWakeUpCmd(USART_TypeDef* USARTx, FunctionalState NewState)
   *          This parameter can be one of the following values:
   *            @arg USART_WakeUp_IdleLine: WakeUp by an idle line detection
   *            @arg USART_WakeUp_AddressMark: WakeUp by an address mark
-  * @retval None
   */
 void USART_WakeUpConfig(USART_TypeDef* USARTx, uint16_t USART_WakeUp)
 {
@@ -736,7 +723,6 @@ void USART_WakeUpConfig(USART_TypeDef* USARTx, uint16_t USART_WakeUp)
   *          This parameter can be one of the following values:
   *            @arg USART_LINBreakDetectLength_10b: 10-bit break detection
   *            @arg USART_LINBreakDetectLength_11b: 11-bit break detection
-  * @retval None
   */
 void USART_LINBreakDetectLengthConfig(USART_TypeDef* USARTx, uint16_t USART_LINBreakDetectLength)
 {
@@ -754,7 +740,6 @@ void USART_LINBreakDetectLengthConfig(USART_TypeDef* USARTx, uint16_t USART_LINB
   *         UART peripheral.
   * @param  NewState: new state of the USART LIN mode.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void USART_LINCmd(USART_TypeDef* USARTx, FunctionalState NewState)
 {
@@ -778,7 +763,6 @@ void USART_LINCmd(USART_TypeDef* USARTx, FunctionalState NewState)
   * @brief  Transmits break characters.
   * @param  USARTx: where x can be 1, 2, 3, 4, 5, 6, 7 or 8 to select the USART or 
   *         UART peripheral.
-  * @retval None
   */
 void USART_SendBreak(USART_TypeDef* USARTx)
 {
@@ -831,7 +815,6 @@ void USART_SendBreak(USART_TypeDef* USARTx)
   *         UART peripheral.
   * @param  NewState: new state of the USART Communication.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void USART_HalfDuplexCmd(USART_TypeDef* USARTx, FunctionalState NewState)
 {
@@ -915,7 +898,6 @@ void USART_HalfDuplexCmd(USART_TypeDef* USARTx, FunctionalState NewState)
   * @param  USARTx: where x can be 1, 2, 3 or 6 to select the USART or 
   *         UART peripheral.
   * @param  USART_GuardTime: specifies the guard time.   
-  * @retval None
   */
 void USART_SetGuardTime(USART_TypeDef* USARTx, uint8_t USART_GuardTime)
 {    
@@ -934,7 +916,6 @@ void USART_SetGuardTime(USART_TypeDef* USARTx, uint8_t USART_GuardTime)
   *         UART peripheral.
   * @param  NewState: new state of the Smart Card mode.
   *          This parameter can be: ENABLE or DISABLE.      
-  * @retval None
   */
 void USART_SmartCardCmd(USART_TypeDef* USARTx, FunctionalState NewState)
 {
@@ -959,7 +940,6 @@ void USART_SmartCardCmd(USART_TypeDef* USARTx, FunctionalState NewState)
   *         UART peripheral.
   * @param  NewState: new state of the NACK transmission.
   *          This parameter can be: ENABLE or DISABLE.  
-  * @retval None
   */
 void USART_SmartCardNACKCmd(USART_TypeDef* USARTx, FunctionalState NewState)
 {
@@ -1030,7 +1010,6 @@ void USART_SmartCardNACKCmd(USART_TypeDef* USARTx, FunctionalState NewState)
   *          This parameter can be one of the following values:
   *            @arg USART_IrDAMode_LowPower
   *            @arg USART_IrDAMode_Normal
-  * @retval None
   */
 void USART_IrDAConfig(USART_TypeDef* USARTx, uint16_t USART_IrDAMode)
 {
@@ -1048,7 +1027,6 @@ void USART_IrDAConfig(USART_TypeDef* USARTx, uint16_t USART_IrDAMode)
   *         UART peripheral.
   * @param  NewState: new state of the IrDA mode.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void USART_IrDACmd(USART_TypeDef* USARTx, FunctionalState NewState)
 {
@@ -1094,7 +1072,6 @@ void USART_IrDACmd(USART_TypeDef* USARTx, FunctionalState NewState)
   *            @arg USART_DMAReq_Rx: USART DMA receive request
   * @param  NewState: new state of the DMA Request sources.
   *          This parameter can be: ENABLE or DISABLE.   
-  * @retval None
   */
 void USART_DMACmd(USART_TypeDef* USARTx, uint16_t USART_DMAReq, FunctionalState NewState)
 {
@@ -1226,7 +1203,6 @@ void USART_DMACmd(USART_TypeDef* USARTx, uint16_t USART_DMAReq, FunctionalState 
   *            @arg USART_IT_ERR:  Error interrupt(Frame error, noise error, overrun error)
   * @param  NewState: new state of the specified USARTx interrupts.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void USART_ITConfig(USART_TypeDef* USARTx, uint16_t USART_IT, FunctionalState NewState)
 {
@@ -1339,7 +1315,6 @@ FlagStatus USART_GetFlagStatus(USART_TypeDef* USARTx, uint16_t USART_FLAG)
   * @note   TXE flag is cleared only by a write to the USART_DR register 
   *          (USART_SendData()).
   *   
-  * @retval None
   */
 void USART_ClearFlag(USART_TypeDef* USARTx, uint16_t USART_FLAG)
 {
@@ -1447,7 +1422,6 @@ ITStatus USART_GetITStatus(USART_TypeDef* USARTx, uint16_t USART_IT)
   * @note   TXE pending bit is cleared only by a write to the USART_DR register 
   *          (USART_SendData()).
   *  
-  * @retval None
   */
 void USART_ClearITPendingBit(USART_TypeDef* USARTx, uint16_t USART_IT)
 {

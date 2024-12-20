@@ -4,8 +4,6 @@
 
 static uint16_t test_progress_counter = 0;
 
-float interval_hit(int32_t value, int32_t middle, int32_t half_sector, int32_t range);
-
 void led_startup_restart(void) { test_progress_counter = 0; }
 
 /**

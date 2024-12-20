@@ -1,16 +1,10 @@
 #ifndef LED_DRV_H
 #define LED_DRV_H
 
-#include "led_drv.h"
+#include "led_hw.h"
 #include "platform.h"
 #include <stdbool.h>
 #include <stdint.h>
-
-enum LEDS
-{
-	LED_0 = 0,
-	LED_COUNT
-};
 
 typedef enum
 {
@@ -42,5 +36,9 @@ void led_drv_set_led(uint32_t led_id, LED_MODE mode);
 void led_drv_set_led_manual(uint32_t led_id, float brightness);
 
 float interval_hit(int32_t value, int32_t middle, int32_t half_sector, int32_t range);
+
+// demo
+int led_startup_sample(void);
+void led_startup_restart(void);
 
 #endif // LED_DRV_H

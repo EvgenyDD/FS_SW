@@ -113,7 +113,6 @@
   *                                0 bits for subpriority
   * @note   When the NVIC_PriorityGroup_0 is selected, IRQ pre-emption is no more possible. 
   *         The pending IRQ priority will be managed only by the subpriority. 
-  * @retval None
   */
 void NVIC_PriorityGroupConfig(uint32_t NVIC_PriorityGroup)
 {
@@ -131,7 +130,6 @@ void NVIC_PriorityGroupConfig(uint32_t NVIC_PriorityGroup)
   *         function should be called before. 
   * @param  NVIC_InitStruct: pointer to a NVIC_InitTypeDef structure that contains
   *         the configuration information for the specified NVIC peripheral.
-  * @retval None
   */
 void NVIC_Init(NVIC_InitTypeDef* NVIC_InitStruct)
 {
@@ -175,7 +173,6 @@ void NVIC_Init(NVIC_InitTypeDef* NVIC_InitStruct)
   *     @arg NVIC_VectTab_RAM: Vector Table in internal SRAM.
   *     @arg NVIC_VectTab_FLASH: Vector Table in internal FLASH.
   * @param  Offset: Vector Table base offset field. This value must be a multiple of 0x200.
-  * @retval None
   */
 void NVIC_SetVectorTable(uint32_t NVIC_VectTab, uint32_t Offset)
 { 
@@ -194,7 +191,6 @@ void NVIC_SetVectorTable(uint32_t NVIC_VectTab, uint32_t Offset)
   *     @arg NVIC_LP_SLEEPDEEP: Low Power DEEPSLEEP request.
   *     @arg NVIC_LP_SLEEPONEXIT: Low Power Sleep on Exit.
   * @param  NewState: new state of LP condition. This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void NVIC_SystemLPConfig(uint8_t LowPowerMode, FunctionalState NewState)
 {
@@ -218,7 +214,6 @@ void NVIC_SystemLPConfig(uint8_t LowPowerMode, FunctionalState NewState)
   *   This parameter can be one of the following values:
   *     @arg SysTick_CLKSource_HCLK_Div8: AHB clock divided by 8 selected as SysTick clock source.
   *     @arg SysTick_CLKSource_HCLK: AHB clock selected as SysTick clock source.
-  * @retval None
   */
 void SysTick_CLKSourceConfig(uint32_t SysTick_CLKSource)
 {

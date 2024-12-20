@@ -1,3 +1,4 @@
+# Note: V1.1 DEPRECATED cause of shitty RFM12B modules
 EXE_NAME=fs_ctrl1
 VER_MAJ =   1
 VER_MIN =   0
@@ -14,7 +15,7 @@ CFLAGS   += -fvisibility=hidden -funsafe-math-optimizations -fdata-sections -ffu
 CFLAGS   += -fmessage-length=0 -fno-exceptions -fno-common -fno-builtin -ffreestanding
 CFLAGS   += -fsingle-precision-constant
 CFLAGS   += $(C_FULL_FLAGS)
-# CFLAGS   += -Werror
+CFLAGS   += -Werror
 
 CXXFLAGS += -fvisibility=hidden -funsafe-math-optimizations -fdata-sections -ffunction-sections -fno-move-loop-invariants
 CXXFLAGS += -fmessage-length=0 -fno-exceptions -fno-common -fno-builtin -ffreestanding
@@ -30,39 +31,49 @@ LDFLAGS  += -u _printf_float
 
 EXT_LIBS +=c m nosys
 
-PPDEFS += USE_STDPERIPH_DRIVER STM32F40_41xxx STM32F407xx FW_TYPE=FW_APP CFG_SYSTEM_SAVES_NON_NATIVE_DATA=1 DEV=\"FS_CTRL1_APP\"
+PPDEFS += USE_STDPERIPH_DRIVER STM32F40_41xxx STM32F407xx HSE_VALUE=12000000 FW_TYPE=FW_APP CFG_SYSTEM_SAVES_NON_NATIVE_DATA=1 DEV=\"FS_CTRL1\"
 PPDEFS += MSG_COUNT=64
 PPDEFS += NODES_COUNT=2
 PPDEFS += OWN_ID=RFM_NET_ID_CTRL
 PPDEFS += AIR_PROTOCOL_MASTER
+PPDEFS += USBD_CLASS_COMPOSITE_DFU_CDC
+PPDEFS += USBD_DFU_USES_SUB_FLASHING
+PPDEFS += DFU_READS_CFG_SECTION
 
 INCDIR += app
 INCDIR += common
 INCDIR += common/adc
 INCDIR += common/CMSIS
 INCDIR += common/config_system
+INCDIR += common/console
 INCDIR += common/crc
 INCDIR += common/fw_header
 INCDIR += common/led
-INCDIR += common/rfm12b
+INCDIR += common/md5
 INCDIR += common/STM32_USB_Device_Library/Core
 INCDIR += common/STM32_USB_OTG_Driver
 INCDIR += common/STM32F4xx_StdPeriph_Driver/inc
 INCDIR += common/usb
+INCDIR += ../lib_v1.1
+INCDIR += ../lib_v1.1/rfm12b
 
 SOURCES += $(call rwildcard, app, *.c *.S *.s)
 SOURCES += $(call rwildcard, common/adc, *.c *.S *.s)
 SOURCES += $(call rwildcard, common/CMSIS, *.c *.S *.s)
 SOURCES += $(call rwildcard, common/config_system, *.c *.S *.s)
+SOURCES += $(call rwildcard, common/console, *.c *.S *.s)
 SOURCES += $(call rwildcard, common/crc, *.c *.S *.s)
 SOURCES += $(call rwildcard, common/fw_header, *.c *.S *.s)
 SOURCES += $(call rwildcard, common/led, *.c *.S *.s)
+SOURCES += $(call rwildcard, common/md5, *.c *.S *.s)
 SOURCES += $(call rwildcard, common/rfm12b, *.c *.S *.s)
 SOURCES += $(call rwildcard, common/STM32_USB_Device_Library/Core, *.c *.S *.s)
 SOURCES += $(call rwildcard, common/STM32_USB_OTG_Driver, *.c *.S *.s)
 SOURCES += $(call rwildcard, common/STM32F4xx_StdPeriph_Driver, *.c *.S *.s)
 SOURCES += $(call rwildcard, common/usb, *.c *.S *.s)
 SOURCES += $(wildcard common/*.c)
+SOURCES += $(wildcard ../lib_v1.1/*.c)
+SOURCES += $(wildcard ../lib_v1.1/rfm12b/*.c)
 LDSCRIPT += ldscript/app.ld
 
 BINARY_SIGNED = $(BUILDDIR)/$(EXE_NAME)_app_signed.bin
@@ -115,16 +126,17 @@ clean_ext_targets:
 flash: $(BINARY_SIGNED)
 	@openocd -d0 -f target/stm32f4xx.cfg -c "program $< 0x08020000 verify reset exit" 
 
-flash_full: $(BINARY_MERGED)
+flash_all: $(BINARY_MERGED)
 	@openocd -d0 -f target/stm32f4xx.cfg -c "program $< 0x08000000 verify reset exit"
 
 program: $(BINARY_SIGNED)
-	@usb_dfu_flasher $< FS_CTRL1
+	@usb_dfu_flasher w a $< FS_CTRL1
 
 ds:
-	openocd -d0 -f target/stm32f4xx.cfg
+	@openocd -d0 -f target/stm32f4xx.cfg
 
 debug:
+	@set _NO_DEBUG_HEAP=1
 	@echo "file $(EXECUTABLE)" > .gdbinit
 	@echo "set auto-load safe-path /" >> .gdbinit
 	@echo "set confirm off" >> .gdbinit

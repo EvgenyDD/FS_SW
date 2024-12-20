@@ -7,21 +7,30 @@
 
 #define _BV(x) (1ULL << (x))
 
-#define PAGE_SIZE (2 * 1024)
-
 #define FLASH_LEN (0x00040000U) // 256kB
 #define FLASH_START FLASH_BASE
 #define FLASH_ORIGIN FLASH_BASE
 #define FLASH_FINISH (FLASH_BASE + FLASH_LEN)
 #define FLASH_SIZE FLASH_LEN
 
-// #define PIN_SET(x) x##_GPIO_Port->BSRR = x##_Pin
-// #define PIN_CLR(x) x##_GPIO_Port->BSRR = ((uint32_t)(x##_Pin)) << 16
-// #define PIN_WR(x, v) x##_GPIO_Port->BSRR = ((uint32_t)(x##_Pin)) << ((!(v)) * 16)
-// #define PIN_GET(x) !!(x##_GPIO_Port->IDR & x##_Pin)
-// #define PIN_GET_ODR(x) !!(x##_GPIO_Port->ODR & x##_Pin)
-
 #define UNIQUE_ID 0x1FFF7A10
+
+#define BUTTONS_POLL()                                               \
+	debounce_update(&btn[0][0], !(GPIOC->IDR & (1 << 14)), diff_ms); \
+	debounce_update(&btn[0][1], !(GPIOC->IDR & (1 << 11)), diff_ms); \
+	debounce_update(&btn[0][2], !(GPIOC->IDR & (1 << 8)), diff_ms);  \
+                                                                     \
+	debounce_update(&btn[1][0], !(GPIOC->IDR & (1 << 15)), diff_ms); \
+	debounce_update(&btn[1][1], !(GPIOA->IDR & (1 << 15)), diff_ms); \
+	debounce_update(&btn[1][2], !(GPIOC->IDR & (1 << 7)), diff_ms);  \
+                                                                     \
+	debounce_update(&btn[2][0], !(GPIOA->IDR & (1 << 4)), diff_ms);  \
+	debounce_update(&btn[2][1], !(GPIOC->IDR & (1 << 10)), diff_ms); \
+	debounce_update(&btn[2][2], !(GPIOB->IDR & (1 << 15)), diff_ms); \
+                                                                     \
+	debounce_update(&btn[3][0], !(GPIOA->IDR & (1 << 5)), diff_ms);  \
+	debounce_update(&btn[3][1], !(GPIOA->IDR & (1 << 3)), diff_ms);  \
+	debounce_update(&btn[3][2], !(GPIOB->IDR & (1 << 12)), diff_ms);
 
 void platform_init(void);
 
@@ -35,18 +44,20 @@ int platform_flash_write(uint32_t dest, const uint8_t *src, uint32_t sz);
 
 void platform_deinit(void);
 void platform_reset(void);
+void platform_reset_jump_ldr_app(void);
 void platform_run_address(uint32_t address);
 
 void platform_get_uid(uint32_t *id);
 
 void delay_ms(volatile uint32_t delay_ms);
+void poll_main(void);
 
 void platform_watchdog_init(void);
 static inline void platform_watchdog_reset(void) { IWDG_ReloadCounter(); }
 
 const char *platform_reset_cause_get(void);
 
-void pwr_sleep(void);
+void pwr_off(void);
 
 void _lseek_r(void);
 void _close_r(void);

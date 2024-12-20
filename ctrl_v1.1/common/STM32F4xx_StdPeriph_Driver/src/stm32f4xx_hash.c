@@ -166,7 +166,6 @@
 /**
   * @brief  De-initializes the HASH peripheral registers to their default reset values
   * @param  None
-  * @retval None
   */
 void HASH_DeInit(void)
 {
@@ -186,7 +185,6 @@ void HASH_DeInit(void)
   *         the configuration information for the HASH peripheral.
   * @note   The field HASH_HMACKeyType in HASH_InitTypeDef must be filled only 
   *          if the algorithm mode is HMAC.       
-  * @retval None
   */
 void HASH_Init(HASH_InitTypeDef* HASH_InitStruct)
 {
@@ -220,7 +218,6 @@ void HASH_Init(HASH_InitTypeDef* HASH_InitStruct)
   *          be initialized.  
   *  @note  The default values set are : Processor mode is HASH, Algorithm selected is SHA1,
   *          Data type selected is 32b and HMAC Key Type is short key.  
-  * @retval None
   */
 void HASH_StructInit(HASH_InitTypeDef* HASH_InitStruct)
 {
@@ -244,7 +241,6 @@ void HASH_StructInit(HASH_InitTypeDef* HASH_InitStruct)
   *         completion interrupt status) bit corresponding to HASH_IT_DCI 
   *         interrupt and HASH_FLAG_DCIS flag. 
   * @param  None
-  * @retval None
   */
 void HASH_Reset(void)
 {
@@ -286,7 +282,6 @@ void HASH_Reset(void)
   *             - 0x1F: Only bits[30:0] of the last data written are valid    
   * @note   The Number of valid bits must be set before to start the message 
   *         digest competition (in Hash and HMAC) and key treatment(in HMAC).    
-  * @retval None
   */
 void HASH_SetLastWordValidBitsNbr(uint16_t ValidNumber)
 {
@@ -301,7 +296,6 @@ void HASH_SetLastWordValidBitsNbr(uint16_t ValidNumber)
 /**
   * @brief  Writes data in the Data Input FIFO
   * @param  Data: new data of the message to be processed.
-  * @retval None
   */
 void HASH_DataIn(uint32_t Data)
 {
@@ -330,7 +324,6 @@ uint8_t HASH_GetInFIFOWordsNbr(void)
   *         and is read as zero.  
   * @param  HASH_MessageDigest: pointer to a HASH_MsgDigest structure which will 
   *         hold the message digest result 
-  * @retval None
   */
 void HASH_GetDigest(HASH_MsgDigest* HASH_MessageDigest)
 {
@@ -348,7 +341,6 @@ void HASH_GetDigest(HASH_MsgDigest* HASH_MessageDigest)
 /**
   * @brief  Starts the message padding and calculation of the final message     
   * @param  None
-  * @retval None
   */
 void HASH_StartDigest(void)
 {
@@ -391,7 +383,6 @@ void HASH_StartDigest(void)
   *         full and no processing is ongoing).   
   * @param  HASH_ContextSave: pointer to a HASH_Context structure that contains
   *         the repository for current context.
-  * @retval None
   */
 void HASH_SaveContext(HASH_Context* HASH_ContextSave)
 {
@@ -413,7 +404,6 @@ void HASH_SaveContext(HASH_Context* HASH_ContextSave)
   *         point where it has been interrupted.  
   * @param  HASH_ContextRestore: pointer to a HASH_Context structure that contains
   *         the repository for saved context.
-  * @retval None
   */
 void HASH_RestoreContext(HASH_Context* HASH_ContextRestore)  
 {
@@ -460,7 +450,6 @@ void HASH_RestoreContext(HASH_Context* HASH_ContextRestore)
   *         calculation of the final message digest at the end of DMA transfer.
   * @param  NewState: new state of the selected HASH DMA transfer request.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void HASH_AutoStartDigest(FunctionalState NewState)
 {
@@ -484,7 +473,6 @@ void HASH_AutoStartDigest(FunctionalState NewState)
   * @note   The DMA is disabled by hardware after the end of transfer.
   * @param  NewState: new state of the selected HASH DMA transfer request.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void HASH_DMACmd(FunctionalState NewState)
 {
@@ -576,7 +564,6 @@ void HASH_DMACmd(FunctionalState NewState)
   *            @arg HASH_IT_DCI: Digest Calculation Completion Interrupt
   * @param  NewState: new state of the specified HASH interrupt.
   *           This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void HASH_ITConfig(uint32_t HASH_IT, FunctionalState NewState)
 {
@@ -646,7 +633,6 @@ FlagStatus HASH_GetFlagStatus(uint32_t HASH_FLAG)
   *          This parameter can be any combination of the following values:
   *            @arg HASH_FLAG_DINIS: Data Input Flag
   *            @arg HASH_FLAG_DCIS: Digest Calculation Completion Flag                       
-  * @retval None
   */
 void HASH_ClearFlag(uint32_t HASH_FLAG)
 {
@@ -696,7 +682,6 @@ ITStatus HASH_GetITStatus(uint32_t HASH_IT)
   *          This parameter can be any combination of the following values:
   *            @arg HASH_IT_DINI: Data Input interrupt
   *            @arg HASH_IT_DCI: Digest Calculation Completion Interrupt
-  * @retval None
   */
 void HASH_ClearITPendingBit(uint32_t HASH_IT)
 {

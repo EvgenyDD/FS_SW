@@ -65,20 +65,27 @@ float interval_hit(int32_t value, int32_t middle, int32_t half_sector, int32_t r
 
 typedef void (*f)(void);
 
-void _led_prc_f10(void) { leds[current_led].brightness = (counter_2000 % 100) <= 50 ? 1.0f : 0; }
-void _led_prc_f2_5(void) { leds[current_led].brightness = (counter_2000 % 400) > 50 && (counter_2000 % 400) <= 200 ? 1.0f : 0; }
-void _led_prc_fs(void) { leds[current_led].brightness = counter_2000 <= 200 ? 1.0f : 0; }
-void _led_prc_fd(void) { leds[current_led].brightness = counter_2000 < 200 || (counter_2000 >= 400 && counter_2000 < 600) ? 1.0f : 0; }
-void _led_prc_ft(void) { leds[current_led].brightness = counter_2000 < 200 || (counter_2000 >= 400 && counter_2000 < 600) || (counter_2000 >= 800 && counter_2000 < 1000) ? 1.0f : 0; }
-void _led_prc_sf2_5(void) { leds[current_led].brightness = interval_hit((int32_t)(counter_2000 % 400), 100, half_period_flash, 2000); }
-void _led_prc_sfs(void) { leds[current_led].brightness = interval_hit((int32_t)(counter_2000 % 400), 100, half_period_flash, 2000); }
-void _led_prc_sfd(void)
+static void _led_prc_f10(void) { leds[current_led].brightness = (counter_2000 % 100) <= 50 ? 1.0f : 0; }
+static void _led_prc_f2_5(void) { leds[current_led].brightness = (counter_2000 % 400) > 50 && (counter_2000 % 400) <= 200 ? 1.0f : 0; }
+
+static void _led_prc_strb_05(void) { leds[current_led].brightness = (counter_2000) <= 2 ? 1.0f : 0; }
+static void _led_prc_strb_1(void) { leds[current_led].brightness = (counter_2000 % 1000) <= 2 ? 1.0f : 0; }
+static void _led_prc_strb_2(void) { leds[current_led].brightness = (counter_2000 % 500) > 50 && (counter_2000 % 500) <= 52 ? 1.0f : 0; }
+static void _led_prc_strb_5(void) { leds[current_led].brightness = (counter_2000 % 200) <= 2 ? 1.0f : 0; }
+
+static void _led_prc_f1(void) { leds[current_led].brightness = counter_2000 <= 200 ? 1.0f : 0; }
+static void _led_prc_f2(void) { leds[current_led].brightness = counter_2000 < 200 || (counter_2000 >= 400 && counter_2000 < 600) ? 1.0f : 0; }
+static void _led_prc_f3(void) { leds[current_led].brightness = counter_2000 < 200 || (counter_2000 >= 400 && counter_2000 < 600) || (counter_2000 >= 800 && counter_2000 < 1000) ? 1.0f : 0; }
+
+static void _led_prc_sf2_5(void) { leds[current_led].brightness = interval_hit((int32_t)(counter_2000 % 400), 100, half_period_flash, 2000); }
+static void _led_prc_sf1(void) { leds[current_led].brightness = interval_hit((int32_t)(counter_2000 % 400), 100, half_period_flash, 2000); }
+static void _led_prc_sf2(void)
 {
 	float y1 = interval_hit((int32_t)counter_2000, 100, half_period_flash, 2000);
 	float y2 = interval_hit((int32_t)counter_2000, 500, half_period_flash, 2000);
 	leds[current_led].brightness = y1 > 0 ? y1 : y2;
 }
-void _led_prc_sft(void)
+static void _led_prc_sf3(void)
 {
 	float y1 = interval_hit((int32_t)counter_2000, 100, half_period_flash, 2000),
 		  y2 = interval_hit((int32_t)counter_2000, 500, half_period_flash, 2000),
@@ -88,18 +95,22 @@ void _led_prc_sft(void)
 }
 
 void (*led_processors[LED_MODE_SIZE])(void) = {
-	/* LED_MODE_OFF           */ NULL,
-	/* LED_MODE_ON            */ NULL,
-	/* LED_MODE_FLASH_10HZ    */ _led_prc_f10,
-	/* LED_MODE_FLASH_2_5HZ   */ _led_prc_f2_5,
-	/* LED_MODE_FLASH_SINGLE  */ _led_prc_fs,
-	/* LED_MODE_FLASH_DOUBLE  */ _led_prc_fd,
-	/* LED_MODE_FLASH_TRIPLE  */ _led_prc_ft,
-	/* LED_MODE_SFLASH_2_5HZ  */ _led_prc_sf2_5,
-	/* LED_MODE_SFLASH_SINGLE */ _led_prc_sfs,
-	/* LED_MODE_SFLASH_DOUBLE */ _led_prc_sfd,
-	/* LED_MODE_SFLASH_TRIPLE */ _led_prc_sft,
-	/* LED_MODE_MANUAL        */ NULL,
+	NULL,			  // LED_MODE_OFF
+	NULL,			  // LED_MODE_ON
+	_led_prc_f10,	  // LED_MODE_FLASH_10HZ
+	_led_prc_f2_5,	  // LED_MODE_FLASH_2_5HZ
+	_led_prc_f1,	  // LED_MODE_FLASH_SINGLE
+	_led_prc_f2,	  // LED_MODE_FLASH_DOUBLE
+	_led_prc_f3,	  // LED_MODE_FLASH_TRIPLE
+	_led_prc_sf2_5,	  // LED_MODE_SFLASH_2_5HZ
+	_led_prc_sf1,	  // LED_MODE_SFLASH_SINGLE
+	_led_prc_sf2,	  // LED_MODE_SFLASH_DOUBLE
+	_led_prc_sf3,	  // LED_MODE_SFLASH_TRIPLE
+	_led_prc_strb_05, // LED_MODE_STROB_05HZ
+	_led_prc_strb_1,  // LED_MODE_STROB_1HZ
+	_led_prc_strb_2,  // LED_MODE_STROB_2HZ
+	_led_prc_strb_5,  // LED_MODE_STROB_5HZ
+	NULL,			  // LED_MODE_MANUAL
 };
 
 /**
@@ -151,15 +162,7 @@ void led_drv_poll(uint32_t diff_ms)
 	cnt++;
 	if(cnt >= LED_PWM_QUANTS) cnt = 0;
 
-	cnt < led_pwm_lvl[LED_0] ? (GPIOA->BSRRL = (1 << 7)) : (GPIOA->BSRRH = (1 << 7));
-	cnt < led_pwm_lvl[LED_1] ? (GPIOC->BSRRL = (1 << 4)) : (GPIOC->BSRRH = (1 << 4));
-	cnt < led_pwm_lvl[LED_2] ? (GPIOC->BSRRL = (1 << 5)) : (GPIOC->BSRRH = (1 << 5));
-	cnt < led_pwm_lvl[LED_3] ? (GPIOB->BSRRL = (1 << 0)) : (GPIOB->BSRRH = (1 << 0));
-	cnt < led_pwm_lvl[LED_4] ? (GPIOB->BSRRL = (1 << 1)) : (GPIOB->BSRRH = (1 << 1));
-	cnt < led_pwm_lvl[LED_5] ? (GPIOB->BSRRL = (1 << 2)) : (GPIOB->BSRRH = (1 << 2));
-// cnt < led_pwm_lvl[LED_6] ? (GPIOB->BSRRL = (1 << 10)) : (GPIOB->BSRRH = (1 << 10));
-#warning here
-	cnt < led_pwm_lvl[LED_7] ? (GPIOB->BSRRL = (1 << 11)) : (GPIOB->BSRRH = (1 << 11));
+	LED_HW_DRIVE();
 }
 
 void led_drv_set_led(uint32_t led_id, LED_MODE mode)
@@ -175,6 +178,5 @@ void led_drv_set_led(uint32_t led_id, LED_MODE mode)
 void led_drv_set_led_manual(uint32_t led_id, float brightness)
 {
 	leds[led_id].mode = LED_MODE_MANUAL;
-	leds[led_id].brightness = brightness > 1.0f ? 1.0 : brightness < 0 ? 0
-																	   : brightness;
+	leds[led_id].brightness = brightness > 1.0f ? 1.0 : (brightness < 0 ? 0 : brightness);
 }

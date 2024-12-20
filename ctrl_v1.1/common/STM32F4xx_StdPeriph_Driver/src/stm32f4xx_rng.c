@@ -94,7 +94,6 @@
 /**
   * @brief  De-initializes the RNG peripheral registers to their default reset values.
   * @param  None
-  * @retval None
   */
 void RNG_DeInit(void)
 {
@@ -118,7 +117,6 @@ void RNG_DeInit(void)
   * @brief  Enables or disables the RNG peripheral.
   * @param  NewState: new state of the RNG peripheral.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void RNG_Cmd(FunctionalState NewState)
 {
@@ -271,7 +269,6 @@ uint32_t RNG_GetRandomNumber(void)
   *         (see RNG_ClearITPendingBit() function).
   * @param  NewState: new state of the RNG interrupt.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void RNG_ITConfig(FunctionalState NewState)
 {
@@ -330,7 +327,6 @@ FlagStatus RNG_GetFlagStatus(uint8_t RNG_FLAG)
   * @note   RNG_FLAG_DRDY can not be cleared by RNG_ClearFlag() function. 
   *         This flag is cleared only by reading the Random number data (using 
   *         RNG_GetRandomNumber() function).                           
-  * @retval None
   */
 void RNG_ClearFlag(uint8_t RNG_FLAG)
 {
@@ -376,7 +372,6 @@ ITStatus RNG_GetITStatus(uint8_t RNG_IT)
   *          This parameter can be any combination of the following values:
   *            @arg RNG_IT_CEI: Clock Error Interrupt.
   *            @arg RNG_IT_SEI: Seed Error Interrupt.
-  * @retval None
   */
 void RNG_ClearITPendingBit(uint8_t RNG_IT)
 {

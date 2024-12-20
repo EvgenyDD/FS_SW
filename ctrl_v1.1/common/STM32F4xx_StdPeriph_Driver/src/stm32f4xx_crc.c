@@ -51,7 +51,6 @@
 /**
   * @brief  Resets the CRC Data register (DR).
   * @param  None
-  * @retval None
   */
 void CRC_ResetDR(void)
 {
@@ -101,7 +100,6 @@ uint32_t CRC_GetCRC(void)
 /**
   * @brief  Stores a 8-bit data in the Independent Data(ID) register.
   * @param  IDValue: 8-bit value to be stored in the ID register 					
-  * @retval None
   */
 void CRC_SetIDRegister(uint8_t IDValue)
 {

@@ -30,38 +30,48 @@ LDFLAGS  += -Wl,--print-memory-usage
 
 EXT_LIBS +=c nosys
 
-PPDEFS += USE_STDPERIPH_DRIVER STM32F40_41xxx STM32F407xx FW_HEADER_REDUCED FW_TYPE=FW_LDR CFG_SYSTEM_SAVES_NON_NATIVE_DATA=1 DEV=\"FS_CTRL1_LDR\"
-PPDEFS  += MSG_COUNT=64
-PPDEFS  += NODES_COUNT=2
-PPDEFS  += OWN_ID=RFM_NET_ID_CTRL
-PPDEFS  += AIR_PROTOCOL_MASTER
+PPDEFS += USE_STDPERIPH_DRIVER STM32F40_41xxx STM32F407xx HSE_VALUE=12000000 FW_HEADER_REDUCED FW_TYPE=FW_LDR CFG_SYSTEM_SAVES_NON_NATIVE_DATA=1 DEV=\"FS_CTRL1\"
+PPDEFS += MSG_COUNT=64
+PPDEFS += NODES_COUNT=2
+PPDEFS += OWN_ID=RFM_NET_ID_CTRL
+PPDEFS += AIR_PROTOCOL_MASTER
+# PPDEFS += USBD_CLASS_DFU
+PPDEFS += USBD_CLASS_COMPOSITE_DFU_CDC
+PPDEFS += USBD_DFU_USES_SUB_FLASHING
+PPDEFS += DFU_READS_CFG_SECTION
 
 INCDIR += .
 INCDIR += ../common
 INCDIR += ../common/adc
 INCDIR += ../common/config_system
+INCDIR += ../common/console
 INCDIR += ../common/CMSIS
 INCDIR += ../common/crc
 INCDIR += ../common/fw_header
 INCDIR += ../common/led
-INCDIR += ../common/rfm12b
+INCDIR += ../common/md5
 INCDIR += ../common/STM32_USB_Device_Library/Core
 INCDIR += ../common/STM32_USB_OTG_Driver
 INCDIR += ../common/STM32F4xx_StdPeriph_Driver/inc
 INCDIR += ../common/usb
+INCDIR += ../../lib_v1.1
+INCDIR += ../../lib_v1.1/rfm12b
 
 SOURCES += $(call rwildcard, ../common/adc, *.c *.S *.s)
 SOURCES += $(call rwildcard, ../common/CMSIS, *.c *.S *.s)
 SOURCES += $(call rwildcard, ../common/config_system, *.c *.S *.s)
+SOURCES += $(call rwildcard, ../common/console, *.c *.S *.s)
 SOURCES += $(call rwildcard, ../common/crc, *.c *.S *.s)
 SOURCES += $(call rwildcard, ../common/fw_header, *.c *.S *.s)
 SOURCES += $(call rwildcard, ../common/led, *.c *.S *.s)
-SOURCES += $(call rwildcard, ../common/rfm12b, *.c *.S *.s)
+SOURCES += $(call rwildcard, ../common/md5 , *.c *.S *.s)
 SOURCES += $(call rwildcard, ../common/STM32_USB_Device_Library/Core, *.c *.S *.s)
 SOURCES += $(call rwildcard, ../common/STM32_USB_OTG_Driver, *.c *.S *.s)
 SOURCES += $(call rwildcard, ../common/STM32F4xx_StdPeriph_Driver, *.c *.S *.s)
 SOURCES += $(call rwildcard, ../common/usb, *.c *.S *.s)
 SOURCES += $(wildcard ../common/*.c)
+SOURCES += $(wildcard ../../lib_v1.1/*.c)
+SOURCES += $(wildcard ../../lib_v1.1/rfm12b/*.c)
 SOURCES += $(wildcard *.c)
 LDSCRIPT += ../ldscript/ldr.ld
 
@@ -117,12 +127,13 @@ flash_all: $(BINARY_MERGED)
 	@openocd -d0 -f ../target/stm32f4xx.cfg -c "program $< 0x08000000 verify reset exit" 
 
 program: $(BINARY_SIGNED)
-	@usb_dfu_flasher $< FS_CTRL1 boot
+	@usb_dfu_flasher w b $< FS_CTRL1
 
 ds:
-	openocd -f ../target/stm32f4xx.cfg
+	@openocd -d0 -f ../target/stm32f4xx.cfg
 
 debug:
+	@set _NO_DEBUG_HEAP=1
 	@echo "file $(EXECUTABLE)" > .gdbinit
 	@echo "set auto-load safe-path /" >> .gdbinit
 	@echo "set confirm off" >> .gdbinit

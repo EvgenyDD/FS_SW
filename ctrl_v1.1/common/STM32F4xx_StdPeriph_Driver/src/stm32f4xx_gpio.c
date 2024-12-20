@@ -122,7 +122,6 @@
   * @param  GPIOx: where x can be (A..K) to select the GPIO peripheral for STM32F405xx/407xx and STM32F415xx/417xx devices
   *                      x can be (A..I) to select the GPIO peripheral for STM32F42xxx/43xxx devices.
   *                      x can be (A, B, C, D and H) to select the GPIO peripheral for STM32F401xx devices.  
-  * @retval None
   */
 void GPIO_DeInit(GPIO_TypeDef* GPIOx)
 {
@@ -197,7 +196,6 @@ void GPIO_DeInit(GPIO_TypeDef* GPIOx)
   *                      x can be (A, B, C, D and H) to select the GPIO peripheral for STM32F401xx devices.   
   * @param  GPIO_InitStruct: pointer to a GPIO_InitTypeDef structure that contains
   *         the configuration information for the specified GPIO peripheral.
-  * @retval None
   */
 void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct)
 {
@@ -249,7 +247,6 @@ void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct)
 /**
   * @brief  Fills each GPIO_InitStruct member with its default value.
   * @param  GPIO_InitStruct : pointer to a GPIO_InitTypeDef structure which will be initialized.
-  * @retval None
   */
 void GPIO_StructInit(GPIO_InitTypeDef* GPIO_InitStruct)
 {
@@ -272,7 +269,6 @@ void GPIO_StructInit(GPIO_InitTypeDef* GPIO_InitStruct)
   *                      x can be (A, B, C, D and H) to select the GPIO peripheral for STM32F401xx devices. 
   * @param  GPIO_Pin: specifies the port bit to be locked.
   *          This parameter can be any combination of GPIO_Pin_x where x can be (0..15).
-  * @retval None
   */
 void GPIO_PinLockConfig(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 {
@@ -407,7 +403,6 @@ uint16_t GPIO_ReadOutputData(GPIO_TypeDef* GPIOx)
   *                      x can be (A, B, C, D and H) to select the GPIO peripheral for STM32F401xx devices. 
   * @param  GPIO_Pin: specifies the port bits to be written.
   *          This parameter can be any combination of GPIO_Pin_x where x can be (0..15).
-  * @retval None
   */
 void GPIO_SetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 {
@@ -428,7 +423,6 @@ void GPIO_SetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
   *                      x can be (A, B, C, D and H) to select the GPIO peripheral for STM32F401xx devices. 
   * @param  GPIO_Pin: specifies the port bits to be written.
   *          This parameter can be any combination of GPIO_Pin_x where x can be (0..15).
-  * @retval None
   */
 void GPIO_ResetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 {
@@ -450,7 +444,6 @@ void GPIO_ResetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
   *          This parameter can be one of the BitAction enum values:
   *            @arg Bit_RESET: to clear the port pin
   *            @arg Bit_SET: to set the port pin
-  * @retval None
   */
 void GPIO_WriteBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, BitAction BitVal)
 {
@@ -475,7 +468,6 @@ void GPIO_WriteBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, BitAction BitVal)
   *                      x can be (A..I) to select the GPIO peripheral for STM32F42xxx/43xxx devices.
   *                      x can be (A, B, C, D and H) to select the GPIO peripheral for STM32F401xx devices. 
   * @param  PortVal: specifies the value to be written to the port output data register.
-  * @retval None
   */
 void GPIO_Write(GPIO_TypeDef* GPIOx, uint16_t PortVal)
 {
@@ -491,7 +483,6 @@ void GPIO_Write(GPIO_TypeDef* GPIOx, uint16_t PortVal)
   *                      x can be (A..I) to select the GPIO peripheral for STM32F42xxx/43xxx devices.
   *                      x can be (A, B, C, D and H) to select the GPIO peripheral for STM32F401xx devices. 
   * @param  GPIO_Pin: Specifies the pins to be toggled.
-  * @retval None
   */
 void GPIO_ToggleBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 {
@@ -574,7 +565,6 @@ void GPIO_ToggleBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
   *            @arg GPIO_AF_DCMI: Connect DCMI pins to AF13
   *            @arg GPIO_AF_LTDC: Connect LTDC pins to AF14 for STM32F429xx/439xx devices. 
   *            @arg GPIO_AF_EVENTOUT: Connect EVENTOUT pins to AF15
-  * @retval None
   */
 void GPIO_PinAFConfig(GPIO_TypeDef* GPIOx, uint16_t GPIO_PinSource, uint8_t GPIO_AF)
 {

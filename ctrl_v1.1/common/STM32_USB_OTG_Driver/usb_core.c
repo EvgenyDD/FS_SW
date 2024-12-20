@@ -89,7 +89,10 @@ USB_OTG_STS USB_OTG_WritePacket(USB_OTG_CORE_HANDLE *pdev, uint8_t *src, uint8_t
 		fifo = pdev->regs.DFIFO[ch_ep_num];
 		for(i = 0; i < count32b; i++)
 		{
-			USB_OTG_WRITE_REG32(fifo, *((/*__packed*/uint32_t *)src));
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wcast-align"
+			USB_OTG_WRITE_REG32(fifo, *((/*__packed*/ uint32_t *)src));
+#pragma GCC diagnostic pop
 			src += 4;
 		}
 	}
@@ -111,7 +114,10 @@ void *USB_OTG_ReadPacket(USB_OTG_CORE_HANDLE *pdev, uint8_t *dest, uint16_t len)
 
 	for(i = 0; i < count32b; i++)
 	{
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wcast-align"
 		*(/*__packed*/ uint32_t *)dest = USB_OTG_READ_REG32(fifo);
+#pragma GCC diagnostic pop
 		dest += 4;
 	}
 	return ((void *)dest);

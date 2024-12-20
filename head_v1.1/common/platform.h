@@ -7,8 +7,6 @@
 
 #define _BV(x) (1ULL << (x))
 
-#define PAGE_SIZE (2 * 1024)
-
 #define FLASH_LEN (0x00040000U) // 256kB
 #define FLASH_START FLASH_BASE
 #define FLASH_ORIGIN FLASH_BASE
@@ -18,6 +16,8 @@
 #define UNIQUE_ID 0x1FFF7A10
 
 void platform_init(void);
+
+void poll_main(void);
 
 void platform_flash_erase_flag_reset(void);
 void platform_flash_erase_flag_reset_sect_cfg(void);
@@ -30,8 +30,14 @@ int platform_flash_write(uint32_t dest, const uint8_t *src, uint32_t sz);
 void platform_deinit(void);
 void platform_reset(void);
 void platform_run_address(uint32_t address);
+void platform_reset_jump_ldr_app(void);
 
 void platform_get_uid(uint32_t *id);
+
+void air_flash_sts_cb(uint8_t dev_idx, const uint8_t *data, uint8_t data_len);
+void air_flash_type_cb(uint8_t dev_idx, const uint8_t *data, uint8_t data_len);
+void air_flash_write_cb(uint8_t dev_idx, const uint8_t *data, uint8_t data_len);
+void air_flash_read_cb(uint8_t dev_idx, const uint8_t *data, uint8_t data_len);
 
 void delay_ms(volatile uint32_t delay_ms);
 

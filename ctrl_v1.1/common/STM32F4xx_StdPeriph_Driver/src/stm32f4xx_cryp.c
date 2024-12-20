@@ -214,7 +214,6 @@
 /**
   * @brief  Deinitializes the CRYP peripheral registers to their default reset values
   * @param  None
-  * @retval None
   */
 void CRYP_DeInit(void)
 {
@@ -230,7 +229,6 @@ void CRYP_DeInit(void)
   *         in the CRYP_InitStruct.
   * @param  CRYP_InitStruct: pointer to a CRYP_InitTypeDef structure that contains
   *         the configuration information for the CRYP peripheral.
-  * @retval None
   */
 void CRYP_Init(CRYP_InitTypeDef* CRYP_InitStruct)
 {
@@ -269,7 +267,6 @@ void CRYP_Init(CRYP_InitTypeDef* CRYP_InitStruct)
   * @brief  Fills each CRYP_InitStruct member with its default value.
   * @param  CRYP_InitStruct: pointer to a CRYP_InitTypeDef structure which will
   *         be initialized.
-  * @retval None
   */
 void CRYP_StructInit(CRYP_InitTypeDef* CRYP_InitStruct)
 {
@@ -291,7 +288,6 @@ void CRYP_StructInit(CRYP_InitTypeDef* CRYP_InitStruct)
   *         the CRYP_KeyInitStruct.
   * @param  CRYP_KeyInitStruct: pointer to a CRYP_KeyInitTypeDef structure that
   *         contains the configuration information for the CRYP Keys.
-  * @retval None
   */
 void CRYP_KeyInit(CRYP_KeyInitTypeDef* CRYP_KeyInitStruct)
 {
@@ -310,7 +306,6 @@ void CRYP_KeyInit(CRYP_KeyInitTypeDef* CRYP_KeyInitStruct)
   * @brief  Fills each CRYP_KeyInitStruct member with its default value.
   * @param  CRYP_KeyInitStruct: pointer to a CRYP_KeyInitTypeDef structure 
   *         which will be initialized.
-  * @retval None
   */
 void CRYP_KeyStructInit(CRYP_KeyInitTypeDef* CRYP_KeyInitStruct)
 {
@@ -328,7 +323,6 @@ void CRYP_KeyStructInit(CRYP_KeyInitTypeDef* CRYP_KeyInitStruct)
   *         specified parameters in the CRYP_IVInitStruct.
   * @param  CRYP_IVInitStruct: pointer to a CRYP_IVInitTypeDef structure that contains
   *         the configuration information for the CRYP Initialization Vectors(IV).
-  * @retval None
   */
 void CRYP_IVInit(CRYP_IVInitTypeDef* CRYP_IVInitStruct)
 {
@@ -342,7 +336,6 @@ void CRYP_IVInit(CRYP_IVInitTypeDef* CRYP_IVInitStruct)
   * @brief  Fills each CRYP_IVInitStruct member with its default value.
   * @param  CRYP_IVInitStruct: pointer to a CRYP_IVInitTypeDef Initialization 
   *         Vectors(IV) structure which will be initialized.
-  * @retval None
   */
 void CRYP_IVStructInit(CRYP_IVInitTypeDef* CRYP_IVInitStruct)
 {
@@ -361,7 +354,6 @@ void CRYP_IVStructInit(CRYP_IVInitTypeDef* CRYP_IVInitStruct)
   *            @arg CRYP_Phase_Header: Header phase
   *            @arg CRYP_Phase_Payload: Payload phase
   *            @arg CRYP_Phase_Final: Final phase 
-  * @retval None
   */
 void CRYP_PhaseConfig(uint32_t CRYP_Phase)
 { uint32_t tempcr = 0;
@@ -386,7 +378,6 @@ void CRYP_PhaseConfig(uint32_t CRYP_Phase)
   *         FIFOs are reset)
   * @note   The FIFOs must be flushed only when BUSY flag is reset.  
   * @param  None
-  * @retval None
   */
 void CRYP_FIFOFlush(void)
 {
@@ -398,7 +389,6 @@ void CRYP_FIFOFlush(void)
   * @brief  Enables or disables the CRYP peripheral.
   * @param  NewState: new state of the CRYP peripheral.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void CRYP_Cmd(FunctionalState NewState)
 {
@@ -441,7 +431,6 @@ void CRYP_Cmd(FunctionalState NewState)
   * @note   After the DIN register has been read once or several times, 
   *         the FIFO must be flushed (using CRYP_FIFOFlush() function).  
   * @param  Data: data to write in Data Input register
-  * @retval None
   */
 void CRYP_DataIn(uint32_t Data)
 {
@@ -492,7 +481,6 @@ uint32_t CRYP_DataOut(void)
   *         the repository for current context.
   * @param  CRYP_KeyInitStruct: pointer to a CRYP_KeyInitTypeDef structure that 
   *         contains the configuration information for the CRYP Keys.  
-  * @retval None
   */
 ErrorStatus CRYP_SaveContext(CRYP_Context* CRYP_ContextSave,
                              CRYP_KeyInitTypeDef* CRYP_KeyInitStruct)
@@ -597,7 +585,6 @@ ErrorStatus CRYP_SaveContext(CRYP_Context* CRYP_ContextSave,
   *         the repository for saved context.
   * @note   The data that were saved during context saving must be rewritten into
   *         the IN FIFO.
-  * @retval None
   */
 void CRYP_RestoreContext(CRYP_Context* CRYP_ContextRestore)  
 {
@@ -676,7 +663,6 @@ void CRYP_RestoreContext(CRYP_Context* CRYP_ContextRestore)
   *            @arg CRYP_DMAReq_DataIN: DMA for incoming(Rx) data transfer
   * @param  NewState: new state of the selected CRYP DMA transfer request.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void CRYP_DMACmd(uint8_t CRYP_DMAReq, FunctionalState NewState)
 {
@@ -794,7 +780,6 @@ void CRYP_DMACmd(uint8_t CRYP_DMAReq, FunctionalState NewState)
   *            @arg CRYP_IT_OUTI: Output FIFO interrupt
   * @param  NewState: new state of the specified CRYP interrupt.
   *           This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void CRYP_ITConfig(uint8_t CRYP_IT, FunctionalState NewState)
 {

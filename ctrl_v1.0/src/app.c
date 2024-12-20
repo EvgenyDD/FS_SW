@@ -351,7 +351,7 @@ inline static void memcpy_volatile(void *dst, const volatile void *src, size_t s
     }
 }
 
-static uint8_t dbg_buffer[RFM12B_MAXDATA];
+static uint8_t dbg_buffer[RFM12B_MAX_PAYLOAD_SIZE];
 void process_data(uint8_t sender_node_id, const volatile uint8_t *data, uint8_t data_len)
 {
     // debug("RX: %d > Size: %d | %d %d %d %d\n", sender_node_id, data_len, *(data-4), *(data-3),*(data-2),*(data-1));

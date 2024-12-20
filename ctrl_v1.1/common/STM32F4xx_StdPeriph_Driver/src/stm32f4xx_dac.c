@@ -182,7 +182,6 @@
 /**
   * @brief  Deinitializes the DAC peripheral registers to their default reset values.
   * @param  None
-  * @retval None
   */
 void DAC_DeInit(void)
 {
@@ -201,7 +200,6 @@ void DAC_DeInit(void)
   *            @arg DAC_Channel_2: DAC Channel2 selected
   * @param  DAC_InitStruct: pointer to a DAC_InitTypeDef structure that contains
   *         the configuration information for the  specified DAC channel.
-  * @retval None
   */
 void DAC_Init(uint32_t DAC_Channel, DAC_InitTypeDef* DAC_InitStruct)
 {
@@ -237,7 +235,6 @@ void DAC_Init(uint32_t DAC_Channel, DAC_InitTypeDef* DAC_InitStruct)
   * @brief  Fills each DAC_InitStruct member with its default value.
   * @param  DAC_InitStruct: pointer to a DAC_InitTypeDef structure which will 
   *         be initialized.
-  * @retval None
   */
 void DAC_StructInit(DAC_InitTypeDef* DAC_InitStruct)
 {
@@ -261,7 +258,6 @@ void DAC_StructInit(DAC_InitTypeDef* DAC_InitStruct)
   * @param  NewState: new state of the DAC channel. 
   *          This parameter can be: ENABLE or DISABLE.
   * @note   When the DAC channel is enabled the trigger source can no more be modified.
-  * @retval None
   */
 void DAC_Cmd(uint32_t DAC_Channel, FunctionalState NewState)
 {
@@ -289,7 +285,6 @@ void DAC_Cmd(uint32_t DAC_Channel, FunctionalState NewState)
   *            @arg DAC_Channel_2: DAC Channel2 selected
   * @param  NewState: new state of the selected DAC channel software trigger.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void DAC_SoftwareTriggerCmd(uint32_t DAC_Channel, FunctionalState NewState)
 {
@@ -313,7 +308,6 @@ void DAC_SoftwareTriggerCmd(uint32_t DAC_Channel, FunctionalState NewState)
   * @brief  Enables or disables simultaneously the two DAC channels software triggers.
   * @param  NewState: new state of the DAC channels software triggers.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void DAC_DualSoftwareTriggerCmd(FunctionalState NewState)
 {
@@ -344,7 +338,6 @@ void DAC_DualSoftwareTriggerCmd(FunctionalState NewState)
   *            @arg DAC_Wave_Triangle: triangle wave generation
   * @param  NewState: new state of the selected DAC channel wave generation.
   *          This parameter can be: ENABLE or DISABLE.  
-  * @retval None
   */
 void DAC_WaveGenerationCmd(uint32_t DAC_Channel, uint32_t DAC_Wave, FunctionalState NewState)
 {
@@ -373,7 +366,6 @@ void DAC_WaveGenerationCmd(uint32_t DAC_Channel, uint32_t DAC_Wave, FunctionalSt
   *            @arg DAC_Align_12b_L: 12bit left data alignment selected
   *            @arg DAC_Align_12b_R: 12bit right data alignment selected
   * @param  Data: Data to be loaded in the selected data holding register.
-  * @retval None
   */
 void DAC_SetChannel1Data(uint32_t DAC_Align, uint16_t Data)
 {  
@@ -398,7 +390,6 @@ void DAC_SetChannel1Data(uint32_t DAC_Align, uint16_t Data)
   *            @arg DAC_Align_12b_L: 12bit left data alignment selected
   *            @arg DAC_Align_12b_R: 12bit right data alignment selected
   * @param  Data: Data to be loaded in the selected data holding register.
-  * @retval None
   */
 void DAC_SetChannel2Data(uint32_t DAC_Align, uint16_t Data)
 {
@@ -426,7 +417,6 @@ void DAC_SetChannel2Data(uint32_t DAC_Align, uint16_t Data)
   * @param  Data1: Data for DAC Channel1 to be loaded in the selected data  holding register.
   * @note   In dual mode, a unique register access is required to write in both
   *          DAC channels at the same time.
-  * @retval None
   */
 void DAC_SetDualChannelData(uint32_t DAC_Align, uint16_t Data2, uint16_t Data1)
 {
@@ -505,7 +495,6 @@ uint16_t DAC_GetDataOutputValue(uint32_t DAC_Channel)
   *          already configured.
   * @note   The DAC channel2 is mapped on DMA1 Stream 6 channel7 which must be
   *          already configured.    
-  * @retval None
   */
 void DAC_DMACmd(uint32_t DAC_Channel, FunctionalState NewState)
 {
@@ -553,7 +542,6 @@ void DAC_DMACmd(uint32_t DAC_Channel, FunctionalState NewState)
   *         acknowledgement for the first external trigger is received (first request).
   * @param  NewState: new state of the specified DAC interrupts.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */ 
 void DAC_ITConfig(uint32_t DAC_Channel, uint32_t DAC_IT, FunctionalState NewState)  
 {
@@ -620,7 +608,6 @@ FlagStatus DAC_GetFlagStatus(uint32_t DAC_Channel, uint32_t DAC_FLAG)
   *            @arg DAC_FLAG_DMAUDR: DMA underrun flag 
   * @note   The DMA underrun occurs when a second external trigger arrives before the 
   *         acknowledgement for the first external trigger is received (first request).                           
-  * @retval None
   */
 void DAC_ClearFlag(uint32_t DAC_Channel, uint32_t DAC_FLAG)
 {
@@ -683,7 +670,6 @@ ITStatus DAC_GetITStatus(uint32_t DAC_Channel, uint32_t DAC_IT)
   *            @arg DAC_IT_DMAUDR: DMA underrun interrupt mask                         
   * @note   The DMA underrun occurs when a second external trigger arrives before the 
   *         acknowledgement for the first external trigger is received (first request).                           
-  * @retval None
   */
 void DAC_ClearITPendingBit(uint32_t DAC_Channel, uint32_t DAC_IT)
 {

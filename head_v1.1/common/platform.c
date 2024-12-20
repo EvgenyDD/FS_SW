@@ -7,10 +7,6 @@
 #include "rfm12b.h"
 #endif
 
-#if FW_TYPE == FW_APP
-extern void i2c_display_clear_screen(bool invert);
-#endif
-
 extern void usb_disconnect(void);
 
 typedef void (*pFunction)(void);
@@ -40,11 +36,11 @@ sector_t flash_desc[] = {
 
 static int find_sector(uint32_t addr)
 {
-	for(int i = 0; i < sizeof(flash_desc) / sizeof(flash_desc[0]); i++)
+	for(unsigned int i = 0; i < sizeof(flash_desc) / sizeof(flash_desc[0]); i++)
 	{
 		if((addr >= flash_desc[i].start) && (addr < (flash_desc[i].start + flash_desc[i].len)))
 		{
-			return i;
+			return (int)i;
 		}
 	}
 	return -1;
@@ -52,7 +48,7 @@ static int find_sector(uint32_t addr)
 
 void platform_flash_erase_flag_reset(void)
 {
-	for(int i = 0; i < sizeof(flash_desc) / sizeof(flash_desc[0]); i++)
+	for(unsigned int i = 0; i < sizeof(flash_desc) / sizeof(flash_desc[0]); i++)
 	{
 		flash_desc[i].erased = false;
 	}
@@ -303,6 +299,7 @@ void platform_init(void)
 
 	GPIO_PinAFConfig(GPIOB, GPIO_PinSource10, GPIO_AF_TIM2);
 	GPIO_PinAFConfig(GPIOB, GPIO_PinSource11, GPIO_AF_TIM2);
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource15, GPIO_AF_TIM2);
 
 	GPIO_PinAFConfig(GPIOB, GPIO_PinSource6, GPIO_AF_TIM4);
 	GPIO_PinAFConfig(GPIOB, GPIO_PinSource7, GPIO_AF_TIM4);
@@ -333,7 +330,9 @@ void platform_deinit(void)
 	__enable_irq();
 }
 
-void platform_reset(void)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Winline"
+__attribute__((noreturn)) void platform_reset(void)
 {
 #if FW_TYPE == FW_LDR
 	ret_mem_set_bl_stuck(false);
@@ -341,6 +340,23 @@ void platform_reset(void)
 	platform_deinit();
 	NVIC_SystemReset();
 }
+
+__attribute__((noreturn)) void platform_reset_jump_ldr_app(void)
+{
+#if FW_TYPE == FW_LDR
+	ret_mem_set_bl_stuck(false);
+#endif
+	platform_deinit();
+	fw_header_check_all();
+#if FW_TYPE == FW_APP
+	if(g_fw_info[FW_LDR].locked == false) platform_run_address((uint32_t)&__ldr_start);
+#endif
+#if FW_TYPE == FW_LDR
+	if(g_fw_info[FW_APP].locked == false) platform_run_address((uint32_t)&__app_start);
+#endif
+	NVIC_SystemReset();
+}
+#pragma GCC diagnostic pop
 
 __attribute__((optimize("-O0"))) __attribute__((always_inline)) static __inline void boot_jump(uint32_t address)
 {
@@ -397,9 +413,6 @@ void _write_r(void) {}
 
 void pwr_off(void)
 {
-#if FW_TYPE == FW_LDR || FW_TYPE == FW_APP
-	rfm12b_sleep();
-#endif
 	GPIOB->BSRRH = 1 << 12; // disable power FET
 }
 

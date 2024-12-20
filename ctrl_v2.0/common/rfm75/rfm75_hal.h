@@ -30,13 +30,8 @@
 	while(SPI3->SR & SPI_FLAG_BSY) \
 		asm("nop");
 
-#define S_DT(x)   \
-	asm("nop");   \
-	SPI3->DR = x; \
-	asm("nop");
-
-#define S_DR(x) \
-	x = SPI3->DR;
+#define S_DT(x) *((volatile uint16_t *)&SPI3->DR) = x;
+#define S_DR(x) x = (uint16_t)(SPI3->DR);
 
 void EXTI0_IRQHandler(void);
 

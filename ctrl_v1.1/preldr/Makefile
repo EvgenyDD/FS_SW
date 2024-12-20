@@ -28,15 +28,20 @@ LDFLAGS  += -specs=nano.specs
 LDFLAGS  += -Wl,--gc-sections
 LDFLAGS  += -Wl,--print-memory-usage
 
-PPDEFS += USE_STDPERIPH_DRIVER STM32F40_41xxx STM32F407xx
+PPDEFS += USE_STDPERIPH_DRIVER STM32F40_41xxx STM32F407xx HSE_VALUE=12000000
 
+INCDIR += ../../lib_v1.1
+INCDIR += ../../lib_v1.1/rfm12b
 INCDIR += ../common
 INCDIR += ../common/CMSIS
 INCDIR += ../common/crc
 INCDIR += ../common/fw_header
 INCDIR += ../common/STM32F4xx_StdPeriph_Driver/inc
 SOURCES += $(call rwildcard, ../common/CMSIS ../common/crc ../common/fw_header ../common/STM32F4xx_StdPeriph_Driver, *.c *.S *.s)
-SOURCES += $(wildcard ../common/*.c)
+SOURCES += ../common/platform.c
+SOURCES += ../common/syscalls.c
+SOURCES += ../common/system_stm32f4xx.c
+SOURCES += ../common/ret_mem.c
 SOURCES += preldr.c
 LDSCRIPT += ../ldscript/preldr.ld
 
@@ -66,9 +71,10 @@ flash: $(BINARY_SIGNED)
 	@openocd -d0 -f ../target/stm32f4xx.cfg -c "program $< 0x08000000 verify reset exit" 
 
 ds:
-	openocd -d0 -f ../target/stm32f4xx.cfg
+	@openocd -d0 -f ../target/stm32f4xx.cfg
 
 debug:
+	@set _NO_DEBUG_HEAP=1
 	@echo "file $(EXECUTABLE)" > .gdbinit
 	@echo "set auto-load safe-path /" >> .gdbinit
 	@echo "set confirm off" >> .gdbinit

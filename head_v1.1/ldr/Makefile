@@ -15,7 +15,7 @@ CFLAGS   += -fvisibility=hidden -funsafe-math-optimizations -fdata-sections -ffu
 CFLAGS   += -fmessage-length=0 -fno-exceptions -fno-common -fno-builtin -ffreestanding
 CFLAGS   += -fsingle-precision-constant
 CFLAGS   += $(C_FULL_FLAGS)
-# CFLAGS   += -Werror
+CFLAGS   += -Werror
 
 CXXFLAGS += -fvisibility=hidden -funsafe-math-optimizations -fdata-sections -ffunction-sections -fno-move-loop-invariants
 CXXFLAGS += -fmessage-length=0 -fno-exceptions -fno-common -fno-builtin -ffreestanding
@@ -30,7 +30,7 @@ LDFLAGS  += -Wl,--print-memory-usage
 
 EXT_LIBS +=c nosys
 
-PPDEFS += USE_STDPERIPH_DRIVER STM32F40_41xxx STM32F407xx FW_HEADER_REDUCED FW_TYPE=FW_LDR CFG_SYSTEM_SAVES_NON_NATIVE_DATA=1 DEV=\"FS_CTRL1_LDR\"
+PPDEFS += USE_STDPERIPH_DRIVER STM32F40_41xxx STM32F407xx FW_HEADER_REDUCED FW_TYPE=FW_LDR CFG_SYSTEM_SAVES_NON_NATIVE_DATA=1
 PPDEFS += MSG_COUNT=64
 PPDEFS += NODES_COUNT=1
 PPDEFS += OWN_ID=RFM_NET_ID_HEAD
@@ -41,22 +41,26 @@ INCDIR += .
 INCDIR += ../common
 INCDIR += ../common/adc
 INCDIR += ../common/config_system
+INCDIR += ../common/console
 INCDIR += ../common/CMSIS
 INCDIR += ../common/crc
 INCDIR += ../common/fw_header
 INCDIR += ../common/led
-INCDIR += ../common/rfm12b
 INCDIR += ../common/STM32F4xx_StdPeriph_Driver/inc
+INCDIR += ../../lib_v1.1
+INCDIR += ../../lib_v1.1/rfm12b
 
 SOURCES += $(call rwildcard, ../common/adc, *.c *.S *.s)
 SOURCES += $(call rwildcard, ../common/CMSIS, *.c *.S *.s)
 SOURCES += $(call rwildcard, ../common/config_system, *.c *.S *.s)
+SOURCES += $(call rwildcard, ../common/console, *.c *.S *.s)
 SOURCES += $(call rwildcard, ../common/crc, *.c *.S *.s)
 SOURCES += $(call rwildcard, ../common/fw_header, *.c *.S *.s)
 SOURCES += $(call rwildcard, ../common/led, *.c *.S *.s)
-SOURCES += $(call rwildcard, ../common/rfm12b, *.c *.S *.s)
 SOURCES += $(call rwildcard, ../common/STM32F4xx_StdPeriph_Driver, *.c *.S *.s)
 SOURCES += $(wildcard ../common/*.c)
+SOURCES += $(wildcard ../../lib_v1.1/*.c)
+SOURCES += $(wildcard ../../lib_v1.1/rfm12b/*.c)
 SOURCES += $(wildcard *.c)
 LDSCRIPT += ../ldscript/ldr.ld
 
@@ -112,12 +116,13 @@ flash_all: $(BINARY_MERGED)
 	@openocd -d0 -f ../target/stm32f4xx.cfg -c "program $< 0x08000000 verify reset exit" 
 
 program: $(BINARY_SIGNED)
-	@usb_dfu_flasher $< FS_HEAD1 boot
+	@usb_dfu_flasher w b $< FS_CTRL1 fs_head2 8
 
 ds:
-	openocd -d0 -f ../target/stm32f4xx.cfg
+	@openocd -d0 -f ../target/stm32f4xx.cfg
 
 debug:
+	@set _NO_DEBUG_HEAP=1
 	@echo "file $(EXECUTABLE)" > .gdbinit
 	@echo "set auto-load safe-path /" >> .gdbinit
 	@echo "set confirm off" >> .gdbinit

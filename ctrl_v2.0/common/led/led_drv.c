@@ -162,14 +162,7 @@ void led_drv_poll(uint32_t diff_ms)
 	cnt++;
 	if(cnt >= LED_PWM_QUANTS) cnt = 0;
 
-	cnt < led_pwm_lvl[LED_0] ? (GPIOA->BSRRL = (1 << 7)) : (GPIOA->BSRRH = (1 << 7));
-	cnt < led_pwm_lvl[LED_1] ? (GPIOC->BSRRL = (1 << 4)) : (GPIOC->BSRRH = (1 << 4));
-	cnt < led_pwm_lvl[LED_2] ? (GPIOC->BSRRL = (1 << 5)) : (GPIOC->BSRRH = (1 << 5));
-	cnt < led_pwm_lvl[LED_3] ? (GPIOB->BSRRL = (1 << 0)) : (GPIOB->BSRRH = (1 << 0));
-	cnt < led_pwm_lvl[LED_4] ? (GPIOB->BSRRL = (1 << 1)) : (GPIOB->BSRRH = (1 << 1));
-	cnt < led_pwm_lvl[LED_5] ? (GPIOB->BSRRL = (1 << 2)) : (GPIOB->BSRRH = (1 << 2));
-	cnt < led_pwm_lvl[LED_6] ? (GPIOB->BSRRL = (1 << 10)) : (GPIOB->BSRRH = (1 << 10));
-	cnt < led_pwm_lvl[LED_7] ? (GPIOB->BSRRL = (1 << 11)) : (GPIOB->BSRRH = (1 << 11));
+	LED_HW_DRIVE();
 }
 
 void led_drv_set_led(uint32_t led_id, LED_MODE mode)

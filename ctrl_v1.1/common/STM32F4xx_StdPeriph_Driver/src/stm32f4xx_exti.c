@@ -105,7 +105,6 @@
 /**
   * @brief  Deinitializes the EXTI peripheral registers to their default reset values.
   * @param  None
-  * @retval None
   */
 void EXTI_DeInit(void)
 {
@@ -121,7 +120,6 @@ void EXTI_DeInit(void)
   *         parameters in the EXTI_InitStruct.
   * @param  EXTI_InitStruct: pointer to a EXTI_InitTypeDef structure
   *         that contains the configuration information for the EXTI peripheral.
-  * @retval None
   */
 void EXTI_Init(EXTI_InitTypeDef* EXTI_InitStruct)
 {
@@ -177,7 +175,6 @@ void EXTI_Init(EXTI_InitTypeDef* EXTI_InitStruct)
   * @brief  Fills each EXTI_InitStruct member with its reset value.
   * @param  EXTI_InitStruct: pointer to a EXTI_InitTypeDef structure which will
   *         be initialized.
-  * @retval None
   */
 void EXTI_StructInit(EXTI_InitTypeDef* EXTI_InitStruct)
 {
@@ -192,7 +189,6 @@ void EXTI_StructInit(EXTI_InitTypeDef* EXTI_InitStruct)
   * @param  EXTI_Line: specifies the EXTI line on which the software interrupt
   *         will be generated.
   *         This parameter can be any combination of EXTI_Linex where x can be (0..22)
-  * @retval None
   */
 void EXTI_GenerateSWInterrupt(uint32_t EXTI_Line)
 {
@@ -245,7 +241,6 @@ FlagStatus EXTI_GetFlagStatus(uint32_t EXTI_Line)
   * @brief  Clears the EXTI's line pending flags.
   * @param  EXTI_Line: specifies the EXTI lines flags to clear.
   *          This parameter can be any combination of EXTI_Linex where x can be (0..22)
-  * @retval None
   */
 void EXTI_ClearFlag(uint32_t EXTI_Line)
 {
@@ -283,7 +278,6 @@ ITStatus EXTI_GetITStatus(uint32_t EXTI_Line)
   * @brief  Clears the EXTI's line pending bits.
   * @param  EXTI_Line: specifies the EXTI lines to clear.
   *          This parameter can be any combination of EXTI_Linex where x can be (0..22)
-  * @retval None
   */
 void EXTI_ClearITPendingBit(uint32_t EXTI_Line)
 {

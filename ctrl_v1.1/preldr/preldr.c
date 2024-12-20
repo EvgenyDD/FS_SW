@@ -3,10 +3,6 @@
 #include "ret_mem.h"
 #include "stm32f4xx.h"
 
-extern int __preldr_start, __preldr_end;
-extern int __ldr_start, __ldr_end;
-extern int __app_start, __app_end;
-
 // void SystemInit(void)
 // {
 // FLASH->ACR |= FLASH_ACR_LATENCY_2;

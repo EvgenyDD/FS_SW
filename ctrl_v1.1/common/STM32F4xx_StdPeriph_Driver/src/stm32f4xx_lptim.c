@@ -139,7 +139,6 @@
 /**
   * @brief  Deinitializes the LPTIMx peripheral registers to their default reset values.
   * @param  LPTIMx: where x can be 1.
-  * @retval None
   *
   */
 void LPTIM_DeInit(LPTIM_TypeDef* LPTIMx)
@@ -161,7 +160,6 @@ void LPTIM_DeInit(LPTIM_TypeDef* LPTIMx)
   * @param  LPTIMx: where x can be 1.
   * @param  LPTIM_InitStruct: pointer to an LPTIM_InitTypeDef structure that contains
   *         the configuration information for the specified LPTIM peripheral.
-  * @retval None
   *
   * @note   It is mandatory to disable the peripheral to use this function.
   */
@@ -196,7 +194,6 @@ void LPTIM_Init(LPTIM_TypeDef* LPTIMx, LPTIM_InitTypeDef* LPTIM_InitStruct)
 /**
   * @brief  Fills each LPTIM_InitStruct member with its default value.
   * @param  LPTIM_InitStruct : pointer to a LPTIM_InitTypeDef structure which will be initialized.
-  * @retval None
   */
 void LPTIM_StructInit(LPTIM_InitTypeDef* LPTIM_InitStruct)
 {
@@ -246,7 +243,6 @@ void LPTIM_StructInit(LPTIM_InitTypeDef* LPTIM_InitStruct)
   * @param  LPTIMx: where x can be 1.
   * @param  NewState: new state of the LPTIMx peripheral.
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void LPTIM_Cmd(LPTIM_TypeDef* LPTIMx, FunctionalState NewState)
 {
@@ -273,7 +269,6 @@ void LPTIM_Cmd(LPTIM_TypeDef* LPTIMx, FunctionalState NewState)
   *         This parameter can be:
   *         @arg LPTIM_ClockSource_APBClock_LPosc : APB clock/LP oscillators selected
   *         @arg LPTIM_ClockSource_ULPTIM: ULPTIM (external input) selected
-  * @retval None
   *
   * @note   It is mandatory to disable the peripheral to use this function.
   */
@@ -299,7 +294,6 @@ void LPTIM_SelectClockSource(LPTIM_TypeDef* LPTIMx, uint32_t LPTIM_ClockSource)
   *     @arg LPTIM_ClockPolarity_RisingEdge : Counter Clock = LPTIM Clock / 1
   *     @arg LPTIM_ClockPolarity_FallingEdge : Counter Clock = LPTIM Clock / 2
   *     @arg LPTIM_ClockPolarity_BothEdges : Counter Clock = LPTIM Clock / 4
-  * @retval None
   *
   * @note   It is mandatory to disable the peripheral to use this function.
   */
@@ -337,7 +331,6 @@ void LPTIM_SelectULPTIMClockPolarity(LPTIM_TypeDef* LPTIMx, uint32_t LPTIM_Clock
   *     @arg LPTIM_Prescaler_DIV32 : Counter Clock = LPTIM Clock / 32
   *     @arg LPTIM_Prescaler_DIV64 : Counter Clock = LPTIM Clock / 64
   *     @arg LPTIM_Prescaler_DIV128 : Counter Clock = LPTIM Clock / 128
-  * @retval None
   *
   * @note   It is mandatory to disable the peripheral to use this function.
   */
@@ -380,7 +373,6 @@ void LPTIM_ConfigPrescaler(LPTIM_TypeDef* LPTIMx, uint32_t LPTIM_Prescaler)
   *     @arg LPTIM_ExtTRGPolarity_RisingEdge : Rising edge polarity selected
   *     @arg LPTIM_ExtTRGPolarity_FallingEdge : Falling edge polarity selected
   *     @arg LPTIM_ExtTRGPolarity_BothEdges : Both edges polarity selected
-  * @retval None
   *
   * @note   It is mandatory to disable the peripheral to use this function.
   */
@@ -409,7 +401,6 @@ void LPTIM_ConfigExternalTrigger(LPTIM_TypeDef* LPTIMx, uint32_t LPTIM_ExtTRGSou
 /**
   * @brief  Selects a software start of the counter.
   * @param  LPTIMx: where x can be 1.
-  * @retval None
   *
   * @note   It is mandatory to disable the peripheral to use this function.
   */
@@ -432,7 +423,6 @@ void LPTIM_SelectSoftwareStart(LPTIM_TypeDef* LPTIMx)
   *     @arg LPTIM_TrigSampleTime_2Transistions : Event is detected after 2 consecutive samples at the active level
   *     @arg LPTIM_TrigSampleTime_4Transistions : Event is detected after 4 consecutive samples at the active level
   *     @arg LPTIM_TrigSampleTime_8Transistions : Event is detected after 8 consecutive samples at the active level
-  * @retval None
   *
   * @note   It is mandatory to disable the peripheral to use this function.
   * @note   An auxiliary clock must be present to use this feature.
@@ -468,7 +458,6 @@ void LPTIM_ConfigTriggerGlitchFilter(LPTIM_TypeDef* LPTIMx, uint32_t LPTIM_TrigS
   *     @arg LPTIM_ClockSampleTime_2Transistions : Event is detected after 2 consecutive samples at the active level
   *     @arg LPTIM_ClockSampleTime_4Transistions : Event is detected after 4 consecutive samples at the active level
   *     @arg LPTIM_ClockSampleTime_8Transistions : Event is detected after 8 consecutive samples at the active level
-  * @retval None
   *
   * @note   It is mandatory to disable the peripheral to use this function.
   * @note   An auxiliary clock must be present to use this feature.
@@ -501,7 +490,6 @@ void LPTIM_ConfigClockGlitchFilter(LPTIM_TypeDef* LPTIMx, uint32_t LPTIM_ClockSa
   * This parameter can be:
   *     @arg LPTIM_Mode_Continuous : Timer starts in Continuous mode
   *     @arg LPTIM_Mode_Single : Timer will starts in Single mode
-  * @retval None
   */
 void LPTIM_SelectOperatingMode(LPTIM_TypeDef* LPTIMx, uint32_t LPTIM_Mode)
 {
@@ -527,7 +515,6 @@ void LPTIM_SelectOperatingMode(LPTIM_TypeDef* LPTIMx, uint32_t LPTIM_Mode)
   * @param  LPTIMx: where x can be 1.
   * @param  NewState: new state of the Timeout function.
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
   *
   * @note   It is mandatory to disable the peripheral to use this function.
   */
@@ -556,7 +543,6 @@ void LPTIM_TimoutCmd(LPTIM_TypeDef* LPTIMx, FunctionalState NewState)
   * This parameter can be:
   *     @arg LPTIM_Waveform_PWM_OnePulse : PWM/One Pulse is selected
   *     @arg LPTIM_Waveform_SetOnce : Set once is selected
-  * @retval None
   *
   * @note   It is mandatory to disable the peripheral to use this function.
   */
@@ -580,7 +566,6 @@ void LPTIM_ConfigWaveform(LPTIM_TypeDef* LPTIMx, uint32_t LPTIM_Waveform)
   * This parameter can be:
   *     @arg LPTIM_Update_Immediate : Registers updated after APB write
   *     @arg LPTIM_Update_EndOfPeriod : Registers updated at the end of current timer preload
-  * @retval None
   *
   * @note   It is mandatory to disable the peripheral to use this function.
   */
@@ -602,7 +587,6 @@ void LPTIM_ConfigUpdate(LPTIM_TypeDef* LPTIMx, uint32_t LPTIM_Update)
   * @param  LPTIMx: where x can be 1.
   * @param  LPTIM_Autoreload: The Autoreload value.
   *         This parameter must be a value between 0x0000 and 0xFFFF
-  * @retval None
   */
 void LPTIM_SetAutoreloadValue(LPTIM_TypeDef* LPTIMx, uint32_t LPTIM_Autoreload)
 {
@@ -619,7 +603,6 @@ void LPTIM_SetAutoreloadValue(LPTIM_TypeDef* LPTIMx, uint32_t LPTIM_Autoreload)
   * @param  LPTIMx: where x can be 1.
   * @param  LPTIM_Compare: The Compare value.
   *         This parameter must be a value between 0x0000 and 0xFFFF
-  * @retval None
   */
 void LPTIM_SetCompareValue(LPTIM_TypeDef* LPTIMx, uint32_t LPTIM_Compare)
 {
@@ -637,7 +620,6 @@ void LPTIM_SetCompareValue(LPTIM_TypeDef* LPTIMx, uint32_t LPTIM_Compare)
   * @param  LPTIMx: where x can be 1.
   * @param  NewState: new state of the Counter mode.
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
   *
   * @note   It is mandatory to disable the peripheral to use this function.
   */
@@ -664,7 +646,6 @@ void LPTIM_SelectCounterMode(LPTIM_TypeDef* LPTIMx, FunctionalState NewState)
   * @param  LPTIMx: where x can be 1.
   * @param  NewState: New state of the encoder mode.
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
   *
   * @note   It is mandatory to disable the peripheral to use this function.
   */
@@ -805,7 +786,6 @@ void LPTIM_RemapConfig(LPTIM_TypeDef* LPTIMx, uint32_t LPTIM_OPTR)
   * @note   LPTIM_IT_UP is available only for LPTIM1.
   * @param  NewState: new state of the TIM interrupts.
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
   *
   * @note   It is mandatory to disable the peripheral to use this function.
   */
@@ -844,7 +824,6 @@ void LPTIM_ITConfig(LPTIM_TypeDef* LPTIMx, uint32_t LPTIM_IT, FunctionalState Ne
   * @note   LPTIM_Flag_UP is generated only for LPTIM1.
   * @param  NewState: new state of the TIM interrupts.
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 FlagStatus LPTIM_GetFlagStatus(LPTIM_TypeDef* LPTIMx, uint32_t LPTIM_FLAG)
 {
@@ -879,7 +858,6 @@ FlagStatus LPTIM_GetFlagStatus(LPTIM_TypeDef* LPTIMx, uint32_t LPTIM_FLAG)
   *            @arg LPTIM_CLEARF_CMPM: Compare match Clear Flag
   * @note   LPTIM_Flag_DOWN is generated only for LPTIM1.
   * @note   LPTIM_Flag_UP is generated only for LPTIM1.
-  * @retval None
   */
 void LPTIM_ClearFlag(LPTIM_TypeDef* LPTIMx, uint32_t LPTIM_CLEARF)
 {

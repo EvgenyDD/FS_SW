@@ -139,7 +139,6 @@
   * @brief  Deinitializes the QSPI peripheral registers to their default
   *         reset values.
   * @param  None
-  * @retval None
   */
 void QSPI_DeInit(void)
 {
@@ -152,7 +151,6 @@ void QSPI_DeInit(void)
 /**
   * @brief  Fills each QSPI_InitStruct member with its default value.
   * @param  QSPI_InitStruct: pointer to a QSPI_InitTypeDef structure which will be initialized.
-  * @retval None
   */
 void QSPI_StructInit(QSPI_InitTypeDef* QSPI_InitStruct)
 {
@@ -176,7 +174,6 @@ void QSPI_StructInit(QSPI_InitTypeDef* QSPI_InitStruct)
 /**
   * @brief  Fills each QSPI_ComConfig_InitStruct member with its default value.
   * @param  QSPI_ComConfig_InitStruct: pointer to a QSPI_ComConfig_InitTypeDef structure which will be initialized.
-  * @retval None
   */
 void QSPI_ComConfig_StructInit(QSPI_ComConfig_InitTypeDef* QSPI_ComConfig_InitStruct)
 {
@@ -214,7 +211,6 @@ void QSPI_ComConfig_StructInit(QSPI_ComConfig_InitTypeDef* QSPI_ComConfig_InitSt
   *         parameters in the QSPI_InitStruct.
   * @param  QSPI_InitStruct: pointer to a QSPI_InitTypeDef structure that
   *         contains the configuration information for the specified QSPI peripheral.
-  * @retval None
   */
 void QSPI_Init(QSPI_InitTypeDef* QSPI_InitStruct)
 {
@@ -260,7 +256,6 @@ void QSPI_Init(QSPI_InitTypeDef* QSPI_InitStruct)
   *         parameters in the QSPI_ComConfig_InitStruct.
   * @param  QSPI_ComConfig_InitStruct: pointer to a QSPI_ComConfig_InitTypeDef structure that
   *         contains the communication configuration informations about QSPI peripheral.
-  * @retval None
   */
 void QSPI_ComConfig_Init(QSPI_ComConfig_InitTypeDef* QSPI_ComConfig_InitStruct)
 {
@@ -306,7 +301,6 @@ void QSPI_ComConfig_Init(QSPI_ComConfig_InitTypeDef* QSPI_ComConfig_InitStruct)
   * @brief  Enables or disables QSPI peripheral.
   * @param  NewState: new state of the QSPI peripheral. 
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void QSPI_Cmd(FunctionalState NewState)
 {
@@ -331,7 +325,7 @@ void QSPI_Cmd(FunctionalState NewState)
   *          This parameter can be any value between 0x00000000 and 0xFFFFFFFF.
   * @param  QSPI_Mask: Mask to be applied to the status bytes received in polling mode.. 
   *          This parameter can be any value between 0x00000000 and 0xFFFFFFFF.
-  * @param  QSPI_Match_Mode: indicates which method should be used for determining a “match” during
+  * @param  QSPI_Match_Mode: indicates which method should be used for determining a ï¿½matchï¿½ during
   *         automatic polling mode. 
   *          This parameter can be any value of :
   *            @arg QSPI_PMM_AND: AND match mode- SMF is set if all the unmasked bits received from the flash match
@@ -339,7 +333,6 @@ void QSPI_Cmd(FunctionalState NewState)
   *            @arg QSPI_PMM_OR: OR match mode- SMF is set if any one of the unmasked bits received from the flash
                     matches its corresponding bit in the match register.
   * @note   This function is used only in Automatic Polling Mode
-  * @retval None
   */
 void QSPI_AutoPollingMode_Config(uint32_t QSPI_Match, uint32_t QSPI_Mask , uint32_t QSPI_Match_Mode)
 {
@@ -376,7 +369,6 @@ void QSPI_AutoPollingMode_Config(uint32_t QSPI_Match, uint32_t QSPI_Mask , uint3
   * @param  QSPI_Interval: The number of CLK cycle between two read during automatic polling phases. 
   *          This parameter can be any value of between 0x0000 and 0xFFFF
   * @note   This function is used only in Automatic Polling Mode  
-  * @retval None
   */
 void QSPI_AutoPollingMode_SetInterval(uint32_t QSPI_Interval)
 {
@@ -406,7 +398,6 @@ void QSPI_AutoPollingMode_SetInterval(uint32_t QSPI_Interval)
   *         in a lowerconsumption state. 
   *         This parameter can be any value of between 0x0000 and 0xFFFF
   * @note   This function is used only in Memory Mapped Mode  
-  * @retval None
   */
 void QSPI_MemoryMappedMode_SetTimeout(uint32_t QSPI_Timeout)
 {
@@ -434,7 +425,6 @@ void QSPI_MemoryMappedMode_SetTimeout(uint32_t QSPI_Timeout)
   * @param  QSPI_Address: Address to be send to the external flash memory.  
   *         This parameter can be any value of between 0x00000000 and 0xFFFFFFFF
   * @note   This function is used only in Indirect Mode  
-  * @retval None
   */
 void QSPI_SetAddress(uint32_t QSPI_Address)
 {
@@ -451,7 +441,6 @@ void QSPI_SetAddress(uint32_t QSPI_Address)
   * @param  QSPI_AlternateByte: Optional data to be send to the external QSPI device right after the address. 
   *         This parameter can be any value of between 0x00000000 and 0xFFFFFFFF
   * @note   This function is used only in Indirect Mode  
-  * @retval None
   */
 void QSPI_SetAlternateByte(uint32_t QSPI_AlternateByte)
 {
@@ -469,7 +458,6 @@ void QSPI_SetAlternateByte(uint32_t QSPI_AlternateByte)
   *           of bytes in the FIFO which will cause the FIFO Threshold Flag 
   *           FTF to be set.
   *         This parameter can be any value of between 0x00 and 0x0F
-  * @retval None
   */
 void QSPI_SetFIFOThreshold(uint32_t QSPI_FIFOThreshold)
 {
@@ -506,7 +494,6 @@ void QSPI_SetFIFOThreshold(uint32_t QSPI_FIFOThreshold)
   *             0xFFFF_FFFF: undefined length -- all bytes until the end of flash memory (as defined
   *             by FSIZE) are to be transferred
   * @note   This function is not used in Memory Mapped Mode.
-  * @retval None
   */
 void QSPI_SetDataLength(uint32_t QSPI_DataLength)
 {
@@ -523,7 +510,6 @@ void QSPI_SetDataLength(uint32_t QSPI_DataLength)
   * @param  NewState: new state of the Timeout Counter. 
   *          This parameter can be: ENABLE or DISABLE.
   * @note   This function is used only in Memory Mapped Mode.
-  * @retval None
   */
 void QSPI_TimeoutCounterCmd(FunctionalState NewState)
 {
@@ -551,7 +537,6 @@ void QSPI_TimeoutCounterCmd(FunctionalState NewState)
   * @param  NewState: new state of the Automatic Polling Mode Stop. 
   *          This parameter can be: ENABLE or DISABLE.
   * @note   This function is used only in Automatic Polling Mode.    
-  * @retval None
   */
 void QSPI_AutoPollingModeStopCmd(FunctionalState NewState)
 {
@@ -577,7 +562,6 @@ void QSPI_AutoPollingModeStopCmd(FunctionalState NewState)
 /**
   * @brief  Abort the on-going command sequence.
   * @param  None
-  * @retval None
   */
 void QSPI_AbortRequest(void)
 {
@@ -590,7 +574,6 @@ void QSPI_AbortRequest(void)
 /**
   * @brief  Transmits a 8bit Data through the QSPI peripheral.
   * @param  Data: Data to be transmitted.
-  * @retval None
   */
 void QSPI_SendData8(uint8_t Data)
 {
@@ -605,7 +588,6 @@ void QSPI_SendData8(uint8_t Data)
 /**
   * @brief  Transmits a 16bit Data through the QSPI peripheral.
   * @param  Data: Data to be transmitted.
-  * @retval None
   */
 void QSPI_SendData16(uint16_t Data)
 {
@@ -620,7 +602,6 @@ void QSPI_SendData16(uint16_t Data)
 /**
   * @brief  Transmits a 32bit Data through the QSPI peripheral.
   * @param  Data: Data to be transmitted.
-  * @retval None
   */
 void QSPI_SendData32(uint32_t Data)
 {
@@ -670,7 +651,6 @@ uint32_t QSPI_ReceiveData32(void)
   * @brief  Enables or disables DMA for Indirect Mode.
   * @param  NewState: new state of the Timeout Counter. 
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void QSPI_DMACmd(FunctionalState NewState)
 {
@@ -702,7 +682,6 @@ void QSPI_DMACmd(FunctionalState NewState)
   *            @arg QSPI_IT_TE: Transfer Error      
   * @param  NewState: new state of the specified QSPI interrupt.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void QSPI_ITConfig(uint32_t QSPI_IT, FunctionalState NewState)
 {
@@ -797,7 +776,6 @@ FlagStatus QSPI_GetFlagStatus(uint32_t QSPI_FLAG)
   *            @arg QSPI_FLAG_SM: Status Match interrupt flag
   *            @arg QSPI_FLAG_TC: Transfer Complete flag
   *            @arg QSPI_FLAG_TE: Transfer Error flag
-  * @retval None
   */
 void QSPI_ClearFlag(uint32_t QSPI_FLAG)
 {
@@ -858,7 +836,6 @@ ITStatus QSPI_GetITStatus(uint32_t QSPI_IT)
   *            @arg QSPI_IT_SM: Status Match interrupt
   *            @arg QSPI_IT_TC: Transfer Complete
   *            @arg QSPI_IT_TE: Transfer Error 
-  * @retval None
   */
 void QSPI_ClearITPendingBit(uint32_t QSPI_IT)
 {
@@ -872,7 +849,6 @@ void QSPI_ClearITPendingBit(uint32_t QSPI_IT)
   * @brief  Enables or disables QSPI Dual Flash Mode.
   * @param  NewState: new state of the QSPI Dual Flash Mode. 
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void QSPI_DualFlashMode_Cmd(FunctionalState NewState)
 {

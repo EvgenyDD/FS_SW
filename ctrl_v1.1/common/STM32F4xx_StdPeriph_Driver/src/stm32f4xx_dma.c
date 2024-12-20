@@ -191,7 +191,6 @@
   * @brief  Deinitialize the DMAy Streamx registers to their default reset values.
   * @param  DMAy_Streamx: where y can be 1 or 2 to select the DMA and x can be 0
   *         to 7 to select the DMA Stream.
-  * @retval None
   */
 void DMA_DeInit(DMA_Stream_TypeDef* DMAy_Streamx)
 {
@@ -314,7 +313,6 @@ void DMA_DeInit(DMA_Stream_TypeDef* DMAy_Streamx)
   *         to 7 to select the DMA Stream.
   * @param  DMA_InitStruct: pointer to a DMA_InitTypeDef structure that contains
   *         the configuration information for the specified DMA Stream.  
-  * @retval None
   */
 void DMA_Init(DMA_Stream_TypeDef* DMAy_Streamx, DMA_InitTypeDef* DMA_InitStruct)
 {
@@ -398,7 +396,6 @@ void DMA_Init(DMA_Stream_TypeDef* DMAy_Streamx, DMA_InitTypeDef* DMA_InitStruct)
   * @brief  Fills each DMA_InitStruct member with its default value.
   * @param  DMA_InitStruct : pointer to a DMA_InitTypeDef structure which will 
   *         be initialized.
-  * @retval None
   */
 void DMA_StructInit(DMA_InitTypeDef* DMA_InitStruct)
 {
@@ -473,7 +470,6 @@ void DMA_StructInit(DMA_InitTypeDef* DMA_InitStruct)
   *        and the Stream will be effectively disabled only after the transfer of
   *        this single data is finished.            
   *    
-  * @retval None
   */
 void DMA_Cmd(DMA_Stream_TypeDef* DMAy_Streamx, FunctionalState NewState)
 {
@@ -509,7 +505,6 @@ void DMA_Cmd(DMA_Stream_TypeDef* DMAy_Streamx, FunctionalState NewState)
   *                                   accordingly to PSIZE parameter.
   *            @arg DMA_PINCOS_WordAligned: Peripheral address increment offset is 
   *                                         fixed to 4 (32-bit aligned addresses). 
-  * @retval None
   */
 void DMA_PeriphIncOffsetSizeConfig(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DMA_Pincos)
 {
@@ -545,7 +540,6 @@ void DMA_PeriphIncOffsetSizeConfig(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DM
   *                                      the DMA controller.
   *            @arg DMA_FlowCtrl_Peripheral: DMAy_Streamx transactions flow controller 
   *                                          is the peripheral.    
-  * @retval None
   */
 void DMA_FlowControllerConfig(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DMA_FlowCtrl)
 {
@@ -725,7 +719,6 @@ uint16_t DMA_GetCurrDataCounter(DMA_Stream_TypeDef* DMAy_Streamx)
   *       
   * @note   Memory0BaseAddr is set by the DMA structure configuration in DMA_Init().
   *   
-  * @retval None
   */
 void DMA_DoubleBufferModeConfig(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t Memory1BaseAddr,
                                 uint32_t DMA_CurrentMemory)
@@ -756,7 +749,6 @@ void DMA_DoubleBufferModeConfig(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t Memor
   *          to 7 to select the DMA Stream.
   * @param  NewState: new state of the DMAy Streamx double buffer mode. 
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void DMA_DoubleBufferModeCmd(DMA_Stream_TypeDef* DMAy_Streamx, FunctionalState NewState)
 {  
@@ -797,7 +789,6 @@ void DMA_DoubleBufferModeCmd(DMA_Stream_TypeDef* DMAy_Streamx, FunctionalState N
   *          To know which Memory is currently used, you can use the function
   *          DMA_GetCurrentMemoryTarget().             
   *  
-  * @retval None
   */
 void DMA_MemoryTargetConfig(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t MemoryBaseAddr,
                            uint32_t DMA_MemoryTarget)
@@ -1066,7 +1057,6 @@ FlagStatus DMA_GetFlagStatus(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DMA_FLAG
   *            @arg DMA_FLAG_DMEIFx: Streamx direct mode error flag
   *            @arg DMA_FLAG_FEIFx:  Streamx FIFO error flag
   *         Where x can be 0 to 7 to select the DMA Stream.   
-  * @retval None
   */
 void DMA_ClearFlag(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DMA_FLAG)
 {
@@ -1113,7 +1103,6 @@ void DMA_ClearFlag(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DMA_FLAG)
   *            @arg DMA_IT_FE:  FIFO error interrupt mask
   * @param  NewState: new state of the specified DMA interrupts.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void DMA_ITConfig(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DMA_IT, FunctionalState NewState)
 {
@@ -1247,7 +1236,6 @@ ITStatus DMA_GetITStatus(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DMA_IT)
   *            @arg DMA_IT_DMEIFx: Streamx direct mode error interrupt
   *            @arg DMA_IT_FEIFx:  Streamx FIFO error interrupt
   *         Where x can be 0 to 7 to select the DMA Stream.
-  * @retval None
   */
 void DMA_ClearITPendingBit(DMA_Stream_TypeDef* DMAy_Streamx, uint32_t DMA_IT)
 {

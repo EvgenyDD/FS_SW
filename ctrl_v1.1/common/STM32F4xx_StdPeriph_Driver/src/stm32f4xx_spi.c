@@ -219,7 +219,6 @@
   *         when the relative I2S peripheral is de-initialized (the extended block's clock
   *         is managed by the I2S peripheral clock).
   *             
-  * @retval None
   */
 void SPI_I2S_DeInit(SPI_TypeDef* SPIx)
 {
@@ -279,7 +278,6 @@ void SPI_I2S_DeInit(SPI_TypeDef* SPIx)
   * @param  SPIx: where x can be 1, 2, 3, 4, 5 or 6 to select the SPI peripheral.
   * @param  SPI_InitStruct: pointer to a SPI_InitTypeDef structure that
   *         contains the configuration information for the specified SPI peripheral.
-  * @retval None
   */
 void SPI_Init(SPI_TypeDef* SPIx, SPI_InitTypeDef* SPI_InitStruct)
 {
@@ -343,7 +341,6 @@ void SPI_Init(SPI_TypeDef* SPIx, SPI_InitTypeDef* SPI_InitStruct)
   *         I2S_EXTERNAL_CLOCK_VAL in file stm32f4xx_conf.h should be enabled and set
   *         to the value of the source clock frequency (in Hz).
   *  
-  * @retval None
   */
 void I2S_Init(SPI_TypeDef* SPIx, I2S_InitTypeDef* I2S_InitStruct)
 {
@@ -490,7 +487,6 @@ void I2S_Init(SPI_TypeDef* SPIx, I2S_InitTypeDef* I2S_InitStruct)
 /**
   * @brief  Fills each SPI_InitStruct member with its default value.
   * @param  SPI_InitStruct: pointer to a SPI_InitTypeDef structure which will be initialized.
-  * @retval None
   */
 void SPI_StructInit(SPI_InitTypeDef* SPI_InitStruct)
 {
@@ -518,7 +514,6 @@ void SPI_StructInit(SPI_InitTypeDef* SPI_InitStruct)
 /**
   * @brief  Fills each I2S_InitStruct member with its default value.
   * @param  I2S_InitStruct: pointer to a I2S_InitTypeDef structure which will be initialized.
-  * @retval None
   */
 void I2S_StructInit(I2S_InitTypeDef* I2S_InitStruct)
 {
@@ -547,7 +542,6 @@ void I2S_StructInit(I2S_InitTypeDef* I2S_InitStruct)
   * @param  SPIx: where x can be 1, 2, 3, 4, 5 or 6 to select the SPI peripheral.
   * @param  NewState: new state of the SPIx peripheral. 
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SPI_Cmd(SPI_TypeDef* SPIx, FunctionalState NewState)
 {
@@ -572,7 +566,6 @@ void SPI_Cmd(SPI_TypeDef* SPIx, FunctionalState NewState)
   *         for full duplex mode).
   * @param  NewState: new state of the SPIx peripheral. 
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void I2S_Cmd(SPI_TypeDef* SPIx, FunctionalState NewState)
 {
@@ -599,7 +592,6 @@ void I2S_Cmd(SPI_TypeDef* SPIx, FunctionalState NewState)
   *          This parameter can be one of the following values:
   *            @arg SPI_DataSize_16b: Set data frame format to 16bit
   *            @arg SPI_DataSize_8b: Set data frame format to 8bit
-  * @retval None
   */
 void SPI_DataSizeConfig(SPI_TypeDef* SPIx, uint16_t SPI_DataSize)
 {
@@ -619,7 +611,6 @@ void SPI_DataSizeConfig(SPI_TypeDef* SPIx, uint16_t SPI_DataSize)
   *          This parameter can be one of the following values:
   *            @arg SPI_Direction_Tx: Selects Tx transmission direction
   *            @arg SPI_Direction_Rx: Selects Rx receive direction
-  * @retval None
   */
 void SPI_BiDirectionalLineConfig(SPI_TypeDef* SPIx, uint16_t SPI_Direction)
 {
@@ -645,7 +636,6 @@ void SPI_BiDirectionalLineConfig(SPI_TypeDef* SPIx, uint16_t SPI_Direction)
   *          This parameter can be one of the following values:
   *            @arg SPI_NSSInternalSoft_Set: Set NSS pin internally
   *            @arg SPI_NSSInternalSoft_Reset: Reset NSS pin internally
-  * @retval None
   */
 void SPI_NSSInternalSoftwareConfig(SPI_TypeDef* SPIx, uint16_t SPI_NSSInternalSoft)
 {
@@ -669,7 +659,6 @@ void SPI_NSSInternalSoftwareConfig(SPI_TypeDef* SPIx, uint16_t SPI_NSSInternalSo
   * @param  SPIx: where x can be 1, 2, 3, 4, 5 or 6 to select the SPI peripheral.
   * @param  NewState: new state of the SPIx SS output. 
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SPI_SSOutputCmd(SPI_TypeDef* SPIx, FunctionalState NewState)
 {
@@ -700,7 +689,6 @@ void SPI_SSOutputCmd(SPI_TypeDef* SPIx, FunctionalState NewState)
   * @param  SPIx: where x can be 1, 2, 3, 4, 5 or 6 
   * @param  NewState: new state of the selected SPI TI communication mode.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SPI_TIModeCmd(SPI_TypeDef* SPIx, FunctionalState NewState)
 {
@@ -737,7 +725,6 @@ void SPI_TIModeCmd(SPI_TypeDef* SPIx, FunctionalState NewState)
   *         
   * @note   The I2S full duplex extension can be configured in slave mode only.    
   *  
-  * @retval None
   */
 void I2S_FullDuplexConfig(SPI_TypeDef* I2Sxext, I2S_InitTypeDef* I2S_InitStruct)
 {
@@ -827,7 +814,6 @@ uint16_t SPI_I2S_ReceiveData(SPI_TypeDef* SPIx)
   * @param  SPIx: To select the SPIx/I2Sx peripheral, where x can be: 1, 2, 3, 4, 5 or 6 
   *         in SPI mode or 2 or 3 in I2S mode or I2Sxext for I2S full duplex mode.     
   * @param  Data: Data to be transmitted.
-  * @retval None
   */
 void SPI_I2S_SendData(SPI_TypeDef* SPIx, uint16_t Data)
 {
@@ -917,7 +903,6 @@ void SPI_I2S_SendData(SPI_TypeDef* SPIx, uint16_t Data)
   * @param  SPIx: where x can be 1, 2, 3, 4, 5 or 6 to select the SPI peripheral.
   * @param  NewState: new state of the SPIx CRC value calculation.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SPI_CalculateCRC(SPI_TypeDef* SPIx, FunctionalState NewState)
 {
@@ -939,7 +924,6 @@ void SPI_CalculateCRC(SPI_TypeDef* SPIx, FunctionalState NewState)
 /**
   * @brief  Transmit the SPIx CRC value.
   * @param  SPIx: where x can be 1, 2, 3, 4, 5 or 6 to select the SPI peripheral.
-  * @retval None
   */
 void SPI_TransmitCRC(SPI_TypeDef* SPIx)
 {
@@ -1019,7 +1003,6 @@ uint16_t SPI_GetCRCPolynomial(SPI_TypeDef* SPIx)
   *            @arg SPI_I2S_DMAReq_Rx: Rx buffer DMA transfer request
   * @param  NewState: new state of the selected SPI DMA transfer request.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SPI_I2S_DMACmd(SPI_TypeDef* SPIx, uint16_t SPI_I2S_DMAReq, FunctionalState NewState)
 {
@@ -1127,7 +1110,6 @@ void SPI_I2S_DMACmd(SPI_TypeDef* SPIx, uint16_t SPI_I2S_DMAReq, FunctionalState 
   *            @arg SPI_I2S_IT_ERR: Error interrupt mask
   * @param  NewState: new state of the specified SPI interrupt.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SPI_I2S_ITConfig(SPI_TypeDef* SPIx, uint8_t SPI_I2S_IT, FunctionalState NewState)
 {
@@ -1212,7 +1194,6 @@ FlagStatus SPI_I2S_GetFlagStatus(SPI_TypeDef* SPIx, uint16_t SPI_I2S_FLAG)
   *          operation to SPI_SR register (SPI_I2S_GetFlagStatus()) followed by a 
   *          write operation to SPI_CR1 register (SPI_Cmd() to enable the SPI).
   *  
-  * @retval None
   */
 void SPI_I2S_ClearFlag(SPI_TypeDef* SPIx, uint16_t SPI_I2S_FLAG)
 {
@@ -1292,7 +1273,6 @@ ITStatus SPI_I2S_GetITStatus(SPI_TypeDef* SPIx, uint8_t SPI_I2S_IT)
   *          a read/write operation to SPI_SR register (SPI_I2S_GetITStatus()) 
   *          followed by a write operation to SPI_CR1 register (SPI_Cmd() to enable 
   *          the SPI).
-  * @retval None
   */
 void SPI_I2S_ClearITPendingBit(SPI_TypeDef* SPIx, uint8_t SPI_I2S_IT)
 {

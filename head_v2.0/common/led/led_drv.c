@@ -90,7 +90,8 @@ static void _led_prc_sf3(void)
 	float y1 = interval_hit((int32_t)counter_2000, 100, half_period_flash, 2000),
 		  y2 = interval_hit((int32_t)counter_2000, 500, half_period_flash, 2000),
 		  y3 = interval_hit((int32_t)counter_2000, 900, half_period_flash, 2000);
-	leds[current_led].brightness = y1 > 0 ? y1 : (y2 > 0 ? y2 : y3);
+	leds[current_led].brightness = y1 > 0 ? y1 : y2 > 0 ? y2
+														: y3;
 }
 
 void (*led_processors[LED_MODE_SIZE])(void) = {
@@ -161,7 +162,7 @@ void led_drv_poll(uint32_t diff_ms)
 	cnt++;
 	if(cnt >= LED_PWM_QUANTS) cnt = 0;
 
-	cnt < led_pwm_lvl[LED_0] ? (GPIOC->BSRRL = (1 << 0)) : (GPIOC->BSRRH = (1 << 0));
+	LED_HW_DRIVE();
 }
 
 void led_drv_set_led(uint32_t led_id, LED_MODE mode)

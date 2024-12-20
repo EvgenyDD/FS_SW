@@ -69,9 +69,10 @@ flash: $(BINARY_SIGNED)
 	@openocd -d0 -f ../target/stm32f4xx.cfg -c "program $< 0x08000000 verify reset exit" 
 
 ds:
-	openocd -d0 -f ../target/stm32f4xx.cfg
+	@openocd -d0 -f ../target/stm32f4xx.cfg
 
 debug:
+	@set _NO_DEBUG_HEAP=1
 	@echo "file $(EXECUTABLE)" > .gdbinit
 	@echo "set auto-load safe-path /" >> .gdbinit
 	@echo "set confirm off" >> .gdbinit

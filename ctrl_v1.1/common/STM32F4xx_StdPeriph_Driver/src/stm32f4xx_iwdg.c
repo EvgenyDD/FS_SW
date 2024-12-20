@@ -127,7 +127,6 @@
   *          This parameter can be one of the following values:
   *            @arg IWDG_WriteAccess_Enable: Enable write access to IWDG_PR and IWDG_RLR registers
   *            @arg IWDG_WriteAccess_Disable: Disable write access to IWDG_PR and IWDG_RLR registers
-  * @retval None
   */
 void IWDG_WriteAccessCmd(uint16_t IWDG_WriteAccess)
 {
@@ -147,7 +146,6 @@ void IWDG_WriteAccessCmd(uint16_t IWDG_WriteAccess)
   *            @arg IWDG_Prescaler_64: IWDG prescaler set to 64
   *            @arg IWDG_Prescaler_128: IWDG prescaler set to 128
   *            @arg IWDG_Prescaler_256: IWDG prescaler set to 256
-  * @retval None
   */
 void IWDG_SetPrescaler(uint8_t IWDG_Prescaler)
 {
@@ -160,7 +158,6 @@ void IWDG_SetPrescaler(uint8_t IWDG_Prescaler)
   * @brief  Sets IWDG Reload value.
   * @param  Reload: specifies the IWDG Reload value.
   *          This parameter must be a number between 0 and 0x0FFF.
-  * @retval None
   */
 void IWDG_SetReload(uint16_t Reload)
 {
@@ -173,7 +170,6 @@ void IWDG_SetReload(uint16_t Reload)
   * @brief  Reloads IWDG counter with value defined in the reload register
   *         (write access to IWDG_PR and IWDG_RLR registers disabled).
   * @param  None
-  * @retval None
   */
 void IWDG_ReloadCounter(void)
 {
@@ -199,7 +195,6 @@ void IWDG_ReloadCounter(void)
 /**
   * @brief  Enables IWDG (write access to IWDG_PR and IWDG_RLR registers disabled).
   * @param  None
-  * @retval None
   */
 void IWDG_Enable(void)
 {

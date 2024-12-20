@@ -498,7 +498,6 @@ ErrorStatus RTC_Init(RTC_InitTypeDef* RTC_InitStruct)
   * @brief  Fills each RTC_InitStruct member with its default value.
   * @param  RTC_InitStruct: pointer to a RTC_InitTypeDef structure which will be 
   *         initialized.
-  * @retval None
   */
 void RTC_StructInit(RTC_InitTypeDef* RTC_InitStruct)
 {
@@ -520,7 +519,6 @@ void RTC_StructInit(RTC_InitTypeDef* RTC_InitStruct)
   * @note   The protection mechanism is not affected by system reset.  
   * @param  NewState: new state of the write protection.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void RTC_WriteProtectionCmd(FunctionalState NewState)
 {
@@ -592,7 +590,6 @@ ErrorStatus RTC_EnterInitMode(void)
   * @note   The RTC Initialization mode is write protected, use the 
   *         RTC_WriteProtectionCmd(DISABLE) before calling this function.      
   * @param  None
-  * @retval None
   */
 void RTC_ExitInitMode(void)
 { 
@@ -705,7 +702,6 @@ ErrorStatus RTC_RefClockCmd(FunctionalState NewState)
   *         directly from the Calendar counter.
   * @param  NewState: new state of the Bypass Shadow feature.
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
 */
 void RTC_BypassShadowCmd(FunctionalState NewState)
 {
@@ -863,7 +859,6 @@ ErrorStatus RTC_SetTime(uint32_t RTC_Format, RTC_TimeTypeDef* RTC_TimeStruct)
   *         (Time = 00h:00min:00sec).
   * @param  RTC_TimeStruct: pointer to a RTC_TimeTypeDef structure which will be 
   *         initialized.
-  * @retval None
   */
 void RTC_TimeStructInit(RTC_TimeTypeDef* RTC_TimeStruct)
 {
@@ -882,7 +877,6 @@ void RTC_TimeStructInit(RTC_TimeTypeDef* RTC_TimeStruct)
   *            @arg RTC_Format_BCD:  BCD data format
   * @param  RTC_TimeStruct: pointer to a RTC_TimeTypeDef structure that will 
   *                        contain the returned current time configuration.     
-  * @retval None
   */
 void RTC_GetTime(uint32_t RTC_Format, RTC_TimeTypeDef* RTC_TimeStruct)
 {
@@ -1031,7 +1025,6 @@ ErrorStatus RTC_SetDate(uint32_t RTC_Format, RTC_DateTypeDef* RTC_DateStruct)
   *         (Monday, January 01 xx00).
   * @param  RTC_DateStruct: pointer to a RTC_DateTypeDef structure which will be 
   *         initialized.
-  * @retval None
   */
 void RTC_DateStructInit(RTC_DateTypeDef* RTC_DateStruct)
 {
@@ -1050,7 +1043,6 @@ void RTC_DateStructInit(RTC_DateTypeDef* RTC_DateStruct)
   *            @arg RTC_Format_BCD: BCD data format
   * @param RTC_DateStruct: pointer to a RTC_DateTypeDef structure that will 
   *                        contain the returned current date configuration.     
-  * @retval None
   */
 void RTC_GetDate(uint32_t RTC_Format, RTC_DateTypeDef* RTC_DateStruct)
 {
@@ -1110,7 +1102,6 @@ void RTC_GetDate(uint32_t RTC_Format, RTC_DateTypeDef* RTC_DateStruct)
   *            @arg RTC_Alarm_B: to select Alarm B  
   * @param  RTC_AlarmStruct: pointer to a RTC_AlarmTypeDef structure that 
   *                          contains the alarm configuration parameters.     
-  * @retval None
   */
 void RTC_SetAlarm(uint32_t RTC_Format, uint32_t RTC_Alarm, RTC_AlarmTypeDef* RTC_AlarmStruct)
 {
@@ -1221,7 +1212,6 @@ void RTC_SetAlarm(uint32_t RTC_Format, uint32_t RTC_Alarm, RTC_AlarmTypeDef* RTC
   *         all fields are masked).
   * @param  RTC_AlarmStruct: pointer to a @ref RTC_AlarmTypeDef structure which
   *         will be initialized.
-  * @retval None
   */
 void RTC_AlarmStructInit(RTC_AlarmTypeDef* RTC_AlarmStruct)
 {
@@ -1251,7 +1241,6 @@ void RTC_AlarmStructInit(RTC_AlarmTypeDef* RTC_AlarmStruct)
   *            @arg RTC_Alarm_B: to select Alarm B  
   * @param  RTC_AlarmStruct: pointer to a RTC_AlarmTypeDef structure that will 
   *                          contains the output alarm configuration values.     
-  * @retval None
   */
 void RTC_GetAlarm(uint32_t RTC_Format, uint32_t RTC_Alarm, RTC_AlarmTypeDef* RTC_AlarmStruct)
 {
@@ -1399,7 +1388,6 @@ ErrorStatus RTC_AlarmCmd(uint32_t RTC_Alarm, FunctionalState NewState)
   *                                          Only SS[13:0] are compared
   *     @arg RTC_AlarmSubSecondMask_None   : SS[14:0] are compared and must match
   *                                          to activate alarm
-  * @retval None
   */
 void RTC_AlarmSubSecondConfig(uint32_t RTC_Alarm, uint32_t RTC_AlarmSubSecondValue, uint32_t RTC_AlarmSubSecondMask)
 {
@@ -1489,7 +1477,6 @@ uint32_t RTC_GetAlarmSubSecond(uint32_t RTC_Alarm)
   *            @arg RTC_WakeUpClock_RTCCLK_Div2: RTC Wakeup Counter Clock = RTCCLK/2
   *            @arg RTC_WakeUpClock_CK_SPRE_16bits: RTC Wakeup Counter Clock = CK_SPRE
   *            @arg RTC_WakeUpClock_CK_SPRE_17bits: RTC Wakeup Counter Clock = CK_SPRE
-  * @retval None
   */
 void RTC_WakeUpClockConfig(uint32_t RTC_WakeUpClock)
 {
@@ -1516,7 +1503,6 @@ void RTC_WakeUpClockConfig(uint32_t RTC_WakeUpClock)
   *         is disabled (Use the RTC_WakeUpCmd(DISABLE)).        
   * @param  RTC_WakeUpCounter: specifies the WakeUp counter.
   *          This parameter can be a value from 0x0000 to 0xFFFF. 
-  * @retval None
   */
 void RTC_SetWakeUpCounter(uint32_t RTC_WakeUpCounter)
 {
@@ -1549,7 +1535,6 @@ uint32_t RTC_GetWakeUpCounter(void)
   * @brief  Enables or Disables the RTC WakeUp timer.
   * @param  NewState: new state of the WakeUp timer.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 ErrorStatus RTC_WakeUpCmd(FunctionalState NewState)
 {
@@ -1626,7 +1611,6 @@ ErrorStatus RTC_WakeUpCmd(FunctionalState NewState)
   *          This parameter can be one of the following values:
   *            @arg RTC_StoreOperation_Reset: BCK Bit Reset
   *            @arg RTC_StoreOperation_Set: BCK Bit Set
-  * @retval None
   */
 void RTC_DayLightSavingConfig(uint32_t RTC_DayLightSaving, uint32_t RTC_StoreOperation)
 {
@@ -1692,7 +1676,6 @@ uint32_t RTC_GetStoreOperation(void)
   *                                 ALRAF/ALRBF/WUTF is high (depending on OSEL)
   *            @arg RTC_OutputPolarity_Low: The output pin is low when the 
   *                                 ALRAF/ALRBF/WUTF is high (depending on OSEL)
-  * @retval None
   */
 void RTC_OutputConfig(uint32_t RTC_Output, uint32_t RTC_OutputPolarity)
 {
@@ -1833,7 +1816,6 @@ ErrorStatus RTC_CoarseCalibCmd(FunctionalState NewState)
   * @brief  Enables or disables the RTC clock to be output through the relative pin.
   * @param  NewState: new state of the digital calibration Output.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void RTC_CalibOutputCmd(FunctionalState NewState)
 {
@@ -1865,7 +1847,6 @@ void RTC_CalibOutputCmd(FunctionalState NewState)
   *   This parameter can be one of the following values:
   *     @arg RTC_CalibOutput_512Hz: A signal has a regular waveform at 512Hz. 
   *     @arg RTC_CalibOutput_1Hz  : A signal has a regular waveform at 1Hz.
-  * @retval None
 */
 void RTC_CalibOutputConfig(uint32_t RTC_CalibOutput)
 {
@@ -1977,7 +1958,6 @@ ErrorStatus RTC_SmoothCalibConfig(uint32_t RTC_SmoothCalibPeriod,
   *                                     falling edge of the related pin.
   * @param  NewState: new state of the TimeStamp.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void RTC_TimeStampCmd(uint32_t RTC_TimeStampEdge, FunctionalState NewState)
 {
@@ -2021,7 +2001,6 @@ void RTC_TimeStampCmd(uint32_t RTC_TimeStampEdge, FunctionalState NewState)
   *                             contains the TimeStamp time values. 
   * @param RTC_StampDateStruct: pointer to a RTC_DateTypeDef structure that will 
   *                             contains the TimeStamp date values.     
-  * @retval None
   */
 void RTC_GetTimeStamp(uint32_t RTC_Format, RTC_TimeTypeDef* RTC_StampTimeStruct, 
                                       RTC_DateTypeDef* RTC_StampDateStruct)
@@ -2100,7 +2079,6 @@ uint32_t RTC_GetTimeStampSubSecond(void)
   *     @arg RTC_TamperTrigger_FallingEdge: Falling Edge of the tamper pin causes tamper event.
   *     @arg RTC_TamperTrigger_LowLevel: Low Level of the tamper pin causes tamper event.
   *     @arg RTC_TamperTrigger_HighLevel: High Level of the tamper pin causes tamper event.
-  * @retval None
   */
 void RTC_TamperTriggerConfig(uint32_t RTC_Tamper, uint32_t RTC_TamperTrigger)
 {
@@ -2126,7 +2104,6 @@ void RTC_TamperTriggerConfig(uint32_t RTC_Tamper, uint32_t RTC_TamperTrigger)
   *          This parameter can be RTC_Tamper_1 or RTC_Tamper_2
   * @param  NewState: new state of the tamper pin.
   *          This parameter can be: ENABLE or DISABLE.                   
-  * @retval None
   */
 void RTC_TamperCmd(uint32_t RTC_Tamper, FunctionalState NewState)
 {
@@ -2157,7 +2134,6 @@ void RTC_TamperCmd(uint32_t RTC_Tamper, FunctionalState NewState)
   *                                    samples at the active level
   *     @arg RTC_TamperFilter_8Sample: Tamper is activated after 8 consecutive 
   *                                    samples at the active level 
-  * @retval None
   */
 void RTC_TamperFilterConfig(uint32_t RTC_TamperFilter)
 {
@@ -2191,7 +2167,6 @@ void RTC_TamperFilterConfig(uint32_t RTC_TamperFilter)
   *                                           with a frequency =  RTCCLK / 512  
   *     @arg RTC_TamperSamplingFreq_RTCCLK_Div256: Each of the tamper inputs are sampled
   *                                           with a frequency =  RTCCLK / 256  
-  * @retval None
   */
 void RTC_TamperSamplingFreqConfig(uint32_t RTC_TamperSamplingFreq)
 {
@@ -2214,7 +2189,6 @@ void RTC_TamperSamplingFreqConfig(uint32_t RTC_TamperSamplingFreq)
   *     @arg RTC_TamperPrechargeDuration_2RTCCLK: Tamper pins are precharged before sampling during 2 RTCCLK cycle
   *     @arg RTC_TamperPrechargeDuration_4RTCCLK: Tamper pins are precharged before sampling during 4 RTCCLK cycle    
   *     @arg RTC_TamperPrechargeDuration_8RTCCLK: Tamper pins are precharged before sampling during 8 RTCCLK cycle
-  * @retval None
   */
 void RTC_TamperPinsPrechargeDuration(uint32_t RTC_TamperPrechargeDuration)
 {
@@ -2234,7 +2208,6 @@ void RTC_TamperPinsPrechargeDuration(uint32_t RTC_TamperPrechargeDuration)
   *         is reset.   
   * @param  NewState: new state of the timestamp on tamper event.
   *         This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void RTC_TimeStampOnTamperDetectionCmd(FunctionalState NewState)
 {
@@ -2257,7 +2230,6 @@ void RTC_TimeStampOnTamperDetectionCmd(FunctionalState NewState)
   * @brief  Enables or Disables the Precharge of Tamper pin.
   * @param  NewState: new state of tamper pull up.
   *   This parameter can be: ENABLE or DISABLE.                   
-  * @retval None
   */
 void RTC_TamperPullUpCmd(FunctionalState NewState)
 {
@@ -2298,7 +2270,6 @@ void RTC_TamperPullUpCmd(FunctionalState NewState)
   *          This parameter can be: RTC_BKP_DRx where x can be from 0 to 19 to 
   *                          specify the register.
   * @param  Data: Data to be written in the specified RTC Backup data register.                     
-  * @retval None
   */
 void RTC_WriteBackupRegister(uint32_t RTC_BKP_DR, uint32_t Data)
 {
@@ -2319,7 +2290,6 @@ void RTC_WriteBackupRegister(uint32_t RTC_BKP_DR, uint32_t Data)
   * @param  RTC_BKP_DR: RTC Backup data Register number.
   *          This parameter can be: RTC_BKP_DRx where x can be from 0 to 19 to 
   *                          specify the register.                   
-  * @retval None
   */
 uint32_t RTC_ReadBackupRegister(uint32_t RTC_BKP_DR)
 {
@@ -2358,7 +2328,6 @@ uint32_t RTC_ReadBackupRegister(uint32_t RTC_BKP_DR)
   *          This parameter can be one of the following values:
   *            @arg RTC_TamperPin_Default: RTC_AF1 is used as RTC Tamper Pin.
   *            @arg RTC_TamperPin_Pos1: RTC_AF2 is selected as RTC Tamper Pin.    
-  * @retval None
   */
 void RTC_TamperPinSelection(uint32_t RTC_TamperPin)
 {
@@ -2375,7 +2344,6 @@ void RTC_TamperPinSelection(uint32_t RTC_TamperPin)
   *          This parameter can be one of the following values:
   *            @arg RTC_TimeStampPin_PC13: PC13 is selected as RTC TimeStamp Pin.
   *            @arg RTC_TimeStampPin_PI8: PI8 is selected as RTC TimeStamp Pin.    
-  * @retval None
   */
 void RTC_TimeStampPinSelection(uint32_t RTC_TimeStampPin)
 {
@@ -2394,7 +2362,6 @@ void RTC_TimeStampPinSelection(uint32_t RTC_TimeStampPin)
   *                                    Open Drain mode.
   *            @arg RTC_OutputType_PushPull:  RTC Output (PC13) is configured in 
   *                                    Push Pull mode.    
-  * @retval None
   */
 void RTC_OutputTypeConfig(uint32_t RTC_OutputType)
 {
@@ -2552,7 +2519,6 @@ ErrorStatus RTC_SynchroShiftConfig(uint32_t RTC_ShiftAdd1S, uint32_t RTC_ShiftSu
   *            @arg RTC_IT_TAMP: Tamper event interrupt mask
   * @param  NewState: new state of the specified RTC interrupts.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void RTC_ITConfig(uint32_t RTC_IT, FunctionalState NewState)
 {
@@ -2638,7 +2604,6 @@ FlagStatus RTC_GetFlagStatus(uint32_t RTC_FLAG)
   *            @arg RTC_FLAG_ALRBF: Alarm B flag
   *            @arg RTC_FLAG_ALRAF: Alarm A flag
   *            @arg RTC_FLAG_RSF: Registers Synchronized flag
-  * @retval None
   */
 void RTC_ClearFlag(uint32_t RTC_FLAG)
 {
@@ -2700,7 +2665,6 @@ ITStatus RTC_GetITStatus(uint32_t RTC_IT)
   *            @arg RTC_IT_ALRA: Alarm A interrupt 
   *            @arg RTC_IT_TAMP1: Tamper 1 event interrupt
   *            @arg RTC_IT_TAMP2: Tamper 2 event interrupt 
-  * @retval None
   */
 void RTC_ClearITPendingBit(uint32_t RTC_IT)
 {

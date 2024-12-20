@@ -28,11 +28,12 @@ static uint32_t rx_pkts_size = 0, tx_pkts_push = 0, tx_pkts_pop = 0;
 static uint8_t spi_rw(uint8_t byte)
 {
 	uint8_t rx;
-	S_WB();
 	S_DT(byte);
 	S_WT();
 	S_WR();
 	S_DR(rx);
+	S_WB();
+
 	return rx;
 }
 

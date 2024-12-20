@@ -105,7 +105,6 @@
   * @brief  Deinitializes the DMA2D peripheral registers to their default reset
   *         values.
   * @param  None
-  * @retval None
   */
 
 void DMA2D_DeInit(void)
@@ -123,7 +122,6 @@ void DMA2D_DeInit(void)
   * @note   This function can be used only when the DMA2D is disabled.
   * @param  DMA2D_InitStruct: pointer to a DMA2D_InitTypeDef structure that contains
   *         the configuration information for the specified DMA2D peripheral.
-  * @retval None
   */
 void DMA2D_Init(DMA2D_InitTypeDef* DMA2D_InitStruct)
 {
@@ -211,7 +209,6 @@ void DMA2D_Init(DMA2D_InitTypeDef* DMA2D_InitStruct)
   * @brief  Fills each DMA2D_InitStruct member with its default value.
   * @param  DMA2D_InitStruct: pointer to a DMA2D_InitTypeDef structure which will
   *         be initialized.
-  * @retval None
   */
 }
 void DMA2D_StructInit(DMA2D_InitTypeDef* DMA2D_InitStruct)
@@ -242,7 +239,6 @@ void DMA2D_StructInit(DMA2D_InitTypeDef* DMA2D_InitStruct)
 /**
   * @brief  Start the DMA2D transfer.
   * @param 
-  * @retval None
   */
 
 void DMA2D_StartTransfer(void)
@@ -254,7 +250,6 @@ void DMA2D_StartTransfer(void)
 /**
   * @brief  Abort the DMA2D transfer.
   * @param
-  * @retval None
   */
 
 void DMA2D_AbortTransfer(void)
@@ -268,7 +263,6 @@ void DMA2D_AbortTransfer(void)
   * @brief  Stop or continue the DMA2D transfer.
   * @param  NewState: new state of the DMA2D peripheral.
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void DMA2D_Suspend(FunctionalState NewState)
 {
@@ -293,7 +287,6 @@ void DMA2D_Suspend(FunctionalState NewState)
   * @note   This function can be used only when the transfer is disabled.
   * @param  DMA2D_FGStruct: pointer to a DMA2D_FGTypeDef structure that contains
   *         the configuration information for the specified Background.
-  * @retval None
   */
 void DMA2D_FGConfig(DMA2D_FG_InitTypeDef* DMA2D_FG_InitStruct)
 {
@@ -345,7 +338,6 @@ void DMA2D_FGConfig(DMA2D_FG_InitTypeDef* DMA2D_FG_InitStruct)
   * @brief  Fills each DMA2D_FGStruct member with its default value.
   * @param  DMA2D_FGStruct: pointer to a DMA2D_FGTypeDef structure which will
   *         be initialized.
-  * @retval None
   */
 void DMA2D_FG_StructInit(DMA2D_FG_InitTypeDef* DMA2D_FG_InitStruct)
 {
@@ -390,7 +382,6 @@ void DMA2D_FG_StructInit(DMA2D_FG_InitTypeDef* DMA2D_FG_InitStruct)
   * @note   This function can be used only when the transfer is disabled.
   * @param  DMA2D_BGStruct: pointer to a DMA2D_BGTypeDef structure that contains
   *         the configuration information for the specified Background.
-  * @retval None
   */
 void DMA2D_BGConfig(DMA2D_BG_InitTypeDef* DMA2D_BG_InitStruct)
 {
@@ -443,7 +434,6 @@ void DMA2D_BGConfig(DMA2D_BG_InitTypeDef* DMA2D_BG_InitStruct)
   * @brief  Fills each DMA2D_BGStruct member with its default value.
   * @param  DMA2D_BGStruct: pointer to a DMA2D_BGTypeDef structure which will
   *         be initialized.
-  * @retval None
   */
 void DMA2D_BG_StructInit(DMA2D_BG_InitTypeDef* DMA2D_BG_InitStruct)
 {
@@ -485,7 +475,6 @@ void DMA2D_BG_StructInit(DMA2D_BG_InitTypeDef* DMA2D_BG_InitStruct)
   * @brief  Start the automatic loading of the CLUT or abort the transfer.
   * @param  NewState: new state of the DMA2D peripheral.
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 
 void DMA2D_FGStart(FunctionalState NewState) 
@@ -509,7 +498,6 @@ void DMA2D_FGStart(FunctionalState NewState)
   * @brief  Start the automatic loading of the CLUT or abort the transfer.
   * @param  NewState: new state of the DMA2D peripheral.
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
   
 void DMA2D_BGStart(FunctionalState NewState) 
@@ -533,7 +521,6 @@ void DMA2D_BGStart(FunctionalState NewState)
   * @brief  Configures the DMA2D dead time.
   * @param  DMA2D_DeadTime: specifies the DMA2D dead time.
   *   This parameter can be one of the following values:
-  * @retval None
   */
 void DMA2D_DeadTimeConfig(uint32_t DMA2D_DeadTime, FunctionalState NewState)
 {
@@ -559,7 +546,6 @@ void DMA2D_DeadTimeConfig(uint32_t DMA2D_DeadTime, FunctionalState NewState)
 /**
   * @brief  Define the configuration of the line watermark .
   * @param  DMA2D_LWatermarkConfig: Line Watermark configuration.
-  * @retval None
   */
 
 void DMA2D_LineWatermarkConfig(uint32_t DMA2D_LWatermarkConfig)
@@ -626,7 +612,6 @@ void DMA2D_LineWatermarkConfig(uint32_t DMA2D_LWatermarkConfig)
   *     @arg DMA2D_IT_TE:   Transfer Error interrupt enable.
   * @param NewState: new state of the specified DMA2D interrupts.
   *   This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 
 void DMA2D_ITConfig(uint32_t DMA2D_IT, FunctionalState NewState)
@@ -692,7 +677,6 @@ FlagStatus DMA2D_GetFlagStatus(uint32_t DMA2D_FLAG)
   *     @arg DMA2D_FLAG_TW:   Transfer Watermark Interrupt flag.
   *     @arg DMA2D_FLAG_TC:   Transfer Complete interrupt flag.
   *     @arg DMA2D_FLAG_TE:   Transfer Error interrupt flag.
-  * @retval None
   */
 void DMA2D_ClearFlag(uint32_t DMA2D_FLAG)
 {
@@ -753,7 +737,6 @@ ITStatus DMA2D_GetITStatus(uint32_t DMA2D_IT)
   *     @arg DMA2D_IT_TW:   Transfer Watermark Interrupt.
   *     @arg DMA2D_IT_TC:   Transfer Complete interrupt.
   *     @arg DMA2D_IT_TE:   Transfer Error interrupt.
-  * @retval None
   */
 void DMA2D_ClearITPendingBit(uint32_t DMA2D_IT)
 {

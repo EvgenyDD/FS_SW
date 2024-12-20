@@ -180,7 +180,6 @@
   * @brief  Deinitialize the SAIx peripheral registers to their default reset values.
   * @param  SAIx: To select the SAIx peripheral, where x can be the different instances 
   *                     
-  * @retval None
   */
 void SAI_DeInit(SAI_TypeDef* SAIx)
 {
@@ -218,7 +217,6 @@ void SAI_DeInit(SAI_TypeDef* SAIx)
   * @param  SAI_Block_x: where x can be A or B to select the SAI Block peripheral.
   * @param  SAI_InitStruct: pointer to a SAI_InitTypeDef structure that
   *         contains the configuration information for the specified SAI Block peripheral.             
-  * @retval None
   */
 void SAI_Init(SAI_Block_TypeDef* SAI_Block_x, SAI_InitTypeDef* SAI_InitStruct)
 {
@@ -286,7 +284,6 @@ void SAI_Init(SAI_Block_TypeDef* SAI_Block_x, SAI_InitTypeDef* SAI_InitStruct)
   * @param  SAI_Block_x: where x can be A or B to select the SAI Block peripheral.
   * @param  SAI_FrameInitStruct: pointer to an SAI_FrameInitTypeDef structure that
   *         contains the configuration of audio frame for a specified SAI Block                       
-  * @retval None
   */
 void SAI_FrameInit(SAI_Block_TypeDef* SAI_Block_x, SAI_FrameInitTypeDef* SAI_FrameInitStruct)
 {
@@ -334,7 +331,6 @@ void SAI_FrameInit(SAI_Block_TypeDef* SAI_Block_x, SAI_FrameInitTypeDef* SAI_Fra
   * @param  SAI_Block_x: where x can be A or B to select the SAI Block peripheral.
   * @param  SAI_SlotInitStruct: pointer to an SAI_SlotInitTypeDef structure that
   *         contains the configuration of audio slot for a specified SAI Block                      
-  * @retval None
   */
 void SAI_SlotInit(SAI_Block_TypeDef* SAI_Block_x, SAI_SlotInitTypeDef* SAI_SlotInitStruct)
 {
@@ -373,7 +369,6 @@ void SAI_SlotInit(SAI_Block_TypeDef* SAI_Block_x, SAI_SlotInitTypeDef* SAI_SlotI
   * @brief  Fills each SAI_InitStruct member with its default value.
   * @param  SAI_InitStruct: pointer to a SAI_InitTypeDef structure which will 
   *         be initialized.  
-  * @retval None
   */
 void SAI_StructInit(SAI_InitTypeDef* SAI_InitStruct)
 {
@@ -406,7 +401,6 @@ void SAI_StructInit(SAI_InitTypeDef* SAI_InitStruct)
   * @brief  Fills each SAI_FrameInitStruct member with its default value.
   * @param  SAI_FrameInitStruct: pointer to a SAI_FrameInitTypeDef structure 
   *         which will be initialized.                     
-  * @retval None
   */
 void SAI_FrameStructInit(SAI_FrameInitTypeDef* SAI_FrameInitStruct)
 {
@@ -427,7 +421,6 @@ void SAI_FrameStructInit(SAI_FrameInitTypeDef* SAI_FrameInitStruct)
   * @brief  Fills each SAI_SlotInitStruct member with its default value.
   * @param  SAI_SlotInitStruct: pointer to a SAI_SlotInitTypeDef structure 
   *         which will be initialized.                     
-  * @retval None
   */
 void SAI_SlotStructInit(SAI_SlotInitTypeDef* SAI_SlotInitStruct)
 {
@@ -448,7 +441,6 @@ void SAI_SlotStructInit(SAI_SlotInitTypeDef* SAI_SlotInitStruct)
   * @param  SAI_Block_x: where x can be A or B to select the SAI Block peripheral.
   * @param  NewState: new state of the SAI_Block_x peripheral. 
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SAI_Cmd(SAI_Block_TypeDef* SAI_Block_x, FunctionalState NewState)
 {
@@ -477,7 +469,6 @@ void SAI_Cmd(SAI_Block_TypeDef* SAI_Block_x, FunctionalState NewState)
   *          This parameter can be one of the following values:
   *            @arg SAI_MonoMode : Set mono audio mode
   *            @arg SAI_StreoMode : Set streo audio mode                       
-  * @retval None
   */
 void SAI_MonoModeConfig(SAI_Block_TypeDef* SAI_Block_x, uint32_t SAI_Mono_StreoMode)
 {
@@ -500,7 +491,6 @@ void SAI_MonoModeConfig(SAI_Block_TypeDef* SAI_Block_x, uint32_t SAI_Mono_StreoM
   *          This parameter can be one of the following values:
   *            @arg SAI_Output_NotReleased : SD output line is still driven by the SAI.
   *            @arg SAI_Output_Released : SD output line is released (HI-Z)                       
-  * @retval None
   */
 void SAI_TRIStateConfig(SAI_Block_TypeDef* SAI_Block_x, uint32_t SAI_TRIState)
 {
@@ -528,7 +518,6 @@ void SAI_TRIStateConfig(SAI_Block_TypeDef* SAI_Block_x, uint32_t SAI_TRIState)
   *            @arg SAI_ALaw_1CPL_Companding : Set A law (algorithm 1's complement representation)  
   *            @arg SAI_ULaw_2CPL_Companding : Set U law (algorithm 2's complement representation)
   *            @arg SAI_ALaw_2CPL_Companding : Set A law (algorithm 2's complement representation)  
-  * @retval None
   */
 void SAI_CompandingModeConfig(SAI_Block_TypeDef* SAI_Block_x, uint32_t SAI_CompandingMode)
 {
@@ -552,7 +541,6 @@ void SAI_CompandingModeConfig(SAI_Block_TypeDef* SAI_Block_x, uint32_t SAI_Compa
   * @param  SAI_Block_x: where x can be A or B to select the SAI Block peripheral.
   * @param  NewState: new state of the SAIx block. 
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SAI_MuteModeCmd(SAI_Block_TypeDef* SAI_Block_x, FunctionalState NewState)
 {
@@ -583,7 +571,6 @@ void SAI_MuteModeCmd(SAI_Block_TypeDef* SAI_Block_x, FunctionalState NewState)
   *          This parameter can be one of the following values:
   *            @arg SAI_ZeroValue : bit value 0 is sent during Mute Mode
   *            @arg SAI_LastSentValue : Last value is sent during Mute Mode  
-  * @retval None
   */
 void SAI_MuteValueConfig(SAI_Block_TypeDef* SAI_Block_x, uint32_t SAI_MuteValue)
 {
@@ -605,7 +592,6 @@ void SAI_MuteValueConfig(SAI_Block_TypeDef* SAI_Block_x, uint32_t SAI_MuteValue)
   * @param  SAI_MuteCounter: specifies the SAI block mute value.
   *         This parameter can be a number between 0 and 63.  
  
-  * @retval None
   */
 void SAI_MuteFrameCounterConfig(SAI_Block_TypeDef* SAI_Block_x, uint32_t SAI_MuteCounter)
 {
@@ -694,7 +680,6 @@ void SAI_BlockSynchroConfig(SAI_InitTypeDef* SAI_InitStruct, SAI_TypeDef* SAIx)
   * @param  SAI_Block_x: where x can be A or B to select the SAI Block peripheral.
   * @param  NewState: new state of the selected SAI TI communication mode.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SAI_FlushFIFO(SAI_Block_TypeDef* SAI_Block_x)
 {
@@ -752,7 +737,6 @@ uint32_t SAI_ReceiveData(SAI_Block_TypeDef* SAI_Block_x)
   * @param  SAI_Block_x: where x can be A or B to select the SAI Block peripheral.
   *        
   * @param  Data: Data to be transmitted.
-  * @retval None
   */
 void SAI_SendData(SAI_Block_TypeDef* SAI_Block_x, uint32_t Data)
 {
@@ -784,7 +768,6 @@ void SAI_SendData(SAI_Block_TypeDef* SAI_Block_x, uint32_t Data)
   * @param  SAI_Block_x: where x can be A or B to select the SAI Block peripheral. 
   * @param  NewState: new state of the selected SAI block DMA transfer request.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SAI_DMACmd(SAI_Block_TypeDef* SAI_Block_x, FunctionalState NewState)
 {
@@ -928,7 +911,6 @@ void SAI_DMACmd(SAI_Block_TypeDef* SAI_Block_x, FunctionalState NewState)
   *            @arg SAI_IT_WCKCFG: wrong clock configuration interrupt mask      
   * @param  NewState: new state of the specified SAI interrupt.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void SAI_ITConfig(SAI_Block_TypeDef* SAI_Block_x, uint32_t SAI_IT, FunctionalState NewState)
 { 
@@ -1004,7 +986,6 @@ FlagStatus SAI_GetFlagStatus(SAI_Block_TypeDef* SAI_Block_x, uint32_t SAI_FLAG)
   *            SAI_xCR2 register.
   *          - When the audio block is receiver and the FIFO is not empty           
   *  
-  * @retval None
   */
 void SAI_ClearFlag(SAI_Block_TypeDef* SAI_Block_x, uint32_t SAI_FLAG)
 {
@@ -1076,7 +1057,6 @@ ITStatus SAI_GetITStatus(SAI_Block_TypeDef* SAI_Block_x, uint32_t SAI_IT)
   *            SAI_xCR2 register.
   *          - When the audio block is receiver and the FIFO is not empty  
   *            
-  * @retval None
   */
 void SAI_ClearITPendingBit(SAI_Block_TypeDef* SAI_Block_x, uint32_t SAI_IT)
 {

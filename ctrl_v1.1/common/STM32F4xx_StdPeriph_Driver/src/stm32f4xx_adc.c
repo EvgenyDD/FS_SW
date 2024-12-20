@@ -208,7 +208,6 @@
   * @brief  Deinitializes all ADCs peripherals registers to their default reset 
   *         values.
   * @param  None
-  * @retval None
   */
 void ADC_DeInit(void)
 {
@@ -230,7 +229,6 @@ void ADC_DeInit(void)
   * @param  ADCx: where x can be 1, 2 or 3 to select the ADC peripheral.
   * @param  ADC_InitStruct: pointer to an ADC_InitTypeDef structure that contains
   *         the configuration information for the specified ADC peripheral.
-  * @retval None
   */
 void ADC_Init(ADC_TypeDef* ADCx, ADC_InitTypeDef* ADC_InitStruct)
 {
@@ -305,7 +303,6 @@ void ADC_Init(ADC_TypeDef* ADCx, ADC_InitTypeDef* ADC_InitStruct)
   *         edge, number of conversion in the regular channels group sequencer).  
   * @param  ADC_InitStruct: pointer to an ADC_InitTypeDef structure which will 
   *         be initialized.
-  * @retval None
   */
 void ADC_StructInit(ADC_InitTypeDef* ADC_InitStruct)
 {
@@ -336,7 +333,6 @@ void ADC_StructInit(ADC_InitTypeDef* ADC_InitStruct)
   *         in the ADC_CommonInitStruct.
   * @param  ADC_CommonInitStruct: pointer to an ADC_CommonInitTypeDef structure 
   *         that contains the configuration information for  All ADCs peripherals.
-  * @retval None
   */
 void ADC_CommonInit(ADC_CommonInitTypeDef* ADC_CommonInitStruct)
 {
@@ -372,7 +368,6 @@ void ADC_CommonInit(ADC_CommonInitTypeDef* ADC_CommonInitStruct)
   * @brief  Fills each ADC_CommonInitStruct member with its default value.
   * @param  ADC_CommonInitStruct: pointer to an ADC_CommonInitTypeDef structure
   *         which will be initialized.
-  * @retval None
   */
 void ADC_CommonStructInit(ADC_CommonInitTypeDef* ADC_CommonInitStruct)
 {
@@ -394,7 +389,6 @@ void ADC_CommonStructInit(ADC_CommonInitTypeDef* ADC_CommonInitStruct)
   * @param  ADCx: where x can be 1, 2 or 3 to select the ADC peripheral.
   * @param  NewState: new state of the ADCx peripheral. 
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void ADC_Cmd(ADC_TypeDef* ADCx, FunctionalState NewState)
 {
@@ -479,7 +473,6 @@ void ADC_AnalogWatchdogCmd(ADC_TypeDef* ADCx, uint32_t ADC_AnalogWatchdog)
   *          This parameter must be a 12-bit value.
   * @param  LowThreshold:  the ADC analog watchdog Low threshold value.
   *          This parameter must be a 12-bit value.
-  * @retval None
   */
 void ADC_AnalogWatchdogThresholdsConfig(ADC_TypeDef* ADCx, uint16_t HighThreshold,
                                         uint16_t LowThreshold)
@@ -520,7 +513,6 @@ void ADC_AnalogWatchdogThresholdsConfig(ADC_TypeDef* ADCx, uint16_t HighThreshol
   *            @arg ADC_Channel_16: ADC Channel16 selected
   *            @arg ADC_Channel_17: ADC Channel17 selected
   *            @arg ADC_Channel_18: ADC Channel18 selected
-  * @retval None
   */
 void ADC_AnalogWatchdogSingleChannelConfig(ADC_TypeDef* ADCx, uint8_t ADC_Channel)
 {
@@ -584,7 +576,6 @@ void ADC_AnalogWatchdogSingleChannelConfig(ADC_TypeDef* ADCx, uint8_t ADC_Channe
   * @brief  Enables or disables the temperature sensor and Vrefint channels.
   * @param  NewState: new state of the temperature sensor and Vrefint channels.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void ADC_TempSensorVrefintCmd(FunctionalState NewState)                
 {
@@ -610,7 +601,6 @@ void ADC_TempSensorVrefintCmd(FunctionalState NewState)
   *              
   * @param  NewState: new state of the VBAT channel.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void ADC_VBATCmd(FunctionalState NewState)                             
 {
@@ -710,7 +700,6 @@ void ADC_VBATCmd(FunctionalState NewState)
   *            @arg ADC_SampleTime_112Cycles: Sample time equal to 112 cycles	
   *            @arg ADC_SampleTime_144Cycles: Sample time equal to 144 cycles	
   *            @arg ADC_SampleTime_480Cycles: Sample time equal to 480 cycles	
-  * @retval None
   */
 void ADC_RegularChannelConfig(ADC_TypeDef* ADCx, uint8_t ADC_Channel, uint8_t Rank, uint8_t ADC_SampleTime)
 {
@@ -830,7 +819,6 @@ void ADC_RegularChannelConfig(ADC_TypeDef* ADCx, uint8_t ADC_Channel, uint8_t Ra
 /**
   * @brief  Enables the selected ADC software start conversion of the regular channels.
   * @param  ADCx: where x can be 1, 2 or 3 to select the ADC peripheral.
-  * @retval None
   */
 void ADC_SoftwareStartConv(ADC_TypeDef* ADCx)
 {
@@ -874,7 +862,6 @@ FlagStatus ADC_GetSoftwareStartConvStatus(ADC_TypeDef* ADCx)
   * @param  ADCx: where x can be 1, 2 or 3 to select the ADC peripheral.
   * @param  NewState: new state of the selected ADC EOC flag rising
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void ADC_EOCOnEachRegularChannelCmd(ADC_TypeDef* ADCx, FunctionalState NewState)
 {
@@ -899,7 +886,6 @@ void ADC_EOCOnEachRegularChannelCmd(ADC_TypeDef* ADCx, FunctionalState NewState)
   * @param  ADCx: where x can be 1, 2 or 3 to select the ADC peripheral.
   * @param  NewState: new state of the selected ADC continuous conversion mode
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void ADC_ContinuousModeCmd(ADC_TypeDef* ADCx, FunctionalState NewState)
 {
@@ -925,7 +911,6 @@ void ADC_ContinuousModeCmd(ADC_TypeDef* ADCx, FunctionalState NewState)
   * @param  ADCx: where x can be 1, 2 or 3 to select the ADC peripheral.
   * @param  Number: specifies the discontinuous mode regular channel count value.
   *          This number must be between 1 and 8.
-  * @retval None
   */
 void ADC_DiscModeChannelCountConfig(ADC_TypeDef* ADCx, uint8_t Number)
 {
@@ -957,7 +942,6 @@ void ADC_DiscModeChannelCountConfig(ADC_TypeDef* ADCx, uint8_t Number)
   * @param  NewState: new state of the selected ADC discontinuous mode on 
   *         regular group channel.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void ADC_DiscModeCmd(ADC_TypeDef* ADCx, FunctionalState NewState)
 {
@@ -1047,7 +1031,6 @@ uint32_t ADC_GetMultiModeConversionValue(void)
   * @param  ADCx: where x can be 1, 2 or 3 to select the ADC peripheral.
   * @param  NewState: new state of the selected ADC DMA transfer.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void ADC_DMACmd(ADC_TypeDef* ADCx, FunctionalState NewState)
 {
@@ -1071,7 +1054,6 @@ void ADC_DMACmd(ADC_TypeDef* ADCx, FunctionalState NewState)
   * @param  ADCx: where x can be 1, 2 or 3 to select the ADC peripheral.
   * @param  NewState: new state of the selected ADC DMA request after last transfer.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void ADC_DMARequestAfterLastTransferCmd(ADC_TypeDef* ADCx, FunctionalState NewState)
 {
@@ -1098,7 +1080,6 @@ void ADC_DMARequestAfterLastTransferCmd(ADC_TypeDef* ADCx, FunctionalState NewSt
   *         DMA mode for multi ADC mode (selected using ADC_CommonInit() function 
   *         by ADC_CommonInitStruct.ADC_DMAAccessMode structure member) is 
   *          ADC_DMAAccessMode_1, ADC_DMAAccessMode_2 or ADC_DMAAccessMode_3.     
-  * @retval None
   */
 void ADC_MultiModeDMARequestAfterLastTransferCmd(FunctionalState NewState)
 {
@@ -1185,7 +1166,6 @@ void ADC_MultiModeDMARequestAfterLastTransferCmd(FunctionalState NewState)
   *            @arg ADC_SampleTime_112Cycles: Sample time equal to 112 cycles	
   *            @arg ADC_SampleTime_144Cycles: Sample time equal to 144 cycles	
   *            @arg ADC_SampleTime_480Cycles: Sample time equal to 480 cycles	
-  * @retval None
   */
 void ADC_InjectedChannelConfig(ADC_TypeDef* ADCx, uint8_t ADC_Channel, uint8_t Rank, uint8_t ADC_SampleTime)
 {
@@ -1248,7 +1228,6 @@ void ADC_InjectedChannelConfig(ADC_TypeDef* ADCx, uint8_t ADC_Channel, uint8_t R
   * @param  ADCx: where x can be 1, 2 or 3 to select the ADC peripheral.
   * @param  Length: The sequencer length. 
   *          This parameter must be a number between 1 to 4.
-  * @retval None
   */
 void ADC_InjectedSequencerLengthConfig(ADC_TypeDef* ADCx, uint8_t Length)
 {
@@ -1283,7 +1262,6 @@ void ADC_InjectedSequencerLengthConfig(ADC_TypeDef* ADCx, uint8_t Length)
   *            @arg ADC_InjectedChannel_4: Injected Channel4 selected
   * @param  Offset: the offset value for the selected ADC injected channel
   *          This parameter must be a 12bit value.
-  * @retval None
   */
 void ADC_SetInjectedOffset(ADC_TypeDef* ADCx, uint8_t ADC_InjectedChannel, uint16_t Offset)
 {
@@ -1321,7 +1299,6 @@ void ADC_SetInjectedOffset(ADC_TypeDef* ADCx, uint8_t ADC_InjectedChannel, uint1
   *            @arg ADC_ExternalTrigInjecConv_T8_CC3: Timer8 capture compare3 selected                        
   *            @arg ADC_ExternalTrigInjecConv_T8_CC4: Timer8 capture compare4 selected 
   *            @arg ADC_ExternalTrigInjecConv_Ext_IT15: External interrupt line 15 event selected                          
-  * @retval None
   */
 void ADC_ExternalTrigInjectedConvConfig(ADC_TypeDef* ADCx, uint32_t ADC_ExternalTrigInjecConv)
 {
@@ -1355,7 +1332,6 @@ void ADC_ExternalTrigInjectedConvConfig(ADC_TypeDef* ADCx, uint32_t ADC_External
   *            @arg ADC_ExternalTrigInjecConvEdge_Falling: detection on falling edge
   *            @arg ADC_ExternalTrigInjecConvEdge_RisingFalling: detection on both rising 
   *                                                               and falling edge
-  * @retval None
   */
 void ADC_ExternalTrigInjectedConvEdgeConfig(ADC_TypeDef* ADCx, uint32_t ADC_ExternalTrigInjecConvEdge)
 {
@@ -1376,7 +1352,6 @@ void ADC_ExternalTrigInjectedConvEdgeConfig(ADC_TypeDef* ADCx, uint32_t ADC_Exte
 /**
   * @brief  Enables the selected ADC software start conversion of the injected channels.
   * @param  ADCx: where x can be 1, 2 or 3 to select the ADC peripheral.
-  * @retval None
   */
 void ADC_SoftwareStartInjectedConv(ADC_TypeDef* ADCx)
 {
@@ -1418,7 +1393,6 @@ FlagStatus ADC_GetSoftwareStartInjectedConvCmdStatus(ADC_TypeDef* ADCx)
   * @param  ADCx: where x can be 1, 2 or 3 to select the ADC peripheral.
   * @param  NewState: new state of the selected ADC auto injected conversion
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void ADC_AutoInjectedConvCmd(ADC_TypeDef* ADCx, FunctionalState NewState)
 {
@@ -1444,7 +1418,6 @@ void ADC_AutoInjectedConvCmd(ADC_TypeDef* ADCx, FunctionalState NewState)
   * @param  NewState: new state of the selected ADC discontinuous mode on injected
   *         group channel.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void ADC_InjectedDiscModeCmd(ADC_TypeDef* ADCx, FunctionalState NewState)
 {
@@ -1579,7 +1552,6 @@ uint16_t ADC_GetInjectedConversionValue(ADC_TypeDef* ADCx, uint8_t ADC_InjectedC
   *            @arg ADC_IT_OVR: Overrun interrupt enable                       
   * @param  NewState: new state of the specified ADC interrupts.
   *          This parameter can be: ENABLE or DISABLE.
-  * @retval None
   */
 void ADC_ITConfig(ADC_TypeDef* ADCx, uint16_t ADC_IT, FunctionalState NewState)  
 {
@@ -1651,7 +1623,6 @@ FlagStatus ADC_GetFlagStatus(ADC_TypeDef* ADCx, uint8_t ADC_FLAG)
   *            @arg ADC_FLAG_JSTRT: Start of injected group conversion flag
   *            @arg ADC_FLAG_STRT: Start of regular group conversion flag
   *            @arg ADC_FLAG_OVR: Overrun flag                          
-  * @retval None
   */
 void ADC_ClearFlag(ADC_TypeDef* ADCx, uint8_t ADC_FLAG)
 {
@@ -1713,7 +1684,6 @@ ITStatus ADC_GetITStatus(ADC_TypeDef* ADCx, uint16_t ADC_IT)
   *            @arg ADC_IT_AWD: Analog watchdog interrupt mask
   *            @arg ADC_IT_JEOC: End of injected conversion interrupt mask
   *            @arg ADC_IT_OVR: Overrun interrupt mask                         
-  * @retval None
   */
 void ADC_ClearITPendingBit(ADC_TypeDef* ADCx, uint16_t ADC_IT)
 {

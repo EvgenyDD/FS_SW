@@ -6,10 +6,6 @@ static uint16_t test_progress_counter = 0;
 
 void led_startup_restart(void) { test_progress_counter = 0; }
 
-/**
- * @brief Test
- *
- */
 int led_startup_sample(void)
 {
 	const int32_t cnt_light_half_width = 300; // ms.
