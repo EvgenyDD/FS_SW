@@ -162,6 +162,12 @@ void main(void)
 		}
 
 		// button handler
+		/*
+		O				O				O eyelids  \/ 0
+		O    			O tongue		O eyelids \/ 1
+		O ears ↶↷	   O eyes color	   O eyelids _ _ full
+		O power			O fans		    O eyelids ↑
+		 */
 		{
 			if(btn[0][0].state == BTN_PRESS_SHOT)
 			{
