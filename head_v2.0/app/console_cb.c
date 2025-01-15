@@ -132,8 +132,8 @@ static void led_cb(const char *req, int len, int *ret)
 	int c = sscanf(req, "%u %u", &led, &val);
 	if(c == 2)
 	{
-		val = val % 100;
-		_console_print("Set LED %d to %d\n", led, val);
+		val %= 100;
+		_console_print("Set %d LED to %d\n", led, val);
 		led_set(led, val);
 	}
 	else
@@ -148,7 +148,7 @@ const console_cmd_t console_cmd[] = {
 	{"s1", servo1_cb},
 	{"s2", servo2_cb},
 	{"s3", servo3_cb},
-	{"led", fan_cb},
+	{"fan", fan_cb},
 	{"led", led_cb},
 };
 const uint32_t console_cmd_sz = sizeof(console_cmd) / sizeof(console_cmd[0]);
